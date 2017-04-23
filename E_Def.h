@@ -17,7 +17,7 @@
 
 using namespace QuickCG;
 
-#define GAMENAME "EPITOME"
+#define GAMENAME "O'FALLONSTEIN 3D"
 
 #define screenWidth 800
 #define screenHeight 600

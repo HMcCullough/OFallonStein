@@ -104,7 +104,7 @@ void Game::CheckShoot()
 	Gun &gun = mPlayer.getCurrentGun();
 
 	gun.update();
-	if (keyDown(SDLK_SPACE) && gun.canShoot())
+	if ((keyDown(SDLK_RCTRL) || keyDown(SDLK_LCTRL)) && gun.canShoot())
 	{
 		mPlayer.Shoot();
 
