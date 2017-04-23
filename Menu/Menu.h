@@ -12,4 +12,4 @@
 ========================================================*/
 void DisplayMenu();
 void StartGame();
-
+void Settings();

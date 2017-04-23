@@ -2,14 +2,26 @@
 
 int main(int /*argc*/, char */*argv*/[])
 {
-	screen(screenWidth, screenHeight, 0, "EPITOME");
+	//Initializes Screen
+	screen(screenWidth, screenHeight, 0, "O'Fallonstein");
 
+	//Starts Audio Handler
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
+		BAD();
+
+	//menu is all
 	DisplayMenu();
 
 	//CutsceneManager cm;
 
 	//plays the intro
 	//cm.PlayRange(SCENE1, SCENE5);
+
+	//plays the outro
+	//cm.PlayRange(SCENE6, SCENE8);
+
+	//plays the game over sequence
+	//cm.PlayRange(GAMEOVER1, GAMEOVER5, true, "");
 
 	//Game game;
 	//game.RunGame("e1m1");
