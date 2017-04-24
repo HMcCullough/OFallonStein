@@ -12,7 +12,7 @@ void Game::InitPlayer()
 	mPlayer.setSpeed(1);
 
 	// Object Class Members
-	mPlayer.setPosition(26, 26);
+	mPlayer.setPosition(28, 15);
 	mPlayer.setDirection(-1, 0);
 
 	// Inwit default gun
