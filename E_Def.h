@@ -17,7 +17,7 @@
 
 using namespace QuickCG;
 
-#define GAMENAME "EPITOME"
+#define GAMENAME "O'FALLONSTEIN 3D"
 
 #define screenWidth 800
 #define screenHeight 600
@@ -31,12 +31,28 @@ using namespace QuickCG;
 #define mapWidth 30
 #define mapHeight 30
 
-#define numTextures 28
+#define numTextures 50
 #define numGunTextures 4
 #define numSounds 3
 #define numSongs 1
 
 #define U32Size 4294967295 //all possible colors
+
+//Enemy Info
+#define SMALLHEALTH 1
+#define MEDHEALTH 5
+#define BIGHEALTH 10
+#define BOSSHEALTH 100
+
+#define SMALLDMG 1
+#define MEDDMG 3
+#define BIGDMG 5
+#define BOSSDMG 10
+
+#define FASTSPEED 5
+#define MEDSPEED 3
+#define SLOWSPEED 1
+#define BOSSSPEED 2
 
 typedef struct mapTile
 {
@@ -47,12 +63,13 @@ typedef struct mapTile
 
 enum Textures
 {
-	ShipWallRaised, ShipWallStraight, ShipWallBloodRaised, ShipWallBloodStraight, ShipWallBloodStraight2,
-	ShipWallCircuit, ShipWallPort, ShipWallWindowLeft, ShipWallWindowRight, ShipWallWindow, ShipGrate,
-	ShipGrateBottomLeft, ShipGrateBottomRight, ShipGrateTopLeft, ShipGrateTopRight, ShipRoomFloor, ShipRoomFloorBlood2,
-	ShipRoomFloorBlood, ShipCeiling, ShipCeilingLatch,
+	AndyWall, AndyCeiling, AndyWall2, AndyWall3,AndyWall4,AndyWall5,AndyWall6,AndyWall7,Ground,
+	computer,computerFloor,computerCeiling,Comp4,Comp3,Comp2,
 
-	CaveCeiling, CaveWall, CaveWallMushroom, CaveWallMushroom2, CaveFloor, TestSprite,
+	caterpillar,caterpillarHurt,worm,workHurt,cock,cockHurt,grasshopper,grasshopperHurt,mosquito,
+	mosquitoHurt,spider,spiderHurt,wasp,waspHurt,
+
+	geek,happy,loser,mad,nerd,surprised,mad2,geek2,nerd2,sad2,loser3,mad3,sad3,verysad3,why,die,gameover, 
 
 	GameLogo, UI
 };
@@ -70,6 +87,11 @@ enum Sounds
 enum Songs
 {
 	AndySong
+};
+
+enum Enemies
+{
+	Cockroach, Caterpillar, Grasshopper, Mosquito, Spider, Wasp, Worm, Boss
 };
 
 Vector2<int> Raycast(mapTile map[][mapHeight], Vector2<double> rayPos, Vector2<double> rayDir,	Vector2<double> &stepDir,

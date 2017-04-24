@@ -15,6 +15,64 @@ Enemy::Enemy(int health, int damage, double speed, double posX, double posY, int
 	setCameraX(0);
 }
 
+Enemy::Enemy(const Enemies & enemy, double posX, double posY) :
+	Character(0, 0, posX, posY, 0, 0, 0)
+{
+	setPosition(posX, posY);
+	switch(enemy)
+	{
+		case Enemies::Cockroach:
+			setSpeed(FASTSPEED);
+			setHealth(SMALLHEALTH);
+			setDamage(SMALLDMG);
+			setTexture(Textures::cock);
+			break;
+		case Enemies::Caterpillar:
+			setSpeed(MEDSPEED);
+			setHealth(MEDHEALTH);
+			setDamage(MEDDMG);
+			setTexture(Textures::caterpillar);
+			break;
+		case Enemies::Grasshopper:
+			setSpeed(FASTSPEED);
+			setHealth(SMALLHEALTH);
+			setDamage(SMALLDMG);
+			setTexture(Textures::grasshopper);
+			break;
+		case Enemies::Mosquito:
+			setSpeed(FASTSPEED);
+			setHealth(SMALLHEALTH);
+			setDamage(BIGDMG);
+			setTexture(Textures::mosquito);
+			break;
+		case Enemies::Spider:
+			setSpeed(FASTSPEED);
+			setHealth(BIGHEALTH);
+			setDamage(BIGDMG);
+			setTexture(Textures::spider);
+			break;
+		case Enemies::Wasp:
+			setSpeed(FASTSPEED);
+			setHealth(MEDHEALTH);
+			setDamage(BIGDMG);
+			setTexture(Textures::wasp);
+			break;
+		case Enemies::Worm:
+			setSpeed(SLOWSPEED);
+			setHealth(MEDHEALTH);
+			setDamage(MEDDMG);
+			setTexture(Textures::worm);
+			break;
+		case Enemies::Boss:
+			setSpeed(BOSSSPEED);
+			setHealth(BOSSHEALTH);
+			setDamage(BOSSDMG);
+			break;
+		default:
+		break;
+	}
+}
+
 int Enemy::getDamage() const { return mDamage; }
 void Enemy::setDamage(const int &damage) { mDamage = damage; }
 
