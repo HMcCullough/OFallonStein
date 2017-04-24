@@ -31,7 +31,7 @@ using namespace QuickCG;
 #define mapWidth 30
 #define mapHeight 30
 
-#define numTextures 28
+#define numTextures 50
 #define numGunTextures 4
 #define numSounds 3
 #define numSongs 1
@@ -64,12 +64,13 @@ typedef struct mapTile
 
 enum Textures
 {
-	ShipWallRaised, ShipWallStraight, ShipWallBloodRaised, ShipWallBloodStraight, ShipWallBloodStraight2,
-	ShipWallCircuit, ShipWallPort, ShipWallWindowLeft, ShipWallWindowRight, ShipWallWindow, ShipGrate,
-	ShipGrateBottomLeft, ShipGrateBottomRight, ShipGrateTopLeft, ShipGrateTopRight, ShipRoomFloor, ShipRoomFloorBlood2,
-	ShipRoomFloorBlood, ShipCeiling, ShipCeilingLatch,
+	AndyWall, AndyCeiling, AndyWall2, AndyWall3,AndyWall4,AndyWall5,AndyWall6,AndyWall7,Ground,
+	computer,computerFloor,computerCeiling,Comp4,Comp3,Comp2,
 
-	CaveCeiling, CaveWall, CaveWallMushroom, CaveWallMushroom2, CaveFloor, TestSprite,
+	caterpillar,caterpillarHurt,worm,workHurt,cock,cockHurt,grasshopper,grasshopperHurt,mosquito,
+	mosquitoHurt,spider,spiderHurt,wasp,waspHurt,
+
+	geek,happy,loser,mad,nerd,surprised,mad2,geek2,nerd2,sad2,loser3,mad3,sad3,verysad3,why,die,gameover, 
 
 	GameLogo, UI
 };

@@ -36,42 +36,64 @@ void Game::LoadTextures()
 
 	unsigned long tw, th;
 	// Ship Textures
-	// Ceiling Textures
-    success |= loadImage(mTextures[Textures::ShipCeiling], tw, th, "Textures/Ship/ceiling.png");
-	success |= loadImage(mTextures[Textures::ShipCeilingLatch], tw, th, "Textures/Ship/ceilingLatch.png");
-	// Wall Textures
-    success |= loadImage(mTextures[Textures::ShipWallRaised], tw, th, "Textures/Ship/humanShipWall.png");
-    success |= loadImage(mTextures[Textures::ShipWallStraight], tw, th, "Textures/Ship/humanShipWall2.png");
-    success |= loadImage(mTextures[Textures::ShipWallBloodRaised], tw, th, "Textures/Ship/humanShipWall3.png");
-    success |= loadImage(mTextures[Textures::ShipWallBloodStraight], tw, th, "Textures/Ship/humanShipWallBlood.png");
-    success |= loadImage(mTextures[Textures::ShipWallBloodStraight2], tw, th, "Textures/Ship/humanShipWallBlood2.png");
-    success |= loadImage(mTextures[Textures::ShipWallCircuit], tw, th, "Textures/Ship/humanShipWallCircuit.png");
-    success |= loadImage(mTextures[Textures::ShipWallPort], tw, th, "Textures/Ship/humanShipWallGateClosed.png");
-    success |= loadImage(mTextures[Textures::ShipWallWindowLeft], tw, th, "Textures/Ship/humanShipWallSideLeft.png");
-    success |= loadImage(mTextures[Textures::ShipWallWindowRight], tw, th, "Textures/Ship/humanShipWallSideRight.png");
-    success |= loadImage(mTextures[Textures::ShipWallWindow], tw, th, "Textures/Ship/humanShipWallWindow.png");
-	// Floor Textures
-    success |= loadImage(mTextures[Textures::ShipRoomFloor], tw, th, "Textures/Ship/roomFloor.png");
-    success |= loadImage(mTextures[Textures::ShipRoomFloorBlood], tw, th, "Textures/Ship/roomFloorBlood.png");
-    success |= loadImage(mTextures[Textures::ShipRoomFloorBlood2], tw, th, "Textures/Ship/roomFloorBlood2.png");
-    success |= loadImage(mTextures[Textures::ShipGrateBottomLeft], tw, th, "Textures/Ship/hallFloorBottomLeft.png");
-    success |= loadImage(mTextures[Textures::ShipGrateBottomRight], tw, th, "Textures/Ship/hallFloorBottomRight.png");
-    success |= loadImage(mTextures[Textures::ShipGrateTopLeft], tw, th, "Textures/Ship/hallFloorTopLeft.png");
-    success |= loadImage(mTextures[Textures::ShipGrateTopRight], tw, th, "Textures/Ship/hallFloorTopRight.png");
-    success |= loadImage(mTextures[Textures::ShipGrate], tw, th, "Textures/Ship/grate.png");
 
-	// Cave Textures
-	//Ceiling Textures
-    success |= loadImage(mTextures[Textures::CaveCeiling], tw, th, "Textures/Cave/caveCeiling.png");
+
+	// Ceiling Textures
+    success |= loadImage(mTextures[Textures::AndyCeiling], tw, th, "Textures/Ceilings/andyWall1.png");
+    success |= loadImage(mTextures[Textures::computerCeiling], tw, th, "Textures/Ceilings/computer_ceiling.png");
 	// Wall Textures
-    success |= loadImage(mTextures[Textures::CaveWall], tw, th, "Textures/Cave/normalCaveWall.png");
-    success |= loadImage(mTextures[Textures::CaveWallMushroom], tw, th, "Textures/Cave/normalCaveWallShroom.png");
-    success |= loadImage(mTextures[Textures::CaveWallMushroom2], tw, th, "Textures/Cave/normalCaveWallShroom2.png");
+    success |= loadImage(mTextures[Textures::AndyWall], tw, th, "Textures/Walls/andyWall.png");
+    success |= loadImage(mTextures[Textures::AndyWall2], tw, th, "Textures/Walls/andyWall2.png");
+	success |= loadImage(mTextures[Textures::AndyWall3], tw, th, "Textures/Walls/andyWall3.png");
+	success |= loadImage(mTextures[Textures::AndyWall4], tw, th, "Textures/Walls/andyWall4.png");
+	success |= loadImage(mTextures[Textures::AndyWall5], tw, th, "Textures/Walls/andyWall5.png");
+	success |= loadImage(mTextures[Textures::AndyWall6], tw, th, "Textures/Walls/andyWall6.png");
+	success |= loadImage(mTextures[Textures::AndyWall7], tw, th, "Textures/Walls/andyWall7.png");
+	success |= loadImage(mTextures[Textures::computer], tw, th, "Textures/Walls/computer.png");
+	success |= loadImage(mTextures[Textures::Comp4], tw, th, "Textures/Walls/Computer_4.png");
+	success |= loadImage(mTextures[Textures::Comp3], tw, th, "Textures/Walls/Computer_3.png");
+	success |= loadImage(mTextures[Textures::Comp2], tw, th, "Textures/Walls/Computer_2.png");
+	
 	// Floor Textures
-    success |= loadImage(mTextures[Textures::CaveFloor], tw, th, "Textures/Cave/alienCaveFloor.png");
+    success |= loadImage(mTextures[Textures::Ground], tw, th, "Textures/Floors/ground.png");
+    success |= loadImage(mTextures[Textures::computerFloor], tw, th, "Textures/Floors/computer_floor.png");
+
+	// Enemy Textures
+	success |= loadImage(mTextures[Textures::caterpillar], tw, th, "Textures/Enemies/caterpillar.png");
+    success |= loadImage(mTextures[Textures::caterpillarHurt], tw, th, "Textures/Enemies/caterpillar_hurt.png");
+	success |= loadImage(mTextures[Textures::worm], tw, th, "Textures/Enemies/worm.png");
+	success |= loadImage(mTextures[Textures::workHurt], tw, th, "Textures/Enemies/worm_hurt.png");
+	success |= loadImage(mTextures[Textures::cock], tw, th, "Textures/Enemies/Cock.png");
+	success |= loadImage(mTextures[Textures::cockHurt], tw, th, "Textures/Enemies/Cock_hurt.png");
+	success |= loadImage(mTextures[Textures::grasshopper], tw, th, "Textures/Enemies/grasshopper.png");
+	success |= loadImage(mTextures[Textures::grasshopperHurt], tw, th, "Textures/Enemies/grasshopper_hurt.png");
+	success |= loadImage(mTextures[Textures::mosquito], tw, th, "Textures/Enemies/Mosquito.png");
+	success |= loadImage(mTextures[Textures::mosquitoHurt], tw, th, "Textures/Enemies/Mosquito_hurt.png");
+	success |= loadImage(mTextures[Textures::spider], tw, th, "Textures/Enemies/spider.png");
+	success |= loadImage(mTextures[Textures::spiderHurt], tw, th, "Textures/Enemies/spider_hurt.png");
+	success |= loadImage(mTextures[Textures::wasp], tw, th, "Textures/Enemies/Wasp.png");
+	success |= loadImage(mTextures[Textures::waspHurt], tw, th, "Textures/Enemies/Wasp_hurt.png");
+
+	success |= loadImage(mTextures[Textures::geek], tw, th, "Textures/Enemies/_Geek.png");
+	success |= loadImage(mTextures[Textures::happy], tw, th, "Textures/Enemies/_happy.png");
+	success |= loadImage(mTextures[Textures::loser], tw, th, "Textures/Enemies/_Loser.png");
+	success |= loadImage(mTextures[Textures::mad], tw, th, "Textures/Enemies/_Mad.png");
+	success |= loadImage(mTextures[Textures::nerd], tw, th, "Textures/Enemies/_Nerd.png");
+	success |= loadImage(mTextures[Textures::surprised], tw, th, "Textures/Enemies/_Suprised.png");
+	success |= loadImage(mTextures[Textures::mad2], tw, th, "Textures/Enemies/2attack.png");
+	success |= loadImage(mTextures[Textures::geek2], tw, th, "Textures/Enemies/2Geek.png");
+	success |= loadImage(mTextures[Textures::nerd2], tw, th, "Textures/Enemies/2Nerd.png");
+	success |= loadImage(mTextures[Textures::sad2], tw, th, "Textures/Enemies/2Sad.png");
+	success |= loadImage(mTextures[Textures::loser3], tw, th, "Textures/Enemies/3Loser.png");
+	success |= loadImage(mTextures[Textures::mad3], tw, th, "Textures/Enemies/3Mad.png");
+	success |= loadImage(mTextures[Textures::verysad3], tw, th, "Textures/Enemies/3verySad.png");
+	success |= loadImage(mTextures[Textures::sad3], tw, th, "Textures/Enemies/3Sad.png");
+	success |= loadImage(mTextures[Textures::why], tw, th, "Textures/Enemies/4why.png");
+	success |= loadImage(mTextures[Textures::die], tw, th, "Textures/Enemies/5dying2.png");
+	success |= loadImage(mTextures[Textures::gameover], tw, th, "Textures/Enemies/5evenMoredead.png");
 
 	// Sprites
-	success |= loadImage(mTextures[Textures::TestSprite], tw, th, "Textures/Sprites/27846.png");
+	//success |= loadImage(mTextures[Textures::TestSprite], tw, th, "Textures/Sprites/27846.png");
 
 	// Menu
 	success |= loadImage(mTextures[Textures::GameLogo], tw, th, "Textures/gamelogo.png");
@@ -126,7 +148,7 @@ void Game::LoadSounds()
 
 void Game::LoadEnemies(std::string mapName)
 {
-	Enemy e(5, 20, 0, 4.0, 4.0, Textures::TestSprite);
+	Enemy e(5, 20, 0, 4.0, 4.0, Textures::caterpillar);
 	e.setDamageSound(mSounds[Sounds::DamageSound]);
 	e.setDeathSound(mSounds[Sounds::WillhelmScream]);
 	mEnemies.insertAtFront(e);

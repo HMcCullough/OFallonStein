@@ -124,6 +124,7 @@ void Game::CheckShoot()
 		gun.animate();
 }
 
+
 void Game::CheckQuit()
 {
 	//failsafe

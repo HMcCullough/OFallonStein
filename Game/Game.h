@@ -42,6 +42,7 @@ private:
 
 	//1D Zbuffer
 	double mZBuffer[screenWidth];
+	double mDistLookup[screenHeight / 2];
 
 	// Keeps track on whether the user has pressed escape
 	bool mQuit;
