@@ -49,7 +49,7 @@ private:
 
 	mapTile mMap[mapWidth][mapHeight];
 
-	List<Enemy>  mEnemies;
+	List<Object*>  mObjects;
 
 	//function used to sort the sprites
 	void combSort(std::vector<int> &order, std::vector<double> &dist, int amount);
