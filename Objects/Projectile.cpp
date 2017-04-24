@@ -14,8 +14,8 @@ Projectile(Vector2<double> pos, Vector2<double> dir, double speed, int damage, i
 	mSpeed = speed;
 }
 
-int getDamage(){return mDamage;}
-void setDamage(int newDamage){mDamage = newDamage;}
+int Projectile::getDamage(){return mDamage;}
+void Projectile::setDamage(int newDamage){mDamage = newDamage;}
 
-double getSpeed() {return mSpeed;}
-void setSpeed(double newSpeed){mSpeed = newSpeed;}
+double Projectile::getSpeed() {return mSpeed;}
+void Projectile::setSpeed(double newSpeed){mSpeed = newSpeed;}
