@@ -141,7 +141,7 @@ void Game::LoadMap(std::string mapName)
 	std::string filepath = "./Maps/" + mapName + ".txt";
 	std::ifstream infile(filepath);
 
-	for(int k = 0; k < 3; k++)
+	for(int k = 0; k < 34; k++)
 	{
 		for(int i = 0; i < 30; i++)
 		{
@@ -162,9 +162,12 @@ void Game::LoadMap(std::string mapName)
 						mMap[i][j].floor = std::stoi(line);
 						break;
 					case 1:
-						mMap[i][j].object = std::stoi(line);
+						mMap[i][j].wall = std::stoi(line);
 						break;
 					case 2:
+						mMap[i][j].enemy = std::stoi(line);
+						break;
+					case 3:
 						mMap[i][j].ceiling = std::stoi(line);
 						break;
 				}

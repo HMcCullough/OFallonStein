@@ -57,7 +57,8 @@ using namespace QuickCG;
 typedef struct mapTile
 {
 	int floor;
-	int object;
+	int wall;
+	int enemy;
 	int ceiling;
 }mapTile;
 
