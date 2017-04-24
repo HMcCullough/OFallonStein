@@ -34,7 +34,7 @@ public:
 	CutsceneManager();
 
 	//plays range from start to end index
-	void PlayRange(int start, int end, bool skippable, std::string song); //displays cutscenes in the range defined by user
+	void PlayRange(int start, int end, bool skippable, const char * song); //displays cutscenes in the range defined by user
 
 	//adds scene to buffer, syncs up animations between scene and text
 	void DrawCutscene(int scene, bool skippable, SceneType type = SceneType::STATIC, double frameSpeed = 0.05, int numFrames = 1);

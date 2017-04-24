@@ -79,7 +79,9 @@ void DisplayMenu()
 //-Ryan
 void StartGame()
 {
+
 	Mix_HaltChannel(-1);
+	
 	CutsceneManager cm;
 
 	//plays the intro

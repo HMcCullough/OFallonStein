@@ -121,14 +121,14 @@ void CutsceneManager::LoadText()
 	mTexts[GAMEOVER5] = "ANDY: \"THIS CAN'T BE HAPPENING!\"";
 }
 
-void CutsceneManager::PlayRange(int start, int end, bool skippable, std::string song)
+void CutsceneManager::PlayRange(int start, int end, bool skippable, const char * song)
 {
 	//don't go out of bounds. probably should throw exception
 	if (end > numCutscenes)
 		end = numCutscenes;
 
 	//start song
-	Mix_Music* cutsceneMusic = Mix_LoadMUS(song.c_str());
+	Mix_Music* cutsceneMusic = Mix_LoadMUS(song);
 	playSong(cutsceneMusic);
 
 	std::cout << "playing cutscenes " << start+1 << " to " << end+1 << std::endl;
