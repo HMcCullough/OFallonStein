@@ -67,6 +67,7 @@ Enemy::Enemy(const Enemies & enemy, double posX, double posY) :
 			setSpeed(BOSSSPEED);
 			setHealth(BOSSHEALTH);
 			setDamage(BOSSDMG);
+			setTexture(Textures::geek);
 			break;
 		default:
 		break;

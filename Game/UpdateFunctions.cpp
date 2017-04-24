@@ -113,7 +113,7 @@ void Game::CheckShoot()
 			Enemy *e = dynamic_cast<Enemy*>(mObjects.at(i));
 			if (e && e->isVisible() && e->getCameraX() == 0 && (e->getPosition() - mPlayer.getPosition()).getSqrMagnitude() < 50)
 			{
- 				e->TakeDamage(1);
+ 				e->TakeDamage(gun.getDamage());
 				if (e->isDead())
 					mObjects.deleteAt(i);
 			}

@@ -189,6 +189,14 @@ public:
 		return curNode->getData();
 	}
 
+	void clear()
+	{
+		delete mpHead;
+		mpHead = nullptr;
+		mpTail = nullptr;
+		mCount = 0;
+	}
+
 private:
 	Node<T> *mpHead,
 			*mpTail;
@@ -380,6 +388,14 @@ public:
 			curNode = curNode->getNext();
 
 		return curNode->getData();
+	}
+
+	void clear()
+	{
+		delete mpHead;
+		mpHead = nullptr;
+		mpTail = nullptr;
+		mCount = 0;
 	}
 
 private:

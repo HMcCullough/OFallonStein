@@ -81,4 +81,6 @@ void Game::Play(std::string mapName, Songs song)
 		redraw();
 		//std::cout << mEnemies[0].isVisible() << " " << mEnemies[1].isVisible() << std::endl;
 	}
+
+	mObjects.clear();
 }
