@@ -155,7 +155,7 @@ void Game::CheckPause()
 		Uint32 colorI;
 
 		//button objects
-		Button resume(Vector2<double>(screenWidth/2, screenHeight/2 + 400), nullptr);
+		//Button resume(Vector2<double>(screenWidth/2, screenHeight/2 + 400), nullptr, "");
 
 		//pause background
 		//settled on fractal-like function that emulates DOS color depth sort of thing

@@ -224,7 +224,7 @@ void Game::DrawSprites()
 						int d = (y) * 256 - h * 128 + spriteHeight * 128; //256 and 128 factors to avoid floats
 						int texY = ((d * texHeight) / spriteHeight) / 256;
 						Uint32 color = mTextures[e.getTexture()][texWidth * texY + texX]; //get current color from the texture
-						if((color & 0xFF000000) != 0) mBuffer[y][stripe] = color; //paint pixel if it isn't black, black is the invisible color
+						if((color & 0xFF000000) != 0) mBuffer[y][stripe] = color; //paint pixel if it's transparent'
 					}
 				}
 				else

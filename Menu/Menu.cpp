@@ -2,30 +2,31 @@
 
 void DisplayMenu()
 {
-	// Audio
-	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
-		BAD();
-
 	std::vector<ColorRGB> BG;
-	int success =0;
+	int success = 0;
+	bool quit = 0;
+	
 	unsigned long mw, mh;
-  	success = loadImage(BG, mw, mh, "Textures/gamelogo.png");
-	Button StartButton(Vector2<double>(screenWidth/2 - 200, screenHeight/2), &StartGame);
+  	success = loadImage(BG, mw, mh, "Textures/o'fallonstein.png");
+
+	Button StartButton(Vector2<double>(screenWidth/2 - 300, screenHeight/2 + 100),  &StartGame, "Textures/UI/Start_sized.png");
+	Button SettingsButton(Vector2<double>(screenWidth/2 - 100, screenHeight/2 + 100), nullptr, "Textures/UI/Settings_sized.png");
+	Button ExitButton(Vector2<double>(screenWidth/2 + 120, screenHeight/2 + 100), nullptr, "Textures/UI/Exit_sized.png");
 
 	if (success == 0)
-		std::cout << "Textures Loaded" << std::endl;
+		std::cout << "Logo Loaded" << std::endl;
 	else
-		std::cout << "Textures Not Loaded" << std::endl;
+		std::cout << "Logo Not Loaded" << std::endl;
 
 	success = false;
 
 	Mix_Music* menuMusic = Mix_LoadMUS("Music/CallMe8bit.wav");
-
 	playSong(menuMusic);
 
+	//who the heck loves setting success so bad
 	success = false;
 
-	while(!success)
+	while(!success && !quit)
 	{
 		SDL_Event event;
 		SDL_PollEvent(&event);
@@ -33,11 +34,17 @@ void DisplayMenu()
 		//could use MOUSEBUTTONDOWN to change button graphic
 		//but how to do that with function pointers
 
+		int mx, my;
+		SDL_GetMouseState(&mx, &my);
+
+		StartButton.OnHover(mx, my);
+		SettingsButton.OnHover(mx, my);
+		ExitButton.OnHover(mx, my);
+
 		if( event.type == SDL_MOUSEBUTTONUP )
 		{
-			int mx, my;
-			SDL_GetMouseState(&mx, &my);
 			success = StartButton.OnClick(mx, my);
+			quit = ExitButton.OnClick(mx, my);
 		}
 
 		double skipX = screenWidth / mw;
@@ -59,8 +66,10 @@ void DisplayMenu()
 			}
 		}
 
-		//draws the button. vector would allow drawing all buttons
+		//draws the button. vector would allow drawing all buttons at once
 		StartButton.Draw();
+		SettingsButton.Draw();
+		ExitButton.Draw();
 
 		redraw();
 	}
@@ -70,12 +79,31 @@ void DisplayMenu()
 //-Ryan
 void StartGame()
 {
-	//Mix_FreeMusic(menuMusic);
+	Mix_HaltChannel(-1);
+	
 	CutsceneManager cm;
 
-
 	//plays the intro
-	//cm.PlayRange(SCENE1, SCENE5);
-	Game game;
-	game.RunGame("e1m1");
+	cm.PlayRange(SCENE1, SCENE5, true, "Music/OFallonsteinfeld.wav");
+
+	//Game game;
+	
+	//runs level 1
+	//game.RunGame("e1m1");
+
+	//level 2
+	//game.RunGame("whatever level two called");
+
+	//if lose
+	if(true)
+		cm.PlayRange(GAMEOVER1, GAMEOVER5, false, "Music/SoundOfAndy.wav", 2000);
+
+	//if win
+	if(true)
+		cm.PlayRange(SCENE6, CREDITS, false, "Music/AndyAreYouOkay.wav", 3000);
+}
+
+void Settings()
+{
+	//TODO Dvorak mode
 }

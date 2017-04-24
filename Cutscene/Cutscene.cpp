@@ -22,6 +22,16 @@ CutsceneManager::CutsceneManager()
 	mNumFrames[SCENE7] = 7;
 	mFrameSpeeds[SCENE7] = .005;
 
+	//smooth criminal
+	mSceneType[SMOOTH1] = SceneType::PROGRESSIVE;
+	mNumFrames[SMOOTH1] = 2;
+	mFrameSpeeds[SMOOTH1] = .001;
+
+	//GAMEOVER4. scene where computer melts
+	mSceneType[GAMEOVER4] = SceneType::PROGRESSIVE;
+	mNumFrames[GAMEOVER4] = 10;
+	mFrameSpeeds[GAMEOVER4] = .003;
+
 	//skipped frames (part of animations)
 	mNumFrames[SCENE1_2] = 0;
 
@@ -31,6 +41,18 @@ CutsceneManager::CutsceneManager()
 	mNumFrames[SCENE7_5] = 0;
 	mNumFrames[SCENE7_6] = 0;
 	mNumFrames[SCENE7_7] = 0;
+
+	mNumFrames[SMOOTH2] = 0;
+
+	mNumFrames[GAMEOVER4_2] = 0;
+	mNumFrames[GAMEOVER4_3] = 0;
+	mNumFrames[GAMEOVER4_4] = 0;
+	mNumFrames[GAMEOVER4_5] = 0;
+	mNumFrames[GAMEOVER4_6] = 0;
+	mNumFrames[GAMEOVER4_7] = 0;
+	mNumFrames[GAMEOVER4_8] = 0;
+	mNumFrames[GAMEOVER4_9] = 0;
+	mNumFrames[GAMEOVER4_10] = 0;
 
 	LoadImages();
 	LoadText();
@@ -44,13 +66,15 @@ void CutsceneManager::LoadImages()
  	for(int i = 0; i < numCutscenes; i++) mImages[i].resize(imageHeight * imageWidth);
 
 	unsigned long tw, th;
-	// Scenes
+	//intro scenes
     success |= loadImage(mImages[SCENE1], tw, th, "scenes/scene1open.png");
 	success |= loadImage(mImages[SCENE1_2], tw, th, "scenes/scene1close.png");
     success |= loadImage(mImages[SCENE2], tw, th, "scenes/scene2.png");
 	success |= loadImage(mImages[SCENE3], tw, th, "scenes/scene3_good.png");
     success |= loadImage(mImages[SCENE4], tw, th, "scenes/scene4.png");
 	success |= loadImage(mImages[SCENE5], tw, th, "scenes/scene5.png");
+
+	//outro scenes
     success |= loadImage(mImages[SCENE6], tw, th, "scenes/scene6.png");
 	success |= loadImage(mImages[SCENE7], tw, th, "scenes/scene7-1.png");
     success |= loadImage(mImages[SCENE7_2], tw, th, "scenes/scene7-2.png");
@@ -60,6 +84,24 @@ void CutsceneManager::LoadImages()
     success |= loadImage(mImages[SCENE7_6], tw, th, "scenes/scene7-6.png");
 	success |= loadImage(mImages[SCENE7_7], tw, th, "scenes/scene7-7.png");
 	success |= loadImage(mImages[SCENE8], tw, th, "scenes/scene8.png");
+	success |= loadImage(mImages[SMOOTH1], tw, th, "scenes/credits/smoothCriminalP1.png");
+	success |= loadImage(mImages[SMOOTH2], tw, th, "scenes/credits/smoothCriminalP2.png");
+
+	//gameover scenes
+	success |= loadImage(mImages[GAMEOVER1], tw, th, "scenes/gameover1.png");
+	success |= loadImage(mImages[GAMEOVER2], tw, th, "scenes/gameover2.png");
+    success |= loadImage(mImages[GAMEOVER3], tw, th, "scenes/gameover3.png");
+	success |= loadImage(mImages[GAMEOVER4], tw, th, "scenes/gameover4.png");
+    success |= loadImage(mImages[GAMEOVER4_2], tw, th, "scenes/gameover4_2.png");
+	success |= loadImage(mImages[GAMEOVER4_3], tw, th, "scenes/gameover4_3.png");
+    success |= loadImage(mImages[GAMEOVER4_4], tw, th, "scenes/gameover4_4.png");
+	success |= loadImage(mImages[GAMEOVER4_5], tw, th, "scenes/gameover4_5.png");
+    success |= loadImage(mImages[GAMEOVER4_6], tw, th, "scenes/gameover4_6.png");
+	success |= loadImage(mImages[GAMEOVER4_7], tw, th, "scenes/gameover4_7.png");
+    success |= loadImage(mImages[GAMEOVER4_8], tw, th, "scenes/gameover4_8.png");
+	success |= loadImage(mImages[GAMEOVER4_9], tw, th, "scenes/gameover4_9.png");
+    success |= loadImage(mImages[GAMEOVER4_10], tw, th, "scenes/gameover4_10.png");
+	success |= loadImage(mImages[GAMEOVER5], tw, th, "scenes/gameover5.png");
 
 	if (success == 0)
 		std::cout << "Images Loaded" << std::endl;
@@ -72,47 +114,67 @@ void CutsceneManager::LoadText()
 {
 	//these are all the texts dur
 	mTexts[SCENE1] = "ANDY: \"...now let that sink in. We've got about 10 minutes left in class, so I'm going to let you all relax for a moment.\"";
-	mTexts[SCENE2] = "KID: \"Ehh Soir, I got a yuge problem wit muh program. Just can' figga this sucka out.\"";
+	mTexts[SCENE2] = "KID: \"Ehh Soir, I got a yuge problem wit muh program. Just can' figya this sucka out.\"";
 	mTexts[SCENE3] = "Andy stared at the code, his palms sweaty. This was going to be his hardest debug yet.";
 	mTexts[SCENE4] = "He kneaded his temples and closed his eyes. He called upon the strength of all of the masters of computer science: both Deitel and Deitel.";
 	mTexts[SCENE5] = "And then, Andy, as he was every time a problem this difficult arose, transported to the computer science dimension.";
+
 	mTexts[SCENE6] = "ANDY: \"I've got it! It was all so simple!\"";
 	mTexts[SCENE7] = "With the finesse of a tiger sneaking downstairs to get a midnight snack, he deleted the offending line.";
-	mTexts[SCENE8] = "ANDY: \"Thank you very much students, feel free to appl...\"";
-	//mTexts[SCENE9] = "But they were all gone. Andy checked his watch and realized it was 7p.m. Class was long over.";
-	//mTexts[SCENE10] = "The student's computer began to disappear like sand through his fingers.";
-	//mTexts[SCENE11] = "ANDY: \"This can't be happening!\"";
-	//mTexts[SCENE12] = "ANDY: \"Ahh... it was all a dream.\"";
+	mTexts[SCENE8] = "ANDY: \"Now let THAT sink in.\"";
+
+	mTexts[SMOOTH1] = "";
+	
+	mTexts[GAMEOVER1] = "ANDY: \"Thank you very much students, feel free to appl...\"";
+	mTexts[GAMEOVER2] = "Andy slowly looked at the clock and realized it was 11p.m.";
+	mTexts[GAMEOVER3] = "Everyone was gone. Class was long over.";
+	mTexts[GAMEOVER4] = "The student's computer began to disappear like sand through Andy's fingers.";
+	mTexts[GAMEOVER5] = "ANDY: \"THIS CAN'T BE HAPPENING!\"";
 }
 
-void CutsceneManager::PlayRange(int start, int end)
+void CutsceneManager::PlayRange(int start, int end, bool skippable, const char * song, int autoSpeed)
 {
 	//don't go out of bounds. probably should throw exception
 	if (end > numCutscenes)
 		end = numCutscenes;
 
+	//start song
+	Mix_Music* cutsceneMusic = Mix_LoadMUS(song);
+	playSong(cutsceneMusic);
+
 	std::cout << "playing cutscenes " << start+1 << " to " << end+1 << std::endl;
 
 	for (int i = start; i <= end; ++i)
 	{
+		if (i == CREDITS)
+		{
+			std::cout << "Playing credits " << std::endl;
+			PlayCredits();
+		}
 		//skips animation frames
-		if (mNumFrames[i] != 0)
+		else if (mNumFrames[i] != 0)
 		{
 			std::cout << "displaying scene " << i+1 << std::endl;
 			//this makes me think that cutscenes COULD be objects. but constructing them all seems cumbersome since they won't change
-			DrawCutscene(i, mSceneType[i], mFrameSpeeds[i], mNumFrames[i]);
+			DrawCutscene(i, skippable, mSceneType[i], mFrameSpeeds[i], mNumFrames[i], autoSpeed);
 		}
 	}
+
+	Mix_FreeMusic(cutsceneMusic);
+
+	//stop song
 }
 
 //dankest function I ever wrote so wonderful
-void CutsceneManager::DrawCutscene(int scene, SceneType type, double frameSpeed, int numFrames)
+void CutsceneManager::DrawCutscene(int scene, bool skippable, SceneType type, double frameSpeed, int numFrames, int autoSpeed)
 {
 	//clears screen right before drawing
 	cls();
 
 	//animation stays in loop while false
 	bool exit = false;
+	Uint32 exitTimer = 0;
+	Uint32 exitTimerInit = 0;
 
 	Uint16 character = 0;
 	Uint16 lastCharacter = 0;
@@ -145,7 +207,7 @@ void CutsceneManager::DrawCutscene(int scene, SceneType type, double frameSpeed,
 				if(event.type == SDL_QUIT)
 					end();
 				//advances text to end on keypress
-				if(event.type == SDL_KEYDOWN)
+				if(event.type == SDL_KEYDOWN && skippable)
 					character = mTexts[scene].length() + 1;
 			}
 
@@ -166,8 +228,15 @@ void CutsceneManager::DrawCutscene(int scene, SceneType type, double frameSpeed,
 			}
 		}
 
+		if (!skippable)
+			exitTimerInit = SDL_GetTicks();
+
+		//waits one second on skippable
+		while (skippable == false && GetDeltaT(exitTimerInit) < autoSpeed); //time to wait in ms
+
 		//advances to next cutscene on keypress
-		sleep();
+		if (skippable)
+			sleep();
 	}
 
 	//this is the animation handler
@@ -183,13 +252,20 @@ void CutsceneManager::DrawCutscene(int scene, SceneType type, double frameSpeed,
 					if (animOffset > numFrames - 1)
 						animOffset = numFrames - 1;
 
+					if(skippable == false && character == mTexts[scene].length() + 1 && animOffset == numFrames - 1 && exitTimerInit == 0)
+						exitTimerInit = SDL_GetTicks();
+
+					//waits one second on skippable
+					if (skippable == false && exitTimerInit != 0 && (GetDeltaT(exitTimerInit) > autoSpeed))
+						exit = true;
+
 					while(SDL_PollEvent(&event))
 					{
 						if(event.type == SDL_QUIT) end();
 						//if scene is indeed done advancing is possible
-						if(event.type == SDL_KEYDOWN && character == mTexts[scene].length() + 1 && animOffset == numFrames - 1)
+						if(event.type == SDL_KEYDOWN && skippable && character == mTexts[scene].length() + 1 && animOffset == numFrames - 1)
 							exit = true;
-						if(event.type == SDL_KEYDOWN)
+						if(event.type == SDL_KEYDOWN && skippable)
 							{character = mTexts[scene].length() + 1; animOffset = numFrames - 1;}
 					}
 
@@ -203,8 +279,8 @@ void CutsceneManager::DrawCutscene(int scene, SceneType type, double frameSpeed,
 					}
 				break;
 
-				case SceneType::ANIMATED:
-				//will NEVER stop but when key pressed, text gets to the end
+					case SceneType::ANIMATED:
+					//will NEVER stop but when key pressed, text gets to the end
 					while(SDL_PollEvent(&event))
 		    		{
 						if(event.type == SDL_QUIT) end();
@@ -250,6 +326,50 @@ void CutsceneManager::DrawCutscene(int scene, SceneType type, double frameSpeed,
 	}
 }
 
+void CutsceneManager::PlayCredits()
+{
+	//loads scenes
+	bool success;
+	int sceneDelay = 5000;
+
+	//music
+
+	long unsigned int splashWidth = screenWidth, splashHeight = screenHeight;
+
+	std::vector<ColorRGB> splash[numCredits];
+	std::vector<ColorRGB> thisImage;
+
+	thisImage.resize(splashWidth * splashHeight);
+
+	for (int i = 0; i < numCredits; i++)
+		splash[i].resize(splashWidth * splashHeight);
+
+	success |= loadImage(splash[0], splashWidth, splashHeight, "scenes/credits/teamPage.png");
+	success |= loadImage(splash[1], splashWidth, splashHeight, "scenes/credits/TunesPage.png");
+	success |= loadImage(splash[2], splashWidth, splashHeight, "scenes/credits/specialThanksPage.png");
+	success |= loadImage(splash[3], splashWidth, splashHeight, "scenes/credits/thanksPage.png");
+
+	if (!success)
+		std::cout << "done" << std::endl;
+	else
+		std::cout << "big error" << std::endl;
+
+	for (int i = 0; i < numCredits; ++i)
+	{
+		std::cout << "displaying" << std::endl;
+		thisImage = splash[i];
+
+		for (int y = 0; y < splashHeight; ++y)
+		for (int x = 0; x < splashWidth; ++x)
+			pset(x, y, thisImage[y * screenWidth + x]);
+
+		redraw();
+
+		Uint32 tickInit = SDL_GetTicks();
+		while (GetDeltaT(tickInit) < sceneDelay);
+	}
+}
+
 //calculates time passed since function call
 Uint32 CutsceneManager::GetDeltaT(const Uint32 &initial)
 {
@@ -265,7 +385,6 @@ void CutsceneManager::PrintText(int scene, Uint32 character)
 	//STEP ONE JUST COPY AND PASTE THE FUNCTIONS FROM QUICKCG AND F WITH EM UNTIL THEY WORK
 	//STEP TWO BONER RISING
 
-	//TODO: make this nonlinear! to fix cutscenes
 	//sort of did it
 	//character variable holds the index of the stopping character
 
