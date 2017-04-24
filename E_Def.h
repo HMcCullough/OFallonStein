@@ -91,7 +91,7 @@ enum Songs
 enum Enemies
 {
 	Cockroach, Caterpillar, Grasshopper, Mosquito, Spider, Wasp, Worm, Boss
-}
+};
 
 Vector2<int> Raycast(mapTile map[][mapHeight], Vector2<double> rayPos, Vector2<double> rayDir,	Vector2<double> &stepDir,
 	int &hit, int &side);
