@@ -9,9 +9,9 @@ void DisplayMenu()
 	unsigned long mw, mh;
   	success = loadImage(BG, mw, mh, "Textures/o'fallonstein.png");
 
-	Button StartButton(Vector2<double>(screenWidth/2 - 300, screenHeight/2 + 100),  &StartGame, "Textures/UI/Start_sized.png");
-	Button SettingsButton(Vector2<double>(screenWidth/2 - 100, screenHeight/2 + 100), nullptr, "Textures/UI/Settings_sized.png");
-	Button ExitButton(Vector2<double>(screenWidth/2 + 120, screenHeight/2 + 100), nullptr, "Textures/UI/Exit_sized.png");
+	Button StartButton(Vector2<double>(screenWidth/2 - 330, screenHeight/2 + 100),  &StartGame, "Textures/UI/Start.png");
+	Button InfoButton(Vector2<double>(screenWidth/2 - 100, screenHeight/2 + 100), &ShowInfo, "Textures/UI/Info.png");
+	Button ExitButton(Vector2<double>(screenWidth/2 + 120, screenHeight/2 + 100), nullptr, "Textures/UI/Exit.png");
 
 	if (success == 0)
 		std::cout << "Logo Loaded" << std::endl;
@@ -38,7 +38,7 @@ void DisplayMenu()
 		SDL_GetMouseState(&mx, &my);
 
 		StartButton.OnHover(mx, my);
-		SettingsButton.OnHover(mx, my);
+		InfoButton.OnHover(mx, my);
 		ExitButton.OnHover(mx, my);
 
 		if( event.type == SDL_MOUSEBUTTONUP )
@@ -51,6 +51,7 @@ void DisplayMenu()
 		double skipY = screenHeight / mh;
 		//std::cout << skipX << " " << skipX << std::endl;
 
+		//I don' know how this works ask Logan
 		//draw each pixel of the image
 		for(int y = 0; y < mh; y++)
 		{
@@ -68,7 +69,7 @@ void DisplayMenu()
 
 		//draws the button. vector would allow drawing all buttons at once
 		StartButton.Draw();
-		SettingsButton.Draw();
+		InfoButton.Draw();
 		ExitButton.Draw();
 
 		redraw();
@@ -86,10 +87,10 @@ void StartGame()
 	//plays the intro
 	cm.PlayRange(SCENE1, SCENE5, true, "Music/OFallonsteinfeld.wav");
 
-	//Game game;
+	Game game;
 	
 	//runs level 1
-	//game.RunGame("e1m1");
+	game.RunGame("e1m1");
 
 	//level 2
 	//game.RunGame("whatever level two called");
@@ -103,7 +104,7 @@ void StartGame()
 		cm.PlayRange(SCENE6, CREDITS, false, "Music/AndyAreYouOkay.wav", 3000);
 }
 
-void Settings()
+void ShowInfo()
 {
-	//TODO Dvorak mode
+	//
 }
