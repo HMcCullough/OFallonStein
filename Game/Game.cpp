@@ -58,9 +58,9 @@ void Game::RunGame(std::string mapName)
 		UpdateRotation(deltaMouse);
 		UpdateMovement();
 		CheckShoot();
-		CheckPause();
 		//this will be removed in final build. used until pause menu has quit feature
 		CheckQuit();
+		CheckPause();
 
 		int mx, my;
 		SDL_GetMouseState(&mx, &my);

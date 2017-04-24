@@ -20,7 +20,7 @@ CutsceneManager::CutsceneManager()
 	//SCENE7. this is the scene where andy fixes the code. 7 frames long
 	mSceneType[SCENE7] = SceneType::PROGRESSIVE;
 	mNumFrames[SCENE7] = 7;
-	mFrameSpeeds[SCENE7] = .005;
+	mFrameSpeeds[SCENE7] = .002;
 
 	//smooth criminal
 	mSceneType[SMOOTH1] = SceneType::PROGRESSIVE;
