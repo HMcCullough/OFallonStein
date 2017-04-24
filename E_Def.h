@@ -11,6 +11,7 @@
 #include <SDL/SDL_mixer.h>
 #include <climits>
 #include <random>
+#include <type_traits>
 
 #include "HelperClasses/Vector2.h"
 #include "quickcg.h"
