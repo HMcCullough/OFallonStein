@@ -79,7 +79,6 @@ void DisplayMenu()
 //-Ryan
 void StartGame()
 {
-
 	Mix_HaltChannel(-1);
 	
 	CutsceneManager cm;
@@ -87,9 +86,21 @@ void StartGame()
 	//plays the intro
 	cm.PlayRange(SCENE1, SCENE5, true, "Music/OFallonsteinfeld.wav");
 
-	//runs game
-	Game game;
-	game.RunGame("e1m1");
+	//Game game;
+	
+	//runs level 1
+	//game.RunGame("e1m1");
+
+	//level 2
+	//game.RunGame("whatever level two called");
+
+	//if lose
+	if(true)
+		cm.PlayRange(GAMEOVER1, GAMEOVER5, false, "Music/SoundOfAndy.wav", 2000);
+
+	//if win
+	if(true)
+		cm.PlayRange(SCENE6, CREDITS, false, "Music/AndyAreYouOkay.wav", 3000);
 }
 
 void Settings()
