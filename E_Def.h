@@ -17,7 +17,7 @@
 
 using namespace QuickCG;
 
-#define GAMENAME "EPITOME"
+#define GAMENAME "O'FALLONSTEIN 3D"
 
 #define screenWidth 800
 #define screenHeight 600
@@ -37,6 +37,22 @@ using namespace QuickCG;
 #define numSongs 1
 
 #define U32Size 4294967295 //all possible colors
+
+//Enemy Info
+#define SMALLHEALTH 1
+#define MEDHEALTH 5
+#define BIGHEALTH 10
+#define BOSSHEALTH 100
+
+#define SMALLDMG 1
+#define MEDDMG 3
+#define BIGDMG 5
+#define BOSSDMG 10
+
+#define FASTSPEED 5
+#define MEDSPEED 3
+#define SLOWSPEED 1
+#define BOSSSPEED 2
 
 typedef struct mapTile
 {
@@ -71,6 +87,11 @@ enum Sounds
 enum Songs
 {
 	AndySong
+};
+
+enum Enemies
+{
+	Cockroach, Caterpillar, Grasshopper, Mosquito, Spider, Wasp, Worm, Boss
 };
 
 Vector2<int> Raycast(mapTile map[][mapHeight], Vector2<double> rayPos, Vector2<double> rayDir,	Vector2<double> &stepDir,
