@@ -66,7 +66,7 @@ typedef struct mapTile
 enum Textures
 {
 	AndyWall, AndyCeiling, AndyWall2, AndyWall3,AndyWall4,AndyWall5,AndyWall6,AndyWall7,Ground,
-	computer,computerFloor,computerCeiling,Comp4,Comp3,Comp2,
+	computer,computerFloor,computerCeiling,Comp4,Comp3,Comp2, //Starts at 10 for map
 
 	caterpillar,caterpillarHurt,worm,workHurt,cock,cockHurt,grasshopper,grasshopperHurt,mosquito,
 	mosquitoHurt,spider,spiderHurt,wasp,waspHurt,
@@ -80,7 +80,6 @@ enum GunTextures
 {
 	Raid, RaidAnim1, RaidAnim2, RaidAnim3
 };
-
 enum Sounds
 {
 	DamageSound, WillhelmScream, ShootSound

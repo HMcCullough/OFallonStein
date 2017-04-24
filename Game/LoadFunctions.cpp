@@ -1,5 +1,10 @@
 #include "Game.h"
 
+void Game::InitGame()
+{
+	
+}
+
 void Game::InitPlayer()
 {
 	// Player Class Members

@@ -11,15 +11,21 @@ Game::Game(int width, int height)
 Game::~Game()
 {
 	for (int i = 0; i < numSounds; ++i)
-		Mix_FreeChunk(mSounds.at(i));
+		if (mSounds.at(i) != nullptr)
+			Mix_FreeChunk(mSounds.at(i));
 	for ( int i = 0; i < numSongs; ++i)
-		Mix_FreeMusic(mSongs.at(i));
+		if (mSongs.at(i) != nullptr)
+			Mix_FreeMusic(mSongs.at(i));
 }
 
-void Game::RunGame(std::string mapName)
+void Game::RunGame()
 {
 	LoadSounds();
 	LoadTextures();
+}
+
+void Game::Play(std::string mapName, Songs song)
+{
 	LoadMap(mapName);
 	LoadEnemies(mapName);
 	InitPlayer();
@@ -29,8 +35,9 @@ void Game::RunGame(std::string mapName)
 
 	float deltaMouse = 0.0f;
 
-	playSong(mSongs[Songs::AndySong]);
+	playSong(mSongs[song]);
 
+	mQuit = false;
 	while(!mQuit)
 	{
 		int oldmx, oldmy;

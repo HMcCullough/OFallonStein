@@ -208,8 +208,6 @@ public:
 
 	~List<T*>()
 	{
-		for (Node<T*> *cur = mpHead; cur != nullptr; cur = cur->getNext())
-			delete cur->getData();
 		delete mpHead;
 	}
 

@@ -28,7 +28,8 @@ public:
 	void setWidth(const int width) { mScreenWidth = width; }
 	void setHeight(const int height) { mScreenHeight = height; }
 
-	void RunGame(std::string mapName);
+	void RunGame();
+	void Play(std::string mapName, Songs song);
 private:
 	Player mPlayer;
 	double mFrameTime;

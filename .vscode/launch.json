@@ -5,7 +5,7 @@
             "name": "C++ Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/Epitome",
+            "program": "${workspaceRoot}/OFALLONSTEIN3D",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceRoot}",
@@ -39,7 +39,7 @@
             "name": "C++ Attach",
             "type": "cppdbg",
             "request": "attach",
-            "program": "${workspaceRoot}/Epitome",
+            "program": "${workspaceRoot}/OFALLONSTEIN3D",
             "processId": "${command:pickProcess}",
             "linux": {
                 "MIMode": "gdb",

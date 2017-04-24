@@ -85,15 +85,23 @@ void StartGame()
 	CutsceneManager cm;
 
 	//plays the intro
-	cm.PlayRange(SCENE1, SCENE5, true, "Music/OFallonsteinfeld.wav");
-
-	Game game;
+	//cm.PlayRange(SCENE1, SCENE5, true, "Music/OFallonsteinfeld.wav");
 	
-	//runs level 1
-	game.RunGame("OF1");
+	Mix_HaltChannel(-1);
+	Game game;
+	game.RunGame();
+
+	//Level 1
+	game.Play("OF1", Songs::AndySong);
+	Mix_HaltChannel(-1);
 
 	//level 2
-	//game.RunGame("whatever level two called");
+	game.Play("OF2", Songs::AndySong);
+	Mix_HaltChannel(-1);
+
+	//Boss Level
+	game.Play("OFBOSS", Songs::AndySong);
+	Mix_HaltChannel(-1);
 
 	//if lose
 	//if(true)
