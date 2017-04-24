@@ -21,6 +21,8 @@ public:
 	void setTexture(const int &texture);
 	void setRotation(const bool &rotates);
 
+	virtual void makePolymorph() {}
+
 protected:
 	Vector2<double>  mPosition, mDirection;
 	int  mTexture;

@@ -108,14 +108,14 @@ void Game::CheckShoot()
 	{
 		mPlayer.Shoot();
 
-		for (int i = 0; i < mEnemies.size(); ++i)
+		for (int i = 0; i < mObjects.size(); ++i)
 		{
-			Enemy &e = mEnemies.at(i);
-			if (e.isVisible() && e.getCameraX() == 0 && (e.getPosition() - mPlayer.getPosition()).getSqrMagnitude() < 50)
+			Enemy *e = dynamic_cast<Enemy*>(mObjects.at(i));
+			if (e && e->isVisible() && e->getCameraX() == 0 && (e->getPosition() - mPlayer.getPosition()).getSqrMagnitude() < 50)
 			{
-				e.TakeDamage(1);
-				if (e.isDead())
-					mEnemies.deleteAt(i);
+ 				e->TakeDamage(1);
+				if (e->isDead())
+					mObjects.deleteAt(i);
 			}
 		}
 	}

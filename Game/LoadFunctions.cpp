@@ -143,14 +143,14 @@ void Game::LoadSounds()
 
 void Game::LoadEnemies(std::string mapName)
 {
-	Enemy e(5, 20, 0, 4.0, 4.0, Textures::caterpillar);
-	e.setDamageSound(mSounds[Sounds::DamageSound]);
-	e.setDeathSound(mSounds[Sounds::WillhelmScream]);
-	mEnemies.insertAtFront(e);
-
-	e.setPosition(22.5, 3);
-	mEnemies.insertAtFront(e);
-	std::cout << "Enemies Loaded" << std::endl;
+	Object *obj = nullptr;
+	for (int i = 0; i < mapWidth; i++)
+		for (int j = 0; j < mapHeight; j++)
+			if (mMap[i][j].enemy != 0)
+			{
+				obj = new Enemy(Enemies(mMap[i][j].enemy), double(i), double(j));
+				mObjects.insertAtFront(obj);
+			}
 }
 
 void Game::LoadMap(std::string mapName)
@@ -158,7 +158,7 @@ void Game::LoadMap(std::string mapName)
 	std::string filepath = "./Maps/" + mapName + ".txt";
 	std::ifstream infile(filepath);
 
-	for(int k = 0; k < 34; k++)
+	for(int k = 0; k < 4; k++)
 	{
 		for(int i = 0; i < 30; i++)
 		{
@@ -169,7 +169,6 @@ void Game::LoadMap(std::string mapName)
 
 				if (line == "")
 				{
-					std::cout << "Finished" << std::endl;
 					continue;
 				}
 

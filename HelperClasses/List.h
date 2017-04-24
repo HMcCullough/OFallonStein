@@ -248,7 +248,7 @@ public:
 		return mpHead == nullptr;
 	}
 
-	void insertAtFront(T data)
+	void insertAtFront(T *data)
 	{
 		Node<T*> *newHead = new Node<T*>(data);
 
@@ -266,7 +266,7 @@ public:
 		mpHead = newHead;
 	}
 
-	void insertAtEnd(T data)
+	void insertAtEnd(T *data)
 	{
 		Node<T*> *newTail = new Node<T*>(data);
 
@@ -297,9 +297,6 @@ public:
 			newHead->setPrev(nullptr);
 		}
 
-		if (std::is_pointer<T*>::value)
-			delete mpHead->getData();
-
 		delete mpHead;
 
 		mpHead = newHead;
@@ -322,8 +319,6 @@ public:
 			mpTail->setPrev(nullptr);
 			newTail->setNext(nullptr);
 		}
-
-		delete mpHead->getData();
 
 		delete mpTail;
 
@@ -359,14 +354,13 @@ public:
 		prevNode->setNext(nextNode);
 		nextNode->setPrev(prevNode);
 
-		delete mpHead->getData();
 		delete curNode;
 
 		mCount--;
 		return true;
 	}
 
-	T &at(int index)
+	T *&at(int index)
 	{
 		Node<T*> *curNode = mpHead;
 		for (int i = 0; i < index && curNode != nullptr; ++i)
@@ -381,7 +375,7 @@ public:
 		return curNode->getData();
 	}
 
-	T &operator[](int index)
+	T *&operator[](int index)
 	{
 		Node<T*> *curNode = mpHead;
 		for (int i = 0; i < index && curNode != nullptr; ++i)
