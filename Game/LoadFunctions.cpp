@@ -54,8 +54,8 @@ void Game::LoadTextures()
 	success |= loadImage(mTextures[Textures::AndyWall7], tw, th, "Textures/Walls/andyWall7.png");
 	success |= loadImage(mTextures[Textures::computer], tw, th, "Textures/Walls/computer.png");
 	success |= loadImage(mTextures[Textures::Comp4], tw, th, "Textures/Walls/Computer_4.png");
-	success |= loadImage(mTextures[Textures::Comp3], tw, th, "Textures/Walls/Computer_3.png");
-	success |= loadImage(mTextures[Textures::Comp2], tw, th, "Textures/Walls/Computer_2.png");
+	success |= loadImage(mTextures[Textures::Comp3], tw, th, "Textures/Walls/computer_3.png");
+	success |= loadImage(mTextures[Textures::Comp2], tw, th, "Textures/Walls/computer_2.png");
 	
 	// Floor Textures
     success |= loadImage(mTextures[Textures::Ground], tw, th, "Textures/Floors/ground.png");
