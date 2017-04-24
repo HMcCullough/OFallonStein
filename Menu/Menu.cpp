@@ -86,10 +86,10 @@ void StartGame()
 	//plays the intro
 	cm.PlayRange(SCENE1, SCENE5, true, "Music/OFallonsteinfeld.wav");
 
-	//Game game;
+	Game game;
 	
 	//runs level 1
-	//game.RunGame("e1m1");
+	game.RunGame("e1m1");
 
 	//level 2
 	//game.RunGame("whatever level two called");

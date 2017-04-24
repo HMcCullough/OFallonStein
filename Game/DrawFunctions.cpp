@@ -116,6 +116,7 @@ void Game::Render()
 			//ceiling (symmetrical!)
 			mBuffer[getHeight() - y][x] = mTextures[texNumCeiling][texWidth * floorTexPos.y + floorTexPos.x];
 		}
+		asd++;
 	}
 
 	Game::DrawSprites();
