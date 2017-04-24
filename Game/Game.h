@@ -42,7 +42,6 @@ private:
 
 	//1D Zbuffer
 	double mZBuffer[screenWidth];
-	double mDistLookup[screenHeight / 2];
 
 	// Keeps track on whether the user has pressed escape
 	bool mQuit;
@@ -51,12 +50,11 @@ private:
 	mapTile mMap[mapWidth][mapHeight];
 
 	List<Enemy>  mEnemies;
-	List<Object *> mDoors,
-			  	   mPickups;
 
 	//function used to sort the sprites
 	void combSort(std::vector<int> &order, std::vector<double> &dist, int amount);
 
+	void InitGame();
 	void InitPlayer();
 	void LoadMap(std::string mapName);
 	void LoadEnemies(std::string mapName);

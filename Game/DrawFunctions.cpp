@@ -33,7 +33,7 @@ void Game::Render()
 		if(drawEnd >= getHeight())drawEnd = getHeight() - 1;
 
 		//texturing calculations
-		int texNum = mMap[mapPos.x][mapPos.y].object - 1; //1 subtracted from it so that texture 0 can be used!
+		int texNum = mMap[mapPos.x][mapPos.y].wall - 1; //1 subtracted from it so that texture 0 can be used!
 
 		//calculate value of wallX
 		double wallX; //where exactly the wall was hit

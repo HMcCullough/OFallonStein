@@ -1,6 +1,6 @@
 #include "../E_Def.h"
 
-Vector2<int> Raycast(mapTile map[][mapHeight], Vector2<double> rayPos, Vector2<double> rayDir,	Vector2<double> &stepDir,
+Vector2<int> Raycast(mapTile (& map)[mapWidth][mapHeight], Vector2<double> rayPos, Vector2<double> rayDir,	Vector2<double> &stepDir,
 	int &hit, int &side)
 {
 	//length of ray from current position to next x or y-side
@@ -51,7 +51,7 @@ Vector2<int> Raycast(mapTile map[][mapHeight], Vector2<double> rayPos, Vector2<d
 			side = 1;
 		}
 		//Check if ray has hit a wall
-		if (map[mapPos.x][mapPos.y].object > 0) hit = 1;
+		if (map[mapPos.x][mapPos.y].wall > 0) hit = 1;
 	}
 
 	return mapPos;

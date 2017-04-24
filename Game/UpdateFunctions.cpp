@@ -62,7 +62,7 @@ void Game::UpdateMovement()
 
 				if(newMapPosX + check.x * 0.05 < mapWidth  && newMapPosX + check.x * 0.05 >= 0 &&
 				   newMapPosY + check.y * 0.05 < mapHeight && newMapPosY + check.y * 0.05 >= 0 &&
-				   mMap[int(newMapPosX + check.x * 0.05)][int(newMapPosY + check.y * 0.05)].object != false)
+				   mMap[int(newMapPosX + check.x * 0.05)][int(newMapPosY + check.y * 0.05)].wall != false)
 				   collides = true;
 			}
 
@@ -74,11 +74,11 @@ void Game::UpdateMovement()
 		{
 			velocity.normalize();
 			double oldVelX = velocity.x;
-			if (mMap[int(posX)][int(posY + velocity.y)].object == false)
+			if (mMap[int(posX)][int(posY + velocity.y)].wall == false)
 				velocity.x = 0;
-			if (mMap[int(posX + oldVelX)][int(posY)].object == false)
+			if (mMap[int(posX + oldVelX)][int(posY)].wall == false)
 				velocity.y = 0;
-			if (mMap[int(posX + velocity.x)][int(posY + velocity.y)].object == false)
+			if (mMap[int(posX + velocity.x)][int(posY + velocity.y)].wall == false)
 				mPlayer.Move(posX + 0.1 * velocity.x, posY + 0.1 * velocity.y);
 		}
 	}
