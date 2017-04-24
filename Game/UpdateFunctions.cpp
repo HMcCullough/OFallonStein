@@ -128,7 +128,8 @@ void Game::CheckShoot()
 void Game::CheckQuit()
 {
 	//failsafe
-	mQuit = keyDown(SDLK_1);
+	if (keyDown(SDLK_1))
+		mQuit = true;
 }
 
 //replaces CheckQuit because pause now quits too
@@ -140,6 +141,12 @@ void Game::CheckPause()
 	{
 		int mx, my;
 		//std::cout << "pause" << std::endl;
+
+		Button ResumeButton(Vector2<double>(screenWidth/2 - 350, screenHeight/2 + 100),  nullptr, "Textures/UI/Resume.png");
+		Button InfoButton(Vector2<double>(screenWidth/2 - 75, screenHeight/2 + 100), nullptr, "Textures/UI/Info.png");
+		Button ExitButton(Vector2<double>(screenWidth/2 + 150, screenHeight/2 + 100), nullptr, "Textures/UI/Exit.png");
+
+		SDL_Event event;
 
 		//YOU CAN OVERLOAD PARANTHESES
 		Uint32 coolMod = gen();
@@ -166,7 +173,7 @@ void Game::CheckPause()
 			color = INTtoRGB((( i/dir * (coolMod % mod) + j/dir2 * (coolMod2 % mod)) + colorOffset) / 4);
 			//black and white
 			color.r = color.b;
-			color.g = color.b;
+			color.g *= 2;
 			color.b = color.b;
 			//converts back for printing to screen
 			colorI = RGBtoINT(color);
@@ -179,10 +186,26 @@ void Game::CheckPause()
 
 			//used for button logic
 			SDL_GetMouseState(&mx, &my);
+			SDL_PollEvent(&event);
 
 			readKeys();
 			
 			//this is where buttons logic should go
+			ResumeButton.OnHover(mx, my);
+			InfoButton.OnHover(mx, my);
+			ExitButton.OnHover(mx, my);
+
+			if (keyDown(SDLK_1))
+				mQuit = true;
+
+			if( event.type == SDL_MOUSEBUTTONUP )
+			{	
+				SDL_PollEvent(&event);
+				if (ResumeButton.OnClick(mx, my))
+					mPause = false;
+				if (ExitButton.OnClick(mx, my))
+					{mQuit = true; mPause = false;};
+			}
 			
 			if (keyPressed(SDLK_ESCAPE))
 			{ 
@@ -190,7 +213,12 @@ void Game::CheckPause()
 				mPause = false;
 			}
 
+			SDL_ShowCursor(1);
 			drawBuffer(mBuffer[0]);
+
+			ResumeButton.Draw();
+			InfoButton.Draw();
+			ExitButton.Draw();
 		
 			redraw();
 		}
