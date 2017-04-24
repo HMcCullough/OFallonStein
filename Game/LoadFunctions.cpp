@@ -12,7 +12,7 @@ void Game::InitPlayer()
 	mPlayer.setSpeed(1);
 
 	// Object Class Members
-	mPlayer.setPosition(26, 26);
+	mPlayer.setPosition(28, 15);
 	mPlayer.setDirection(-1, 0);
 
 	// Inwit default gun
@@ -35,8 +35,6 @@ void Game::LoadTextures()
 	mUI.resize(256*800);
 
 	unsigned long tw, th;
-	// Ship Textures
-
 
 	// Ceiling Textures
     success |= loadImage(mTextures[Textures::AndyCeiling], tw, th, "Textures/Ceilings/andyWall1.png");
@@ -91,10 +89,7 @@ void Game::LoadTextures()
 	success |= loadImage(mTextures[Textures::why], tw, th, "Textures/Enemies/4why.png");
 	success |= loadImage(mTextures[Textures::die], tw, th, "Textures/Enemies/5dying2.png");
 	success |= loadImage(mTextures[Textures::gameover], tw, th, "Textures/Enemies/5evenMoredead.png");
-
-	// Sprites
-	//success |= loadImage(mTextures[Textures::TestSprite], tw, th, "Textures/Sprites/27846.png");
-
+	
 	// Menu
 	success |= loadImage(mTextures[Textures::GameLogo], tw, th, "Textures/gamelogo.png");
 
