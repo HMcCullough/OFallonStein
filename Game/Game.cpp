@@ -22,13 +22,13 @@ void Game::RunGame()
 {
 	LoadSounds();
 	LoadTextures();
+	InitPlayer();
 }
 
 void Game::Play(std::string mapName, Songs song)
 {
 	LoadMap(mapName);
 	LoadEnemies(mapName);
-	InitPlayer();
 
 	double time = 0; //time of current frame
 	double oldTime = 0; //time of previous frame
@@ -83,4 +83,9 @@ void Game::Play(std::string mapName, Songs song)
 	}
 
 	mObjects.clear();
+}
+
+void Game::setPlayerPos(double posX, double posY)
+{
+	mPlayer.setPosition(posX, posY);
 }

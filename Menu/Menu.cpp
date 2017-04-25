@@ -96,10 +96,12 @@ void StartGame()
 	Mix_HaltChannel(-1);
 
 	//level 2
+	game.setPlayerPos(28, 3);
 	game.Play("OF2", Songs::AndySong);
 	Mix_HaltChannel(-1);
 
 	//Boss Level
+	game.setPlayerPos(27, 14);
 	game.Play("OFBOSS", Songs::AndySong);
 	Mix_HaltChannel(-1);
 
