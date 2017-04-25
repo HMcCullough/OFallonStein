@@ -101,6 +101,7 @@ void Game::UpdateRotation(float deltaMouse)
 
 void Game::CheckShoot()
 {
+	// Check the player's shoot
 	Gun &gun = mPlayer.getCurrentGun();
 
 	gun.update();
@@ -122,6 +123,22 @@ void Game::CheckShoot()
 
 	if (gun.isShooting())
 		gun.animate();
+
+	// Check Enemies' shoot
+	for (int i = 0; i < mObjects.size(); i++)
+	{
+		Enemy *e = dynamic_cast<Enemy *>(mObjects.at(i));
+		if (e)
+		{
+			if (e->canSeePlayer())
+			{
+				e->Shoot();
+				Object *proj = new Projectile(e->getPosition(), mPlayer.getPosition() - e->getPosition(), MEDSPEED, e->getDamage(), Textures::breakpoint);
+				mObjects.insertAtFront(proj);
+				mNumProjectiles++;
+			}
+		}
+	}
 }
 
 
@@ -142,7 +159,7 @@ void Game::CheckPause()
 		int mx, my;
 		//std::cout << "pause" << std::endl;
 
-		Button ResumeButton(Vector2<double>(screenWidth/2 - 350, screenHeight/2 + 100),  nullptr, "Textures/UI/Resume.png");
+		Button ResumeButton(Vector2<double>(screenWidth/2 - 350, screenHeight/2 + 100),  nullptr, "Textures/UI/Resume->png");
 		Button InfoButton(Vector2<double>(screenWidth/2 - 75, screenHeight/2 + 100), nullptr, "Textures/UI/Info.png");
 		Button ExitButton(Vector2<double>(screenWidth/2 + 150, screenHeight/2 + 100), nullptr, "Textures/UI/Exit.png");
 
@@ -221,6 +238,27 @@ void Game::CheckPause()
 			ExitButton.Draw();
 		
 			redraw();
+		}
+	}
+}
+
+void Game::CheckHit()
+{
+	if (mNumProjectiles > 0)
+	{
+		for (int i = 0; i < mObjects.size(); ++i)
+		{
+			Projectile *obj = dynamic_cast<Projectile *>(mObjects.at(i));
+			if (obj)
+			{
+				obj->Move(obj->getDirection());
+				if (obj->getPosition().distanceTo(mPlayer.getPosition()) < 0.25)
+				{
+					mPlayer.TakeDamage(obj->getDamage());
+					mObjects.deleteAt(i);
+					mNumProjectiles--;
+				}
+			}
 		}
 	}
 }

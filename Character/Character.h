@@ -11,7 +11,7 @@ public:
 	~Character();
 
 	virtual void TakeDamage(int damage) = 0;
-	virtual void Move(double x, double y) = 0; // x and y represent the new position vector components
+	virtual void Move(double x, double y); // x and y represent the new position vector components
 	virtual void Shoot() = 0;
 
 	int getHealth() const;

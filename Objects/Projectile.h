@@ -13,6 +13,10 @@ public:
 
 	double getSpeed();
 	void setSpeed(double newSpeed);
+
+	void Move(Vector2<double> dir);
+	void Move(double x, double y);
+
 private:
 	int mDamage;	
 	double mSpeed;

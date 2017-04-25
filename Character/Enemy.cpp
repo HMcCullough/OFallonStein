@@ -80,6 +80,9 @@ void Enemy::setDamage(const int &damage) { mDamage = damage; }
 bool Enemy::isVisible() const { return mIsVisible; }
 void Enemy::setVisibility(const bool &visibility) { mIsVisible = visibility; }
 
+bool Enemy::canSeePlayer() const { return mCanSeePlayer; }
+void Enemy::setPlayerVisibility(const bool &canSeePlayer) { mCanSeePlayer = canSeePlayer; }
+
 int Enemy::getCameraX() const
 {
 	return mCameraX;
@@ -95,12 +98,6 @@ void Enemy::TakeDamage(int damage)
 	setHealth(getHealth() - damage);
 	if (getHealth() <= 0) { Die(); }
 	else { playSound(mDamageSound); }
-}
-
-void Enemy::Move(double x, double y)
-{
-	mPosition.setX(x);
-	mPosition.setY(y);
 }
 
 void Enemy::Shoot()

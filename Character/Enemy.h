@@ -15,17 +15,20 @@ public:
 	bool isVisible() const;
 	void setVisibility(const bool &visibility);
 
+	bool canSeePlayer() const;
+	void setPlayerVisibility(const bool &canSeePlayer);
+
 	int getCameraX() const;
 	void setCameraX(const int &cameraX);
 
 	void TakeDamage(int damage) override;
-	void Move(double x, double y) override; // x and y represent the differences in the position vector components
 	void Shoot() override;
 
 private:
-	int mDamage;
-	bool mIsVisible;
-	int mCameraX;
+	int mDamage,
+		mCameraX;
+	bool mIsVisible,
+		 mCanSeePlayer;
 
 	void Die() override;
 };

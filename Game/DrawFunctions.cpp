@@ -214,6 +214,7 @@ void Game::DrawSprites()
 									planeRight = pos + mPlayer.getDirection() + mPlayer.getCameraPlane();
 					bool isOnScreen = ((sgn((planeLeft.x - pos.x) * (curLocation.y - pos.y) - (planeLeft.y - pos.y) * (curLocation.x - pos.x)) == -1 &&
 									sgn((planeRight.x - pos.x) * (curLocation.y - pos.y) - (planeRight.y - pos.y) * (curLocation.x - pos.x)) == 1));
+					e->setPlayerVisibility(transform.y > 0 && transform.y < mZBuffer[stripe]);
 					if(transform.y > 0 && isOnScreen && transform.y < mZBuffer[stripe])
 					{
 						if (abs(getWidth() / 2 - stripe) < e->getCameraX())

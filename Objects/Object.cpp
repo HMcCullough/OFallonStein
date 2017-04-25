@@ -26,6 +26,7 @@ void Object::setDirection(const double &dirX, const double &dirY)
 {
 	mDirection.setX(dirX);
 	mDirection.setY(dirY);
+	mDirection.normalize();
 }
 
 void Object::setPosition(const Vector2<double> &pos) { setPosition(pos.x, pos.y); }
