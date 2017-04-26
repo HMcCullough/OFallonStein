@@ -23,7 +23,7 @@
 *.lib
 
 # Executables
-Xeno
+OFALLONSTEIN3D
 *.exe
 *.out
 *.app
