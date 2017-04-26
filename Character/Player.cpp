@@ -68,6 +68,7 @@ void Player::Shoot()
 
 void Player::Die()
 {
+	mIsDead = true;
 }
 
 void Player::AddGun(int screenX, int screenY, int damage, int shotDelay, int defaultTexture)

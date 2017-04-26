@@ -72,6 +72,14 @@ void Game::Play(std::string mapName, Songs song)
 		{
 			break;
 		}
+
+		if(mPlayer.isDead())
+		{
+			CutsceneManager cm;
+
+			cm.PlayRange(GAMEOVER1, GAMEOVER5, false, "Music/SoundOfAndy.wav", 2000);
+			mQuit = true;
+		}
 		
 		//who the heck made these ints defined in the while loop
 		int mx, my;

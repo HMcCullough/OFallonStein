@@ -118,6 +118,8 @@ void StartGame()
 	if(game.mQuit) return;
 
 	//Drop through means winning
+	cm.PlayRange(SCENE6, CREDITS, false, "Music/Credits.wav", 3750);
+
 	//if win
 		//cm.PlayRange(SCENE6, CREDITS, false, "Music/Credits.wav", 3750);
 

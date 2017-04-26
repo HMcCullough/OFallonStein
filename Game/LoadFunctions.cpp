@@ -25,7 +25,7 @@ void Game::InitPlayer()
 	mPlayer.getCurrentGun().addAnimationFrame(GunTextures::RaidAnim1);
 	mPlayer.getCurrentGun().addAnimationFrame(GunTextures::RaidAnim2);
 	mPlayer.getCurrentGun().addAnimationFrame(GunTextures::RaidAnim3);
-	mPlayer.setShootSound(mSounds[Sounds::ShootSound]);
+	mPlayer.setShootSound(mSounds[Sounds::Spray]);
 
 	std::cout << "Player Initialized" << std::endl;
 }
@@ -120,9 +120,37 @@ void Game::LoadSounds()
 
 	mSounds.resize(numSounds);
 
-	mSounds[Sounds::DamageSound] = Mix_LoadWAV("sound/urgh.wav");
-	mSounds[Sounds::WillhelmScream] = Mix_LoadWAV("sound/willhelm.wav");
-	mSounds[Sounds::ShootSound] = Mix_LoadWAV("sound/rap.wav");
+	mSounds[Sounds::Absent] = Mix_LoadWAV("sound/Absent.wav");
+	mSounds[Sounds::BossHit1] = Mix_LoadWAV("sound/BossHit1.wav");
+	mSounds[Sounds::BossHit2] = Mix_LoadWAV("sound/BossHit2.wav");
+	mSounds[Sounds::BossLaugh] = Mix_LoadWAV("sound/BossLaugh.wav");
+	mSounds[Sounds::Caterpillar] = Mix_LoadWAV("sound/Caterpillar.wav");
+	mSounds[Sounds::Cockroach] = Mix_LoadWAV("sound/Cockroach.wav");
+	mSounds[Sounds::CockroachDeath] = Mix_LoadWAV("sound/CockroachDeath.wav");
+	mSounds[Sounds::EatGuard] = Mix_LoadWAV("sound/EatGuard.wav");
+	mSounds[Sounds::Geek] = Mix_LoadWAV("sound/Geek.wav");
+	mSounds[Sounds::Grasshopper] = Mix_LoadWAV("sound/Grasshopper.wav");
+	mSounds[Sounds::Gugh] = Mix_LoadWAV("sound/Gugh.wav");
+	mSounds[Sounds::InheritThis] = Mix_LoadWAV("sound/InheritThis.wav");
+	mSounds[Sounds::Loser] = Mix_LoadWAV("sound/Loser.wav");
+	mSounds[Sounds::MosqDeath] = Mix_LoadWAV("sound/MosqDeath.wav");
+	mSounds[Sounds::Mosquito] = Mix_LoadWAV("sound/Mosquito.wav");
+	mSounds[Sounds::Nerd] = Mix_LoadWAV("sound/Nerd.wav");
+	mSounds[Sounds::PenCap] = Mix_LoadWAV("sound/PenCap.wav");
+	mSounds[Sounds::RaidPickup] = Mix_LoadWAV("sound/RaidPickup.wav");
+	mSounds[Sounds::Spray] = Mix_LoadWAV("sound/rap.wav");
+	mSounds[Sounds::SinkIn] = Mix_LoadWAV("sound/SinkIn.wav");
+	mSounds[Sounds::Spider] = Mix_LoadWAV("sound/Spider.wav");
+	mSounds[Sounds::StackOverflow] = Mix_LoadWAV("sound/StackOverflow.wav");
+	mSounds[Sounds::TestWrapper] = Mix_LoadWAV("sound/TestWrapper.wav");
+	mSounds[Sounds::TryCatch] = Mix_LoadWAV("sound/TryCatch.wav");
+	mSounds[Sounds::TypeDeath] = Mix_LoadWAV("sound/TypeDeath.wav");
+	mSounds[Sounds::Urgh] = Mix_LoadWAV("sound/urgh.wav");
+	mSounds[Sounds::Wasp] = Mix_LoadWAV("sound/Wasp.wav");
+	mSounds[Sounds::WaspDead] = Mix_LoadWAV("sound/WaspDedded.wav");
+	mSounds[Sounds::WHY] = Mix_LoadWAV("sound/WHY.wav");
+	mSounds[Sounds::Worm] = Mix_LoadWAV("sound/Worm.wav");
+	mSounds[Sounds::Worm2] = Mix_LoadWAV("sound/Worm2.wav");
 
 	for (int i = 0; i < numSounds; i++)
 		success &= (mSounds[i] != nullptr);
