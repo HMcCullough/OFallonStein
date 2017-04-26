@@ -22,6 +22,9 @@ public:
 	void Shoot() override;
 	bool CanShoot();
 
+	void setHurtTexture(int texture);
+	int getHurtTexture();
+
 	//void Enemy::setBossTauntSound(); //For the boss sounds
 
 private:
@@ -29,6 +32,8 @@ private:
 		mCameraX,
 		mShotTime, mOldShotTime;
 	bool mIsVisible;
+
+	int mHurtTexture;
 
 	void Die() override;
 };

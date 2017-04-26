@@ -65,7 +65,7 @@ void Game::LoadTextures()
 	success |= loadImage(mTextures[Textures::caterpillar], tw, th, "Textures/Enemies/caterpillar.png");
     success |= loadImage(mTextures[Textures::caterpillarHurt], tw, th, "Textures/Enemies/caterpillar_hurt.png");
 	success |= loadImage(mTextures[Textures::worm], tw, th, "Textures/Enemies/worm.png");
-	success |= loadImage(mTextures[Textures::workHurt], tw, th, "Textures/Enemies/worm_hurt.png");
+	success |= loadImage(mTextures[Textures::wormHurt], tw, th, "Textures/Enemies/worm_hurt.png");
 	success |= loadImage(mTextures[Textures::cock], tw, th, "Textures/Enemies/Cock.png");
 	success |= loadImage(mTextures[Textures::cockHurt], tw, th, "Textures/Enemies/Cock_hurt.png");
 	success |= loadImage(mTextures[Textures::grasshopper], tw, th, "Textures/Enemies/grasshopper.png");
@@ -231,7 +231,15 @@ void Game::LoadMap(std::string mapName)
 						mMap[i][j].wall = std::stoi(line);
 						break;
 					case 2:
-						mMap[i][j].enemy = std::stoi(line);
+						if(std::stoi(line) != 18)
+						{
+							mMap[i][j].enemy = std::stoi(line);
+						}
+						else
+						{
+							mMap[i][j].enemy = 0;
+						}
+						
 						break;
 					case 3:
 						mMap[i][j].ceiling = std::stoi(line);

@@ -28,6 +28,7 @@ Enemy::Enemy(const Enemies & enemy, double posX, double posY, std::vector<Mix_Ch
 			setMaxHealth(SMALLHEALTH);
 			setDamage(SMALLDMG);
 			setTexture(Textures::cock);
+			setHurtTexture(Textures::cockHurt);
 			setDamageSound(soundlist[Sounds::Cockroach]);
 			setDeathSound(soundlist[Sounds::CockroachDeath]);
 			break;
@@ -36,6 +37,7 @@ Enemy::Enemy(const Enemies & enemy, double posX, double posY, std::vector<Mix_Ch
 			setMaxHealth(MEDHEALTH);
 			setDamage(MEDDMG);
 			setTexture(Textures::caterpillar);
+			setHurtTexture(Textures::caterpillarHurt);
 			setDeathSound(soundlist[Sounds::Caterpillar]);
 			break;
 		case Enemies::eGrasshopper:
@@ -43,6 +45,7 @@ Enemy::Enemy(const Enemies & enemy, double posX, double posY, std::vector<Mix_Ch
 			setMaxHealth(SMALLHEALTH);
 			setDamage(SMALLDMG);
 			setTexture(Textures::grasshopper);
+			setHurtTexture(Textures::grasshopperHurt);
 			setDeathSound(soundlist[Sounds::Grasshopper]);
 			break;
 		case Enemies::eMosquito:
@@ -50,6 +53,7 @@ Enemy::Enemy(const Enemies & enemy, double posX, double posY, std::vector<Mix_Ch
 			setMaxHealth(SMALLHEALTH);
 			setDamage(BIGDMG);
 			setTexture(Textures::mosquito);
+			setHurtTexture(Textures::mosquitoHurt);
 			setDamageSound(soundlist[Sounds::Mosquito]);
 			setDeathSound(soundlist[Sounds::MosqDeath]);
 			break;
@@ -58,6 +62,7 @@ Enemy::Enemy(const Enemies & enemy, double posX, double posY, std::vector<Mix_Ch
 			setMaxHealth(BIGHEALTH);
 			setDamage(BIGDMG);
 			setTexture(Textures::spider);
+			setHurtTexture(Textures::spiderHurt);
 			setDeathSound(soundlist[Sounds::Spider]);
 			break;
 		case Enemies::eWasp:
@@ -65,6 +70,7 @@ Enemy::Enemy(const Enemies & enemy, double posX, double posY, std::vector<Mix_Ch
 			setMaxHealth(MEDHEALTH);
 			setDamage(BIGDMG);
 			setTexture(Textures::wasp);
+			setHurtTexture(Textures::waspHurt);
 			setDamageSound(soundlist[Sounds::Wasp]);
 			setDeathSound(soundlist[Sounds::WaspDead]);
 			break;
@@ -73,6 +79,7 @@ Enemy::Enemy(const Enemies & enemy, double posX, double posY, std::vector<Mix_Ch
 			setMaxHealth(MEDHEALTH);
 			setDamage(MEDDMG);
 			setTexture(Textures::worm);
+			setHurtTexture(Textures::wormHurt);
 			setDamageSound(soundlist[Sounds::Worm2]);
 			setDeathSound(soundlist[Sounds::Worm]);
 			break;
@@ -110,6 +117,11 @@ void Enemy::TakeDamage(int damage)
 	setHealth(getHealth() - damage);
 	if (getHealth() <= 0) { Die(); }
 	else { playSound(mDamageSound); }
+
+	if(getHealth() < getMaxHealth() / 2)
+	{
+		setTexture(getHurtTexture());
+	}
 }
 
 void Enemy::Shoot()
@@ -128,6 +140,13 @@ void Enemy::Die()
 	playSound(mDeathSound);
 	mIsDead = true;
 }
+
+void Enemy::setHurtTexture(int texture)
+{
+	mHurtTexture = texture;
+}
+
+int Enemy::getHurtTexture(){return mHurtTexture;}
 
 /*void Enemy::setBossTauntSound(std::vector<Mix_Chunk *>& soundlist)
 {
