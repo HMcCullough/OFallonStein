@@ -119,7 +119,6 @@ void Game::Render()
 	}
 
 	Game::DrawSprites();
-
 	Game::DrawUI();
 }
 
@@ -325,5 +324,77 @@ void Game::DrawCrosshair()
 
 void Game::PrintHUD()
 {
+	std::string print;
+
+	int health = mPlayer.getHealth();
+	int ammo = mPlayer.getAmmo();
+
+	//straight outta cutscene
+
+	ColorRGB color = ColorRGB(0,255,0); //text green
+	ColorRGB color2 = ColorRGB(0,0,0); //background is black if it exists
+	int u,v;
+
+	//will print a background behind the text if this is set to true
+	bool bg = false;
+	//or will it
+
+	//changes the cubic size of the text. filled pixels independent of size
+	int textMult = 5;
+
+	//heavily modified functions from QuickCG
+	
+	
+	//PRINT LEFT - that's health
+	int x = 25;
+	int y = 520;	
+	print = std::to_string(health);
+
+	//std::cout << print << std::endl;
+
+	for(size_t i = 0; i < print.size(); i++)
+	{
+		for (v = 0; v < 8; v++)
+		for (u = 0; u < 8; u++)
+		{
+			//these two for loops determine text fill
+			for (int k = 0; k < 4; ++k)
+			for (int j = 0; j < 4; ++j)
+			{
+		  		if(font[print[i]][u][v]) pset(x + u*textMult + k, y + v*textMult + j, color);
+		  		else if(bg) pset(x + u*textMult + k, y + v*textMult + j, color2);
+	  		}
+		}
+
+		x += 8 * textMult;
+		if(x > screenWidth - 8 * textMult) {x %= 8 * textMult; y += 8 * textMult;}
+		if(y > screenHeight - 8 * textMult) {y %= 8 * textMult;}
+	}
+
+	//PRINT RIGHT - that's ammo
+	x = 650;
+	y = 520;
+	print = std::to_string(ammo);
+
+	//std::cout << print << std::endl;
+
+	for(size_t i = 0; i < print.size(); i++)
+	{
+		for (v = 0; v < 8; v++)
+		for (u = 0; u < 8; u++)
+		{
+			//these two for loops determine text fill
+			for (int k = 0; k < 4; ++k)
+			for (int j = 0; j < 4; ++j)
+			{
+		  		if(font[print[i]][u][v]) pset(x + u*textMult + k, y + v*textMult + j, color);
+		  		else if(bg) pset(x + u*textMult + k, y + v*textMult + j, color2);
+	  		}
+		}
+
+		x += 8 * textMult;
+		if(x > w - 8 * textMult) {x %= 8 * textMult; y += 8 * textMult;}
+		if(y > h - 8 * textMult) {y %= 8 * textMult;}
+	}
 
 }

@@ -14,6 +14,7 @@ public:
 	// Accessors
 	// Getters
 	Vector2<double> getCameraPlane() const;
+	int getHealth() const;
 	int getArmor() const;
 	int getBattery() const;
 	int getAmmo() const;
@@ -23,6 +24,7 @@ public:
 	void setCameraPlane(const Vector2<double> &cam);
 	void setCameraPlane(const double &camX, const double &camY);
 
+	void setHealth(const int &health);
 	void setArmor(const int &armor);
 	void setBattery(const int &battery);
 	void setAmmo(const int &ammo);

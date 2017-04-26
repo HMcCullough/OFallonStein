@@ -22,6 +22,7 @@ Player::Player(int health, int armor, int battery, double speed, Vector2<double>
 }
 
 Vector2<double> Player::getCameraPlane() const { return mCameraPlane; }
+int Player::getHealth() const { return mHealth; }
 int Player::getArmor() const { return mArmor; }
 int Player::getBattery() const { return mBattery; }
 int Player::getAmmo() const { return mAmmo; }
@@ -34,6 +35,7 @@ void Player::setCameraPlane(const double &camX, const double &camY)
 	mCameraPlane.setY(camY);
 }
 
+void Player::setHealth(const int &health) { mHealth = health; }
 void Player::setArmor(const int &armor) { mArmor = armor; }
 void Player::setBattery(const int &battery) { mBattery = battery; }
 void Player::setAmmo(const int &ammo) { mAmmo = ammo; }

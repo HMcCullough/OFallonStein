@@ -33,6 +33,9 @@ void Game::Play(std::string mapName, Songs song)
 	double time = 0; //time of current frame
 	double oldTime = 0; //time of previous frame
 
+	mPlayer.setHealth(100);
+	mPlayer.setAmmo(100);
+
 	float deltaMouse = 0.0f;
 
 	playSong(mSongs[song]);
@@ -44,8 +47,8 @@ void Game::Play(std::string mapName, Songs song)
 		SDL_GetMouseState(&oldmx, &oldmy);
 
 		Render();
-		PrintHUD();
 		DrawCrosshair();
+		PrintHUD();
 
 		//timing for input and FPS counter
 		oldTime = time;
@@ -61,7 +64,7 @@ void Game::Play(std::string mapName, Songs song)
 		//this will be removed in final build
 		CheckQuit();
 		CheckPause();
-		
+
 		if(CheckWin())
 		{
 			break;
