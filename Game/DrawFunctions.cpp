@@ -208,15 +208,15 @@ void Game::DrawSprites()
 				//2) it's on the screen (left)
 				//3) it's on the screen (right)
 				//4) mZBuffer, with perpendicular distance
-				Vector2<double> pos = mPlayer.getPosition();
+				Vector2<double> pos = mPlayer.getPosition(), perpDir(mPlayer.getDirection().y, -mPlayer.getDirection().x);
 				Vector2<double> planeLeft = pos + mPlayer.getDirection() - mPlayer.getCameraPlane(),
 								planeRight = pos + mPlayer.getDirection() + mPlayer.getCameraPlane();
-				bool isOnScreen = ((sgn((planeLeft.x - pos.x) * (curLocation.y + 0.5 - pos.y) - (planeLeft.y - pos.y) * (curLocation.x + 0.5 - pos.x)) == -1 &&
-								sgn((planeRight.x - pos.x) * (curLocation.y - 0.5 - pos.y) - (planeRight.y - pos.y) * (curLocation.x - 0.5 - pos.x)) == 1));
+				bool isOnScreen = ((sgn((planeLeft.x - pos.x) * (curLocation.y + (0.5 * perpDir.y) - pos.y) - (planeLeft.y - pos.y) * (curLocation.x + (0.5 * perpDir.x) - pos.x)) == -1 &&
+								sgn((planeRight.x - pos.x) * (curLocation.y - (0.5 * perpDir.y) - pos.y) - (planeRight.y - pos.y) * (curLocation.x - (0.5 * perpDir.x) - pos.x)) == 1));
 				if(transform.y > 0 && isOnScreen && transform.y < mZBuffer[stripe])
 				{
-					//0if (e && abs(getWidth() / 2 - stripe) < e->getCameraX())
-						//e->setCameraX(abs(getWidth() / 2 - stripe));
+					if (e && abs(getWidth() / 2 - stripe) < e->getCameraX())
+						e->setCameraX(abs(getWidth() / 2 - stripe));
 					for(int y = drawStartY; y < drawEndY; y++) //for every pixel of the current stripe
 					{
 						// Update visibility
@@ -350,7 +350,7 @@ void Game::PrintHUD()
 	int y = 520;	
 	print = std::to_string(health);
 
-	std::cout << print << std::endl;
+	//std::cout << print << std::endl;
 
 	for(size_t i = 0; i < print.size(); i++)
 	{
@@ -376,7 +376,7 @@ void Game::PrintHUD()
 	y = 520;
 	print = std::to_string(ammo);
 
-	std::cout << print << std::endl;
+	//std::cout << print << std::endl;
 
 	for(size_t i = 0; i < print.size(); i++)
 	{
@@ -396,4 +396,5 @@ void Game::PrintHUD()
 		if(x > w - 8 * textMult) {x %= 8 * textMult; y += 8 * textMult;}
 		if(y > h - 8 * textMult) {y %= 8 * textMult;}
 	}
+
 }
