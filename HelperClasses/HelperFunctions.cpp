@@ -69,8 +69,11 @@ int sgn(double val) { return (0.0 < val) - (val < 0.0); }
 
 void playSound(Mix_Chunk *sound)
 {
-	std::thread musicThread(_playSound, sound);
-	musicThread.detach();
+	if (sound != nullptr)
+	{
+		std::thread musicThread(_playSound, sound);
+		musicThread.detach();
+	}
 }
 
 void _playSound(Mix_Chunk *sound)
