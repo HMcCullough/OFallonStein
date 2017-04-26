@@ -311,3 +311,16 @@ void Game::DrawUI()
 		}
 	}
 }
+
+void Game::DrawCrosshair()
+{
+	//DRAW CROSSHAIR
+	for (int i = -5; i <= 5; ++i)
+		for (int j = -5; j <= 5; ++j)
+		{
+			if (i < 2 && j < 2)
+			mBuffer[screenHeight/2 + i][screenWidth/2 + j] = RGBtoINT(ColorRGB(255,0,0));
+		}
+	drawBuffer(mBuffer[0]);
+	for(int x = 0; x < getWidth(); x++) for(int y = 0; y < getHeight(); y++) mBuffer[y][x] = 0; //clear the buffer instead of cls()
+}

@@ -1,9 +1,10 @@
 #include "UI.h"
 
+//if the buttons are smaller nothing bad happens. If they're bigger game crashes :)
 #define buttonWidth 400
 #define buttonHeight 200
 
-Button::Button(Vector2<double> upperLeft, void (* action)(), std::string filename)//, std::string hFilename)
+Button::Button(Vector2<double> upperLeft, void (* action)(), std::string filename)//, std::string hFilename) Don't need anymore done on the fly
 {
 	mUpperLeft.x = upperLeft.x; mUpperLeft.y = upperLeft.y;
 	Do = action;

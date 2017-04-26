@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "../Menu/Menu.h"
 
 std::default_random_engine gen;
 std::uniform_int_distribution<int> dis(0,U32Size), dirDis(8,24);
@@ -143,7 +144,7 @@ void Game::CheckPause()
 		//std::cout << "pause" << std::endl;
 
 		Button ResumeButton(Vector2<double>(screenWidth/2 - 350, screenHeight/2 + 100),  nullptr, "Textures/UI/Resume.png");
-		Button InfoButton(Vector2<double>(screenWidth/2 - 75, screenHeight/2 + 100), nullptr, "Textures/UI/Info.png");
+		Button InfoButton(Vector2<double>(screenWidth/2 - 75, screenHeight/2 + 100), &ShowInfo, "Textures/UI/Info.png");
 		Button ExitButton(Vector2<double>(screenWidth/2 + 150, screenHeight/2 + 100), nullptr, "Textures/UI/Exit.png");
 
 		SDL_Event event;
@@ -201,6 +202,7 @@ void Game::CheckPause()
 			if( event.type == SDL_MOUSEBUTTONUP )
 			{	
 				SDL_PollEvent(&event);
+				InfoButton.OnClick(mx, my);
 				if (ResumeButton.OnClick(mx, my))
 					mPause = false;
 				if (ExitButton.OnClick(mx, my))

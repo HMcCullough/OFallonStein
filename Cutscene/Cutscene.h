@@ -7,7 +7,7 @@
 using std::vector; //take that hunter
 using std::string;
 
-#define numCutscenes 32
+#define numCutscenes 33
 #define numCredits 4
 
 //this is universal for now
@@ -25,7 +25,7 @@ using std::string;
 
 //slightly important enum that contains more logical cutscene names
 //declared up here because they are called in main.cpp *thumbs up emoji*
-enum CutsceneList { SCENE1, SCENE1_2, SCENE2, SCENE3, SCENE4, SCENE5, SCENE6, SCENE7, SCENE7_2, SCENE7_3, SCENE7_4, SCENE7_5, SCENE7_6, SCENE7_7, SCENE8, SMOOTH1, SMOOTH2, CREDITS, GAMEOVER1, GAMEOVER2, GAMEOVER3, GAMEOVER4, GAMEOVER4_2, GAMEOVER4_3, GAMEOVER4_4, GAMEOVER4_5, GAMEOVER4_6, GAMEOVER4_7, GAMEOVER4_8, GAMEOVER4_9, GAMEOVER4_10, GAMEOVER5 };
+enum CutsceneList { SCENE1, SCENE1_2, SCENE2, SCENE3, SCENE4, SCENE5, SCENE6, SCENE7, SCENE7_2, SCENE7_3, SCENE7_4, SCENE7_5, SCENE7_6, SCENE7_7, SCENE8, SMOOTH1, SMOOTH2, DANCINGANDY, CREDITS, GAMEOVER1, GAMEOVER2, GAMEOVER3, GAMEOVER4, GAMEOVER4_2, GAMEOVER4_3, GAMEOVER4_4, GAMEOVER4_5, GAMEOVER4_6, GAMEOVER4_7, GAMEOVER4_8, GAMEOVER4_9, GAMEOVER4_10, GAMEOVER5 };
 enum SceneType { STATIC, ANIMATED, PROGRESSIVE };
 
 class CutsceneManager
@@ -40,6 +40,7 @@ public:
 
 	//adds scene to buffer, syncs up animations between scene and text
 	void DrawCutscene(int scene, bool skippable, SceneType type = SceneType::STATIC, double frameSpeed = 0.05, int numFrames = 1, int autoSpeed = autoAdvance);
+	void DancingAndy(double delay);
 private:
 	//holds the current scene index
 	int mCurrentScene;

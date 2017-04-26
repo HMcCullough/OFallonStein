@@ -44,16 +44,8 @@ void Game::Play(std::string mapName, Songs song)
 		SDL_GetMouseState(&oldmx, &oldmy);
 
 		Render();
-
-		//DRAW CROSSHAIR
-		for (int i = -5; i <= 5; ++i)
-			for (int j = -5; j <= 5; ++j)
-			{
-				if (i < 2 && j < 2)
-				mBuffer[screenHeight/2 + i][screenWidth/2 + j] = RGBtoINT(ColorRGB(255,0,0));
-			}
-		drawBuffer(mBuffer[0]);
-		for(int x = 0; x < getWidth(); x++) for(int y = 0; y < getHeight(); y++) mBuffer[y][x] = 0; //clear the buffer instead of cls()
+		PrintHUD();
+		DrawCrosshair();
 
 		//timing for input and FPS counter
 		oldTime = time;
@@ -65,10 +57,11 @@ void Game::Play(std::string mapName, Songs song)
 		UpdateRotation(deltaMouse);
 		UpdateMovement();
 		CheckShoot();
-		//this will be removed in final build. used until pause menu has quit feature
+		//this will be removed in final build
 		CheckQuit();
 		CheckPause();
 
+		//who the heck made these ints defined in the while loop
 		int mx, my;
 		SDL_GetMouseState(&mx, &my);
 

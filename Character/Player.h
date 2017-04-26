@@ -16,6 +16,7 @@ public:
 	Vector2<double> getCameraPlane() const;
 	int getArmor() const;
 	int getBattery() const;
+	int getAmmo() const;
 	Gun &getCurrentGun();
 
 	// Setters
@@ -24,6 +25,7 @@ public:
 
 	void setArmor(const int &armor);
 	void setBattery(const int &battery);
+	void setAmmo(const int &ammo);
 
 	// Member Functions
 	void TakeDamage(int damage) override;
@@ -36,7 +38,7 @@ public:
 private:
 	Vector2<double> mCameraPlane;
 
-	int mArmor, mBattery, mCurrentGun;
+	int mArmor, mBattery, mCurrentGun, mAmmo;
 	std::vector<Gun> mGuns;
 
 	void Die();

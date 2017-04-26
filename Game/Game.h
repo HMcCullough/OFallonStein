@@ -65,6 +65,7 @@ private:
 	void LoadTextures();
 
 	void Render();
+	void DrawCrosshair();
 	void CheckQuit();
 	void CheckPause();
 

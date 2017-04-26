@@ -43,10 +43,12 @@ void DisplayMenu()
 
 		if( event.type == SDL_MOUSEBUTTONUP )
 		{
+			InfoButton.OnClick(mx, my);
 			success = StartButton.OnClick(mx, my);
 			quit = ExitButton.OnClick(mx, my);
 		}
 
+		//Hunter wrote this I guess
 		double skipX = screenWidth / mw;
 		double skipY = screenHeight / mh;
 		//std::cout << skipX << " " << skipX << std::endl;
@@ -78,14 +80,15 @@ void DisplayMenu()
 
 //this function is really weird I don't know if I like it
 //-Ryan
+//UPDATE: it's not so bad anymore
 void StartGame()
 {
 	Mix_HaltChannel(-1);
-	
-	CutsceneManager cm;
 
+	CutsceneManager cm;
+	
 	//plays the intro
-	//cm.PlayRange(SCENE1, SCENE5, true, "Music/OFallonsteinfeld.wav");
+	cm.PlayRange(SCENE1, SCENE5, true, "Music/OFallonsteinfeld.wav");
 	
 	Mix_HaltChannel(-1);
 	Game game;
@@ -95,7 +98,7 @@ void StartGame()
 	game.Play("OF1", Songs::AndySong);
 	Mix_HaltChannel(-1);
 
-	//level 2
+	//Level 2
 	game.setPlayerPos(28, 3);
 	game.Play("OF2", Songs::AndySong);
 	Mix_HaltChannel(-1);
@@ -111,10 +114,54 @@ void StartGame()
 
 	//if win
 	//if(true)
-		//cm.PlayRange(SCENE6, CREDITS, false, "Music/Credits.wav", 3000);
+		//cm.PlayRange(SCENE6, CREDITS, false, "Music/Credits.wav", 3750);
 }
 
 void ShowInfo()
 {
-	//
+	bool failed;
+	bool pause = 53; //i love bools
+	long unsigned int mw, mh;
+	SDL_Event event;
+	
+	Button ResumeButton(Vector2<double>(screenWidth/2 - 100, screenHeight/2 + 175), nullptr, "Textures/UI/Resume.png");
+
+	std::vector<ColorRGB> image;
+	image.resize(screenWidth * screenHeight);
+	failed = loadImage (image, mw, mh, "Textures/UI/HelpMenu.png");
+
+	if (failed)
+		std::cout << "loading failed" << std::endl;
+
+	int mx, my;
+
+	//draw info image
+	for (int y = 0; y < screenHeight; ++y)
+	for (int x = 0; x < screenWidth; ++x)
+		pset(x, y, image[y * screenWidth + x]);
+			
+	while (pause)
+	{
+		SDL_PollEvent(&event);
+		readKeys();
+		
+		//this is where buttons logic should go
+		ResumeButton.OnHover(mx, my);
+		ResumeButton.Draw();
+
+		SDL_GetMouseState(&mx, &my);
+
+		redraw();
+
+		if (event.type == SDL_MOUSEBUTTONUP)
+		{
+			if (ResumeButton.OnClick(mx, my))
+				pause = false;
+		}
+
+		if (keyDown(SDLK_ESCAPE))
+		{
+			pause = false;
+		}
+	}
 }

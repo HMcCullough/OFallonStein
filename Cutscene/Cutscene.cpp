@@ -151,6 +151,12 @@ void CutsceneManager::PlayRange(int start, int end, bool skippable, const char *
 			std::cout << "Playing credits " << std::endl;
 			PlayCredits();
 		}
+		else if (i == DANCINGANDY)
+		{
+			std::cout << "Dancing Andy " << std::endl;
+			DancingAndy(.3);
+			Mix_FadeOutChannel(-1, 1200);
+		}
 		//skips animation frames
 		else if (mNumFrames[i] != 0)
 		{
@@ -279,7 +285,7 @@ void CutsceneManager::DrawCutscene(int scene, bool skippable, SceneType type, do
 					}
 				break;
 
-					case SceneType::ANIMATED:
+				case SceneType::ANIMATED:
 					//will NEVER stop but when key pressed, text gets to the end
 					while(SDL_PollEvent(&event))
 		    		{
@@ -432,5 +438,54 @@ void CutsceneManager::PrintText(int scene, Uint32 character)
 		if(x > w - 8 * textMult || (text[i] == ' ' && charNum > lineLength - charNum) ) {charNum = 0; x %= 8 * textMult; y += 8 * textMult;}
 		if(y > h - 8 * textMult) {y %= 8 * textMult;}
 		charNum++;
+	}
+}
+
+void CutsceneManager::DancingAndy(double delay)
+{
+	//bool dancing = true;
+	int AndyFrames = 30;
+	long unsigned int mw, mh;
+	bool failed = false;
+	Uint32 counter = 0;
+	std::string name = "";
+
+	//images
+	std::vector<ColorRGB> thisImage;
+	std::vector<ColorRGB> frames[30];
+
+	//load all 30 images
+	for (int i = 0; i < AndyFrames; ++i)
+	{
+		name = "scenes/dancing/" + std::to_string(i+1) + "dance.png";
+		std::cout << name << std::endl;
+		failed |= loadImage(frames[i], mw, mh, name);
+	}
+
+	if (failed)
+		std::cout << "big failed" << std::endl;
+	if (!failed)
+		std::cout << "all images loaded good" << std::endl;
+
+	while (counter < 30)
+	{
+		thisImage = frames[counter % AndyFrames];
+
+		for (int y = 0; y < screenHeight; ++y)
+		for (int x = 0; x < screenWidth; ++x)
+			pset(x, y, thisImage[y * screenWidth + x]);
+
+		std::cout << "drawing frame " << counter % AndyFrames << std::endl;
+
+		// readKeys();
+
+		// if (keyDown(SDLK_RETURN))
+		// {
+		// 	dancing = false;
+		// }
+
+		redraw();
+		sleep(delay);
+		counter++;
 	}
 }
