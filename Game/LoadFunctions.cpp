@@ -117,7 +117,7 @@ void Game::LoadTextures()
 	success |= loadImage(mTextures[Textures::mad2], tw, th, "Textures/Enemies/2attack.png");
 	success |= loadImage(mTextures[Textures::geek2], tw, th, "Textures/Enemies/2Geek.png");
 	success |= loadImage(mTextures[Textures::nerd2], tw, th, "Textures/Enemies/2Nerd.png");
-	success |= loadImage(mTextures[Textures::sad2], tw, th, "Textures/Enemies/2Sad.png");
+	success |= loadImage(mTextures[Textures::sad2], tw, th, "Textures/Enemies/2sad.png");
 	success |= loadImage(mTextures[Textures::loser3], tw, th, "Textures/Enemies/3Loser.png");
 	success |= loadImage(mTextures[Textures::mad3], tw, th, "Textures/Enemies/3Mad.png");
 	success |= loadImage(mTextures[Textures::verysad3], tw, th, "Textures/Enemies/3verySad.png");

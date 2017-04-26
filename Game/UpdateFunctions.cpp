@@ -88,13 +88,13 @@ void Game::UpdateMovement()
 void Game::UpdateRotation(float deltaMouse)
 {
 	// Speed modifiers
-	double rotSpeed = mFrameTime * 2 * (deltaMouse != 0 ? 2 : 1); //the constant value is in radians/second
+	double rotSpeed = mFrameTime * 2.5 * (deltaMouse != 0 ? 2 : 1); //the constant value is in radians/second
 
 	if (keyDown(SDLK_RIGHT))
 		rotSpeed *= -1;
 	else if (keyDown(SDLK_LEFT))
 		rotSpeed *= 1;
-	else if (deltaMouse == 0)
+	else
 		rotSpeed = 0;
 
 	mPlayer.Rotate(rotSpeed);
