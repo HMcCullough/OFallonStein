@@ -75,8 +75,8 @@ Enemy::Enemy(const Enemies & enemy, double posX, double posY, std::vector<Mix_Ch
 			setHealth(MEDHEALTH);
 			setDamage(MEDDMG);
 			setTexture(Textures::worm);
-			setDamageSound(soundlist[Sounds::Worm]);
-			setDeathSound(soundlist[Sounds::Worm2]);
+			setDamageSound(soundlist[Sounds::Worm2]);
+			setDeathSound(soundlist[Sounds::Worm]);
 			break;
 		case Enemies::eBoss:
 			setSpeed(BOSSSPEED);

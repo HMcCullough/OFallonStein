@@ -193,7 +193,7 @@ void Game::LoadEnemies(std::string mapName)
 		for (int j = 0; j < mapHeight; j++)
 			if (mMap[i][j].enemy != 0)
 			{
-				obj = new Enemy(Enemies(mMap[i][j].enemy - 1), double(i) + .5, double(j) + .5);
+				obj = new Enemy(Enemies(mMap[i][j].enemy - 1), double(i) + .5, double(j) + .5, mSounds);
 				if (obj)
 				{
 					mObjects.insertAtFront(obj);
