@@ -6,6 +6,8 @@ Game::Game(int width, int height)
 	setHeight(height);
 
 	mQuit = false;
+	mNumEnemies = 0;
+	mNumProjectiles = 0;
 }
 
 Game::~Game()
@@ -61,6 +63,7 @@ void Game::Play(std::string mapName, Songs song)
 		UpdateRotation(deltaMouse);
 		UpdateMovement();
 		CheckShoot();
+		CheckHit();
 		//this will be removed in final build
 		CheckQuit();
 		CheckPause();

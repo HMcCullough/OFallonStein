@@ -130,17 +130,15 @@ void Game::CheckShoot()
 		gun.animate();
 
 	// Check Enemies' shoot
-	for (int i = 0; i < mObjects.size(); i++)
+	for (int i = 0; i < mNumEnemies; i++)
 	{
-		if (i == mNumEnemies)
-			break;
-		Enemy *e = static_cast<Enemy *>(mObjects.at(i));
+		Enemy *e = dynamic_cast<Enemy *>(mObjects.at(i));
 		if (e)
 		{
-			if (e->canSeePlayer() && e->CanShoot())
+			if (e->CanShoot())
 			{
 				e->Shoot();
-				Object *proj = new Projectile(e->getPosition(), mPlayer.getPosition() - e->getPosition(), 0.1, e->getDamage(), Textures::AndyCeiling);
+				Object *proj = new Projectile(e->getPosition(), mPlayer.getPosition() - e->getPosition(), e->getSpeed(), e->getDamage(), Textures::breakpoint);
 				mObjects.insertAtEnd(proj);
 				mNumProjectiles++;
 			}
@@ -269,13 +267,16 @@ void Game::CheckHit()
 {
 	if (mNumProjectiles > 0)
 	{
-		for (int i = 0; i < mObjects.size(); ++i)
+		for (int i = mNumEnemies; i < mObjects.size(); ++i)
 		{
 			Projectile *obj = static_cast<Projectile *>(mObjects.at(i));
 			if (obj)
 			{
 				obj->Move(obj->getDirection());
-				if (obj->getPosition().distanceTo(mPlayer.getPosition()) < 0.25)
+				Vector2<double> pos = obj->getPosition();
+				if (pos.x > mapWidth || pos.x < 0 || pos.y > mapHeight || pos.y < 0 || mMap[int(pos.x)][int(pos.y)].wall != 0)
+					mObjects.deleteAt(i);
+				if (obj->getPosition().distanceTo(mPlayer.getPosition()) < 0.6)
 				{
 					mPlayer.TakeDamage(obj->getDamage());
 					mObjects.deleteAt(i);

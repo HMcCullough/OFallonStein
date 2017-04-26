@@ -25,5 +25,5 @@ void Projectile::Move(double x, double y) // Direction
 {
 	if (x != mDirection.x || y != mDirection.y)
 		setDirection(x, y);
-	setPosition(mSpeed * mDirection);
+	setPosition(mPosition + mSpeed * mDirection);
 }

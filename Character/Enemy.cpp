@@ -7,6 +7,7 @@ Enemy::Enemy(int health, int damage, double speed, Vector2<double> pos, int text
 	setDamage(damage);
 	setCameraX(0);
 	mShotTime = mOldShotTime = 0;
+	mCanSeePlayer = false;
 }
 
 Enemy::Enemy(int health, int damage, double speed, double posX, double posY, int texture) :
@@ -15,6 +16,7 @@ Enemy::Enemy(int health, int damage, double speed, double posX, double posY, int
 	setDamage(damage);
 	setCameraX(0);
 	mShotTime = mOldShotTime = 0;
+	mCanSeePlayer = false;
 }
 
 Enemy::Enemy(const Enemies & enemy, double posX, double posY) :
@@ -108,12 +110,12 @@ void Enemy::TakeDamage(int damage)
 void Enemy::Shoot()
 {
 	mOldShotTime = mShotTime;
-	mShotTime += 2000;
+	mShotTime += 40;
 }
 
 bool Enemy::CanShoot()
 {
-	return mOldShotTime++ > mShotTime;
+	return mOldShotTime++ > mShotTime && mCanSeePlayer;
 }
 
 void Enemy::Die()

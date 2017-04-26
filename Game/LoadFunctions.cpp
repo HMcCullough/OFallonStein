@@ -94,6 +94,7 @@ void Game::LoadTextures()
 	success |= loadImage(mTextures[Textures::why], tw, th, "Textures/Enemies/4why.png");
 	success |= loadImage(mTextures[Textures::die], tw, th, "Textures/Enemies/5dying2.png");
 	success |= loadImage(mTextures[Textures::gameover], tw, th, "Textures/Enemies/5evenMoredead.png");
+	success |= loadImage(mTextures[Textures::breakpoint], tw, th, "Textures/Sprites/Breakpoint.png");
 	
 	// Menu
 	success |= loadImage(mTextures[Textures::GameLogo], tw, th, "Textures/gamelogo.png");
@@ -129,7 +130,7 @@ void Game::LoadSounds()
 	if (success)
 		std::cout << "Sound Chunks Loaded" << std::endl;
 	else
-		BAD();
+		std::cout << "Sound Chunks NOT Loaded" << std::endl;
 
  	//MUSIC
  	mSongs.resize(numSongs);
@@ -141,7 +142,7 @@ void Game::LoadSounds()
 	mSongs[Songs::Credits] = Mix_LoadMUS("Music/Credits.wav");
 	mSongs[Songs::DukeAndy] = Mix_LoadMUS("Music/DukeOfAndy.wav");
 	mSongs[Songs::MachoBit] = Mix_LoadMUS("Music/MachoBit.wav");
-	mSongs[Songs::SteinFeld] = Mix_LoadMUS("Music/OFallonsteinfeld");
+	mSongs[Songs::SteinFeld] = Mix_LoadMUS("Music/OFallonsteinfeld.wav");
 	mSongs[Songs::SoundAndy] = Mix_LoadMUS("Music/SoundOfAndy.wav");
 	mSongs[Songs::TakeAndy] = Mix_LoadMUS("Music/TakeOnAndy.wav");
 
@@ -153,7 +154,7 @@ void Game::LoadSounds()
  	if (success)
  		std::cout << "Music Loaded" << std::endl;
  	else
- 		BAD();
+		std::cout << "Music NOT Loaded" << std::endl;
 }
 
 void Game::LoadEnemies(std::string mapName)
@@ -166,8 +167,13 @@ void Game::LoadEnemies(std::string mapName)
 			{
 				obj = new Enemy(Enemies(mMap[i][j].enemy - 1), double(i) + .5, double(j) + .5);
 				if (obj)
+				{
 					mObjects.insertAtFront(obj);
+					mNumEnemies++;
+				}
 			}
+
+	std::cout << "Enemies Loaded" << std::endl;
 }
 void Game::LoadMap(std::string mapName)
 {
