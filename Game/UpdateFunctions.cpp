@@ -94,7 +94,7 @@ void Game::UpdateRotation(float deltaMouse)
 		rotSpeed *= -1;
 	else if (keyDown(SDLK_LEFT))
 		rotSpeed *= 1;
-	else if (deltaMouse == 0)
+	else
 		rotSpeed = 0;
 
 	mPlayer.Rotate(rotSpeed);
