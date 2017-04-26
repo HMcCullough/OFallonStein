@@ -7,6 +7,7 @@ Enemy::Enemy(int health, int damage, double speed, Vector2<double> pos, int text
 	setDamage(damage);
 	setCameraX(0);
 	mShotTime = mOldShotTime = 0;
+	mShootDelay = 40;
 }
 
 Enemy::Enemy(int health, int damage, double speed, double posX, double posY, int texture) :
@@ -15,6 +16,7 @@ Enemy::Enemy(int health, int damage, double speed, double posX, double posY, int
 	setDamage(damage);
 	setCameraX(0);
 	mShotTime = mOldShotTime = 0;
+	mShootDelay = 40;
 }
 
 Enemy::Enemy(const Enemies & enemy, double posX, double posY, std::vector<Mix_Chunk *>& soundlist) :
@@ -87,6 +89,7 @@ Enemy::Enemy(const Enemies & enemy, double posX, double posY, std::vector<Mix_Ch
 	}
 
 	mShotTime = mOldShotTime = 0;
+	mShootDelay = 40;
 }
 
 int Enemy::getDamage() const { return mDamage; }
@@ -115,7 +118,7 @@ void Enemy::TakeDamage(int damage)
 void Enemy::Shoot()
 {
 	mOldShotTime = mShotTime;
-	mShotTime += 40;
+	mShotTime += mShootDelay;
 }
 
 bool Enemy::CanShoot()

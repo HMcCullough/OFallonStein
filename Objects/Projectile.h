@@ -14,10 +14,16 @@ public:
 	double getSpeed();
 	void setSpeed(double newSpeed);
 
+	void setHitLocation(const Vector2<int> &hit);
+
+	bool HasHit();
+
 	void Move(Vector2<double> dir);
 	void Move(double x, double y);
 
 private:
 	int mDamage;	
 	double mSpeed;
+	Vector2<double> mPreviousPosition;
+	Vector2<int>    mHitLocation;
 };

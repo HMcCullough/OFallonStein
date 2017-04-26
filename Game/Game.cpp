@@ -5,7 +5,7 @@ Game::Game(int width, int height)
 	setWidth(width);
 	setHeight(height);
 
-	mQuit = false;
+	mQuit = mIsBossLevel = false;
 	mNumEnemies = 0;
 	mNumProjectiles = 0;
 }
