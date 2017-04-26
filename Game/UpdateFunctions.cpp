@@ -154,7 +154,7 @@ void Game::CheckShoot()
 					proj = new Projectile(e->getPosition(), mPlayer.getPosition() - e->getPosition(), 0.1, e->getDamage(), Textures::breakpoint);
 				else
 				{
-					proj = new Projectile(e->getPosition(), mPlayer.getPosition() - e->getPosition(), SLOWSPEED, e->getDamage(), Textures::breakpoint);
+					proj = new Projectile(e->getPosition(), mPlayer.getPosition() - e->getPosition(), SLOWSPEED/3.0, e->getDamage(), Textures::breakpoint);
 
 					Vector2<double> stepDir; //what direction to step in x or y-direction (either +1 or -1)
 					int side, hit = 0;

@@ -40,6 +40,8 @@ using namespace QuickCG;
 
 #define U32Size 4294967295 //all possible colors
 
+#define ENEMYDELAY 85
+
 //Boss Info
 #define BOSS_STAGES 4
 #define BOSSHEALTH 50
