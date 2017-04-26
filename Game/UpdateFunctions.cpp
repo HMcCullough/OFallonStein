@@ -88,7 +88,7 @@ void Game::UpdateMovement()
 void Game::UpdateRotation(float deltaMouse)
 {
 	// Speed modifiers
-	double rotSpeed = mFrameTime * 2 * (deltaMouse != 0 ? 2 : 1); //the constant value is in radians/second
+	double rotSpeed = mFrameTime * 2.5 * (deltaMouse != 0 ? 2 : 1); //the constant value is in radians/second
 
 	if (keyDown(SDLK_RIGHT))
 		rotSpeed *= -1;
@@ -302,8 +302,11 @@ void Game::CheckHit()
 				Vector2<double> pos = obj->getPosition();
 
 				if (pos.x > mapWidth || pos.x < 0 || pos.y > mapHeight || pos.y < 0 || mMap[int(pos.x)][int(pos.y)].wall != 0 || (obj->HasHit() && !mIsBossLevel))
+				{
 					mObjects.deleteAt(i);
-				if (obj->getPosition().distanceTo(mPlayer.getPosition()) < 0.6)
+					mNumProjectiles--;
+				}
+				else if (obj->getPosition().distanceTo(mPlayer.getPosition()) < 0.6)
 				{
 					mPlayer.TakeDamage(obj->getDamage());
 					mObjects.deleteAt(i);

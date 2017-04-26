@@ -36,7 +36,7 @@ void Game::Play(std::string mapName, Songs song)
 	double time = 0; //time of current frame
 	double oldTime = 0; //time of previous frame
 
-	mPlayer.setHealth(1000);
+	mPlayer.setHealth(100);
 
 	float deltaMouse = 0.0f;
 

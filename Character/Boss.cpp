@@ -23,7 +23,7 @@ void Boss::Update()
 
     if (mCurrentStage != 0 && getTicks() - mFrameTime > 10000)
         randomizeFrame();
-    else if (getTicks() - mFrameTime > 3000)
+    else if (mCurrentStage == 0 && getTicks() - mFrameTime > 30000)
         playNextDeathFrame();
 }
 
@@ -39,6 +39,8 @@ void Boss::AddFrame(int texture, Mix_Chunk *taunt, int stage)
     AnimationFrame frame = {texture, taunt};
     mFrames[stage].push_back(frame);
 }
+
+bool Boss::isDying() const { return mIsDying; }
 
 void Boss::randomizeFrame()
 {
