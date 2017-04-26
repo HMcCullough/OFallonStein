@@ -27,7 +27,7 @@ Enemy::Enemy(const Enemies & enemy, double posX, double posY, std::vector<Mix_Ch
 	{
 		case Enemies::eCockroach:
 			setSpeed(FASTSPEED);
-			setHealth(SMALLHEALTH);
+			setMaxHealth(SMALLHEALTH);
 			setDamage(SMALLDMG);
 			setTexture(Textures::cock);
 			setDamageSound(soundlist[Sounds::Cockroach]);
@@ -35,21 +35,21 @@ Enemy::Enemy(const Enemies & enemy, double posX, double posY, std::vector<Mix_Ch
 			break;
 		case Enemies::eCaterpillar:
 			setSpeed(MEDSPEED);
-			setHealth(MEDHEALTH);
+			setMaxHealth(MEDHEALTH);
 			setDamage(MEDDMG);
 			setTexture(Textures::caterpillar);
 			setDeathSound(soundlist[Sounds::Caterpillar]);
 			break;
 		case Enemies::eGrasshopper:
 			setSpeed(FASTSPEED);
-			setHealth(SMALLHEALTH);
+			setMaxHealth(SMALLHEALTH);
 			setDamage(SMALLDMG);
 			setTexture(Textures::grasshopper);
 			setDeathSound(soundlist[Sounds::Grasshopper]);
 			break;
 		case Enemies::eMosquito:
 			setSpeed(FASTSPEED);
-			setHealth(SMALLHEALTH);
+			setMaxHealth(SMALLHEALTH);
 			setDamage(BIGDMG);
 			setTexture(Textures::mosquito);
 			setDamageSound(soundlist[Sounds::Mosquito]);
@@ -57,14 +57,14 @@ Enemy::Enemy(const Enemies & enemy, double posX, double posY, std::vector<Mix_Ch
 			break;
 		case Enemies::eSpider:
 			setSpeed(FASTSPEED);
-			setHealth(BIGHEALTH);
+			setMaxHealth(BIGHEALTH);
 			setDamage(BIGDMG);
 			setTexture(Textures::spider);
 			setDeathSound(soundlist[Sounds::Spider]);
 			break;
 		case Enemies::eWasp:
 			setSpeed(FASTSPEED);
-			setHealth(MEDHEALTH);
+			setMaxHealth(MEDHEALTH);
 			setDamage(BIGDMG);
 			setTexture(Textures::wasp);
 			setDamageSound(soundlist[Sounds::Wasp]);
@@ -72,7 +72,7 @@ Enemy::Enemy(const Enemies & enemy, double posX, double posY, std::vector<Mix_Ch
 			break;
 		case Enemies::eWorm:
 			setSpeed(SLOWSPEED);
-			setHealth(MEDHEALTH);
+			setMaxHealth(MEDHEALTH);
 			setDamage(MEDDMG);
 			setTexture(Textures::worm);
 			setDamageSound(soundlist[Sounds::Worm2]);
@@ -80,7 +80,7 @@ Enemy::Enemy(const Enemies & enemy, double posX, double posY, std::vector<Mix_Ch
 			break;
 		case Enemies::eBoss:
 			setSpeed(BOSSSPEED);
-			setHealth(BOSSHEALTH);
+			setMaxHealth(BOSSHEALTH);
 			setDamage(BOSSDMG);
 			setTexture(Textures::geek);
 			break;

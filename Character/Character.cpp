@@ -24,8 +24,10 @@ Character::~Character()
 // Getters
 int Character::getHealth() const { return mHealth; }
 double Character::getSpeed() const { return mSpeed; }
+int Character::getMaxHealth(){return mMaxHealth;}
 
 //Setters
+void Character::setMaxHealth(const int &maxHealth) { mMaxHealth = maxHealth; mHealth = maxHealth;}
 void Character::setHealth(int health) { mHealth = health; }
 void Character::setSpeed(double speed) { mSpeed = speed; }
 

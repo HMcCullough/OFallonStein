@@ -21,7 +21,7 @@ void Game::InitPlayer()
 	mPlayer.setDirection(-1, 0);
 
 	// Inwit default gun
-	mPlayer.AddGun((screenHeight * 3) / 4 - 300, (screenWidth/2) - 250/2, 10, 1000, GunTextures::Raid);
+	mPlayer.AddGun((screenHeight * 3) / 4 - 300, (screenWidth/2) - 250/2, 2, 1000, GunTextures::Raid);
 	mPlayer.getCurrentGun().addAnimationFrame(GunTextures::RaidAnim1);
 	mPlayer.getCurrentGun().addAnimationFrame(GunTextures::RaidAnim2);
 	mPlayer.getCurrentGun().addAnimationFrame(GunTextures::RaidAnim3);
