@@ -5,6 +5,7 @@
 #include "../Character/Enemy.h"
 #include "../Objects/Projectile.h"
 #include "../HelperClasses/List.h"
+#include "../Cutscene/Cutscene.h"
 
 #include "../UI/UI.h"
 

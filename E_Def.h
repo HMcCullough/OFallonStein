@@ -34,7 +34,7 @@ using namespace QuickCG;
 
 #define numTextures 51
 #define numGunTextures 4
-#define numSounds 3
+#define numSounds 30
 #define numSongs 10
 
 #define U32Size 4294967295 //all possible colors
@@ -82,7 +82,10 @@ enum GunTextures
 };
 enum Sounds
 {
-	DamageSound, WillhelmScream, ShootSound
+	Absent, BossHit1, BossHit2, BossLaugh, Caterpillar, Cockroach, CockroachDeath,
+	EatGuard, Geek, Grasshopper, Gugh, InheritThis, Loser, MosqDeath, Mosquito,
+	Nerd,PenCap, RaidPickup, Spray, SinkIn, Spider, StackOverflow, TestWrapper,
+	TryCatch, TypeDeath, Urgh, Wasp, WaspDead, WHY, Worm, Worm2
 };
 
 enum Songs
@@ -93,7 +96,7 @@ enum Songs
 
 enum Enemies
 {
-	Cockroach, Caterpillar, Grasshopper, Mosquito, Spider, Wasp, Worm, Boss
+	eCockroach, eCaterpillar, eGrasshopper, eMosquito, eSpider, eWasp, eWorm, eBoss
 };
 
 Vector2<int> Raycast(mapTile (& map)[mapWidth][mapHeight], Vector2<double> rayPos, Vector2<double> rayDir,	Vector2<double> &stepDir,

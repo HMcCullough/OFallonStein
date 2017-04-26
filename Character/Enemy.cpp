@@ -17,55 +17,66 @@ Enemy::Enemy(int health, int damage, double speed, double posX, double posY, int
 	mShotTime = mOldShotTime = 0;
 }
 
-Enemy::Enemy(const Enemies & enemy, double posX, double posY) :
+Enemy::Enemy(const Enemies & enemy, double posX, double posY, std::vector<Mix_Chunk *>& soundlist) :
 	Character(0, 0, posX, posY, 0, 0, 0)
 {
 	setPosition(posX, posY);
 	switch(enemy)
 	{
-		case Enemies::Cockroach:
+		case Enemies::eCockroach:
 			setSpeed(FASTSPEED);
 			setHealth(SMALLHEALTH);
 			setDamage(SMALLDMG);
 			setTexture(Textures::cock);
+			setDamageSound(soundlist[Sounds::Cockroach]);
+			setDeathSound(soundlist[Sounds::CockroachDeath]);
 			break;
-		case Enemies::Caterpillar:
+		case Enemies::eCaterpillar:
 			setSpeed(MEDSPEED);
 			setHealth(MEDHEALTH);
 			setDamage(MEDDMG);
 			setTexture(Textures::caterpillar);
+			setDeathSound(soundlist[Sounds::Caterpillar]);
 			break;
-		case Enemies::Grasshopper:
+		case Enemies::eGrasshopper:
 			setSpeed(FASTSPEED);
 			setHealth(SMALLHEALTH);
 			setDamage(SMALLDMG);
 			setTexture(Textures::grasshopper);
+			setDeathSound(soundlist[Sounds::Grasshopper]);
 			break;
-		case Enemies::Mosquito:
+		case Enemies::eMosquito:
 			setSpeed(FASTSPEED);
 			setHealth(SMALLHEALTH);
 			setDamage(BIGDMG);
 			setTexture(Textures::mosquito);
+			setDamageSound(soundlist[Sounds::Mosquito]);
+			setDeathSound(soundlist[Sounds::MosqDeath]);
 			break;
-		case Enemies::Spider:
+		case Enemies::eSpider:
 			setSpeed(FASTSPEED);
 			setHealth(BIGHEALTH);
 			setDamage(BIGDMG);
 			setTexture(Textures::spider);
+			setDeathSound(soundlist[Sounds::Spider]);
 			break;
-		case Enemies::Wasp:
+		case Enemies::eWasp:
 			setSpeed(FASTSPEED);
 			setHealth(MEDHEALTH);
 			setDamage(BIGDMG);
 			setTexture(Textures::wasp);
+			setDamageSound(soundlist[Sounds::Wasp]);
+			setDeathSound(soundlist[Sounds::WaspDead]);
 			break;
-		case Enemies::Worm:
+		case Enemies::eWorm:
 			setSpeed(SLOWSPEED);
 			setHealth(MEDHEALTH);
 			setDamage(MEDDMG);
 			setTexture(Textures::worm);
+			setDamageSound(soundlist[Sounds::Worm]);
+			setDeathSound(soundlist[Sounds::Worm2]);
 			break;
-		case Enemies::Boss:
+		case Enemies::eBoss:
 			setSpeed(BOSSSPEED);
 			setHealth(BOSSHEALTH);
 			setDamage(BOSSDMG);
@@ -121,3 +132,8 @@ void Enemy::Die()
 	playSound(mDeathSound);
 	mIsDead = true;
 }
+
+/*void Enemy::setBossTauntSound(std::vector<Mix_Chunk *>& soundlist)
+{
+
+}*/
