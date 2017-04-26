@@ -111,6 +111,7 @@ void Game::CheckShoot()
 	{
 		if(mPlayer.getAmmo() > 0)
 		{
+			playSound(mPlayer.PlayQuip(mSounds));
 			mPlayer.Shoot();
 
 			for (int i = 0; i < mObjects.size(); ++i)

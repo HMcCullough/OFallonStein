@@ -25,7 +25,7 @@ void Game::RunGame()
 	LoadSounds();
 	LoadTextures();
 	InitPlayer();
-	mPlayer.setAmmo(100);
+	mPlayer.setHealth(100);
 }
 
 void Game::Play(std::string mapName, Songs song)
@@ -36,7 +36,7 @@ void Game::Play(std::string mapName, Songs song)
 	double time = 0; //time of current frame
 	double oldTime = 0; //time of previous frame
 
-	mPlayer.setHealth(100);
+	mPlayer.setAmmo(100);
 
 	float deltaMouse = 0.0f;
 

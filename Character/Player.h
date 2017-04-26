@@ -35,6 +35,7 @@ public:
 	void Shoot() override;
 	void AddGun(Vector2<int> screenPos, int damage, int shotDelay, int defaultTexture);
 	void AddGun(int screenX, int screenY, int damage, int shotDelay, int defaultTexture);
+	Mix_Chunk* PlayQuip(std::vector<Mix_Chunk*> & mSounds);
 
 private:
 	Vector2<double> mCameraPlane;

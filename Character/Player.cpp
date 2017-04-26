@@ -82,3 +82,42 @@ void Player::AddGun(Vector2<int> screenPos, int damage, int shotDelay, int defau
 	Gun g(screenPos, damage, shotDelay, defaultTexture);
 	mGuns.push_back(g);
 }
+
+Mix_Chunk* Player::PlayQuip(std::vector<Mix_Chunk*> & mSounds)
+{
+	 std::random_device r;
+	std::default_random_engine generator(r());
+	std::uniform_int_distribution<int> distribution(1,20);
+	int dice_roll = distribution(generator); 
+	Mix_Chunk* returnChunk;
+
+	switch(dice_roll)
+	{
+		case 1:
+			returnChunk = mSounds[Sounds::Absent];
+			break;
+		case 2:
+			returnChunk = mSounds[Sounds::EatGuard];
+			break;
+		case 3:
+			returnChunk = mSounds[Sounds::SinkIn];
+			break;
+		case 4:
+			returnChunk = mSounds[Sounds::StackOverflow];
+			break;
+		case 5:
+			returnChunk = mSounds[Sounds::TestWrapper];
+			break;
+		case 6:
+			returnChunk = mSounds[Sounds::TryCatch];
+			break;
+		case 7:
+			returnChunk = mSounds[Sounds::TypeDeath];
+			break;
+		default:
+			returnChunk = nullptr;
+			break;
+	}
+
+	return returnChunk;
+}
