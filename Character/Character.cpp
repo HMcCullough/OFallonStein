@@ -32,7 +32,6 @@ void Character::setHealth(int health) { mHealth = health; }
 void Character::setSpeed(double speed) { mSpeed = speed; }
 
 void Character::setDamageSound(Mix_Chunk *damageSound) { mDamageSound = damageSound; }
-void Character::setTauntSound(Mix_Chunk *tauntSound) { mTauntSound = tauntSound; }
 void Character::setDeathSound(Mix_Chunk *deathSound) { mDeathSound = deathSound; }
 void Character::setShootSound(Mix_Chunk *shootSound) { mShootSound = shootSound; }
 

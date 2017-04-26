@@ -15,9 +15,6 @@ public:
 	bool isVisible() const;
 	void setVisibility(const bool &visibility);
 
-	bool canSeePlayer() const;
-	void setPlayerVisibility(const bool &canSeePlayer);
-
 	int getCameraX() const;
 	void setCameraX(const int &cameraX);
 
@@ -31,8 +28,7 @@ private:
 	int mDamage,
 		mCameraX,
 		mShotTime, mOldShotTime;
-	bool mIsVisible,
-		 mCanSeePlayer;
+	bool mIsVisible;
 
 	void Die() override;
 };

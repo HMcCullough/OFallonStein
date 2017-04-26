@@ -221,10 +221,7 @@ void Game::DrawSprites()
 					{
 						// Update visibility
 						if (e)
-						{
 							e->setVisibility(true);
-							e->setPlayerVisibility(true);
-						}
 
 						int d = (y) * 256 - h * 128 + spriteHeight * 128; //256 and 128 factors to avoid floats
 						int texY = ((d * texHeight) / spriteHeight) / 256;
@@ -235,7 +232,6 @@ void Game::DrawSprites()
 				else if (e)
 				{
 					e->setVisibility(false);
-					e->setPlayerVisibility(false);
 				}
 			}
 		}

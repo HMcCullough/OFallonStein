@@ -21,7 +21,6 @@ public:
 	void setSpeed(double speed);
 	
 	void setDamageSound(Mix_Chunk *damageSound);
-	void setTauntSound(Mix_Chunk *tauntSound);
 	void setDeathSound(Mix_Chunk *deathSound);
 	void setShootSound(Mix_Chunk *shootSound);
 
