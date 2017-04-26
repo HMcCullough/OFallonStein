@@ -19,8 +19,11 @@ public:
 	void setCameraX(const int &cameraX);
 
 	virtual void TakeDamage(int damage);
-	virtual void Shoot();
+	void Shoot();
 	bool CanShoot();
+
+	void setHurtTexture(int texture);
+	int getHurtTexture();
 
 	//void Enemy::setBossTauntSound(); //For the boss sounds
 
@@ -32,4 +35,5 @@ protected:
 	bool mIsVisible;
 
 	virtual void Die();
+	int mHurtTexture;
 };

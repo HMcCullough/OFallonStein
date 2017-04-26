@@ -72,7 +72,7 @@ enum Textures
 	AndyWall, AndyCeiling, AndyWall2, AndyWall3,AndyWall4,AndyWall5,AndyWall6,AndyWall7,Ground,
 	computer,computerFloor,computerCeiling,Comp4,Comp3,Comp2, //Starts at 10 for map
 
-	caterpillar,caterpillarHurt,worm,workHurt,cock,cockHurt,grasshopper,grasshopperHurt,mosquito,
+	caterpillar,caterpillarHurt,worm,wormHurt,cock,cockHurt,grasshopper,grasshopperHurt,mosquito,
 	mosquitoHurt,spider,spiderHurt,wasp,waspHurt,
 
 	geek,happy,loser,mad,nerd,surprised,mad2,geek2,nerd2,sad2,loser3,mad3,sad3,verysad3,why,die,gameover,breakpoint,

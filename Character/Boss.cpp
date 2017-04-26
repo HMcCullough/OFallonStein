@@ -34,10 +34,6 @@ void Boss::TakeDamage(int damage)
         Die();
 }
 
-void Boss::Shoot()
-{
-}
-
 void Boss::AddFrame(int texture, Mix_Chunk *taunt)
 {
     AnimationFrame frame = {texture, taunt};

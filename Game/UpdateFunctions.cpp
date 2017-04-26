@@ -61,9 +61,9 @@ void Game::UpdateMovement()
 				Vector2<double> check(i, j);
 				check.normalize();
 
-				if(newMapPosX + check.x * 0.05 < mapWidth  && newMapPosX + check.x * 0.05 >= 0 &&
-				   newMapPosY + check.y * 0.05 < mapHeight && newMapPosY + check.y * 0.05 >= 0 &&
-				   mMap[int(newMapPosX + check.x * 0.05)][int(newMapPosY + check.y * 0.05)].wall != false)
+				if(newMapPosX + check.x * .075 < mapWidth  && newMapPosX + check.x * .075 >= 0 &&
+				   newMapPosY + check.y * .075 < mapHeight && newMapPosY + check.y * .075 >= 0 &&
+				   mMap[int(newMapPosX + check.x * .075)][int(newMapPosY + check.y * .075)].wall != false)
 				   collides = true;
 			}
 

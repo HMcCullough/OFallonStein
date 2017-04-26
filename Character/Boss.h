@@ -17,7 +17,6 @@ public:
     
     // Boss Specific Implementations
     void TakeDamage(int damage);
-	void Shoot();
 
 private:
     std::vector<AnimationFrame> mFrames[BOSS_STAGES];

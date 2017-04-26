@@ -3,6 +3,8 @@
 void Game::InitBoss(double posX, double posY)
 {
 	Object *boss = new Boss(10, Vector2<double>(posX, posY), Textures::nerd);
+	mObjects.insertAtFront(boss);
+	mNumEnemies++;
 }
 
 void Game::InitPlayer()
@@ -65,7 +67,7 @@ void Game::LoadTextures()
 	success |= loadImage(mTextures[Textures::caterpillar], tw, th, "Textures/Enemies/caterpillar.png");
     success |= loadImage(mTextures[Textures::caterpillarHurt], tw, th, "Textures/Enemies/caterpillar_hurt.png");
 	success |= loadImage(mTextures[Textures::worm], tw, th, "Textures/Enemies/worm.png");
-	success |= loadImage(mTextures[Textures::workHurt], tw, th, "Textures/Enemies/worm_hurt.png");
+	success |= loadImage(mTextures[Textures::wormHurt], tw, th, "Textures/Enemies/worm_hurt.png");
 	success |= loadImage(mTextures[Textures::cock], tw, th, "Textures/Enemies/Cock.png");
 	success |= loadImage(mTextures[Textures::cockHurt], tw, th, "Textures/Enemies/Cock_hurt.png");
 	success |= loadImage(mTextures[Textures::grasshopper], tw, th, "Textures/Enemies/grasshopper.png");
@@ -192,7 +194,7 @@ void Game::LoadEnemies(std::string mapName)
 	for (int i = 0; i < mapWidth; i++)
 		for (int j = 0; j < mapHeight; j++)
 		{
-			if (mMap[i][j].enemy != 0 && mMap[i][j].enemy != Enemies::eBoss)
+			if (mMap[i][j].enemy != 0 && mMap[i][j].enemy - 1 != Enemies::eBoss)
 			{
 				obj = new Enemy(Enemies(mMap[i][j].enemy - 1), double(i) + .5, double(j) + .5, mSounds);
 				if (obj)
@@ -201,7 +203,7 @@ void Game::LoadEnemies(std::string mapName)
 					mNumEnemies++;
 				}
 			}
-			else if (mMap[i][j].enemy == Enemies::eBoss)
+			else if (mMap[i][j].enemy - 1 == Enemies::eBoss)
 			{
 				mIsBossLevel = true;
 				InitBoss(double(i) + .5, double(j) + .5);
@@ -238,7 +240,15 @@ void Game::LoadMap(std::string mapName)
 						mMap[i][j].wall = std::stoi(line);
 						break;
 					case 2:
-						mMap[i][j].enemy = std::stoi(line);
+						if(std::stoi(line) != 18)
+						{
+							mMap[i][j].enemy = std::stoi(line);
+						}
+						else
+						{
+							mMap[i][j].enemy = 0;
+						}
+						
 						break;
 					case 3:
 						mMap[i][j].ceiling = std::stoi(line);
