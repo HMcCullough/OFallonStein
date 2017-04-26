@@ -111,6 +111,7 @@ void Game::CheckShoot()
 	{
 		if(mPlayer.getAmmo() > 0)
 		{
+			playSound(mPlayer.PlayQuip(mSounds));
 			mPlayer.Shoot();
 			//std::cout << mPlayer.getPosition().x << " " << mPlayer.getPosition().y << std::endl;
 
