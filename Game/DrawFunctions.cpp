@@ -119,7 +119,6 @@ void Game::Render()
 	}
 
 	Game::DrawSprites();
-
 	Game::DrawUI();
 }
 
@@ -325,50 +324,76 @@ void Game::DrawCrosshair()
 
 void Game::PrintHUD()
 {
-	//PRINT LEFT	
-	int x = 20;
-	int y = 420;
+	std::string print;
 
+	int health = mPlayer.getHealth();
+	int ammo = mPlayer.getAmmo();
+
+	//straight outta cutscene
+
+	ColorRGB color = ColorRGB(0,255,0); //text green
+	ColorRGB color2 = ColorRGB(0,0,0); //background is black if it exists
 	int u,v;
 
-	ColorRGB color = ColorRGB(0,255,0); //text is green
-	ColorRGB color2 = ColorRGB(0,0,0); //background is black if it exists
-
-	//loads proper text in
-	//I would make a string the argument but since this function is very specialized
-	//(it starts on a predefined screen position everytime), it doesn't really make too much sense
-	std::string text = mTexts[scene];
-
-	//will print a background behind the text if this is et to true
+	//will print a background behind the text if this is set to true
 	bool bg = false;
-	int forceLength = 0;
-
-	//lineLength based on size of window but nothing else is. BAD DESIGN!
-	int lineLength = (int) (screenWidth - 40) / 16;
+	//or will it
 
 	//changes the cubic size of the text. filled pixels independent of size
-	int textMult = 3;
+	int textMult = 5;
 
 	//heavily modified functions from QuickCG
-	int charNum = 0;
-	for(size_t i = 0; i < character && i < text.size(); i++)
+	
+	
+	//PRINT LEFT - that's health
+	int x = 25;
+	int y = 520;	
+	print = std::to_string(health);
+
+	std::cout << print << std::endl;
+
+	for(size_t i = 0; i < print.size(); i++)
 	{
 		for (v = 0; v < 8; v++)
 		for (u = 0; u < 8; u++)
 		{
 			//these two for loops determine text fill
-			for (int k = 0; k < 2; ++k)
-			for (int j = 0; j < 2; ++j)
+			for (int k = 0; k < 4; ++k)
+			for (int j = 0; j < 4; ++j)
 			{
-		  		if(font[text[i]][u][v]) pset(x + u*textMult + k, y + v*textMult + j, color);
+		  		if(font[print[i]][u][v]) pset(x + u*textMult + k, y + v*textMult + j, color);
 		  		else if(bg) pset(x + u*textMult + k, y + v*textMult + j, color2);
 	  		}
 		}
 
 		x += 8 * textMult;
-		//this is pretty much straight out of FwD 2
-		if(x > w - 8 * textMult || (text[i] == ' ' && charNum > lineLength - charNum) ) {charNum = 0; x %= 8 * textMult; y += 8 * textMult;}
+		if(x > screenWidth - 8 * textMult) {x %= 8 * textMult; y += 8 * textMult;}
+		if(y > screenHeight - 8 * textMult) {y %= 8 * textMult;}
+	}
+
+	//PRINT RIGHT - that's ammo
+	x = 650;
+	y = 520;
+	print = std::to_string(ammo);
+
+	std::cout << print << std::endl;
+
+	for(size_t i = 0; i < print.size(); i++)
+	{
+		for (v = 0; v < 8; v++)
+		for (u = 0; u < 8; u++)
+		{
+			//these two for loops determine text fill
+			for (int k = 0; k < 4; ++k)
+			for (int j = 0; j < 4; ++j)
+			{
+		  		if(font[print[i]][u][v]) pset(x + u*textMult + k, y + v*textMult + j, color);
+		  		else if(bg) pset(x + u*textMult + k, y + v*textMult + j, color2);
+	  		}
+		}
+
+		x += 8 * textMult;
+		if(x > w - 8 * textMult) {x %= 8 * textMult; y += 8 * textMult;}
 		if(y > h - 8 * textMult) {y %= 8 * textMult;}
-		charNum++;
 	}
 }
