@@ -29,9 +29,9 @@ void Game::InitBoss(double posX, double posY)
 	boss->AddFrame(Textures::verysad3, mSounds[Sounds::Gugh], 1);
 
 	// DYING
-	boss->AddFrame(Textures::why, mSounds[Sounds::WHY], 1);
-	boss->AddFrame(Textures::die, nullptr, 1);
-	boss->AddFrame(Textures::gameover, nullptr, 1);
+	boss->AddFrame(Textures::why, mSounds[Sounds::WHY], 0);
+	boss->AddFrame(Textures::die, nullptr, 0);
+	boss->AddFrame(Textures::gameover, nullptr, 0);
 
 	playSound(mSounds[Sounds::BossLaugh]);
 }
