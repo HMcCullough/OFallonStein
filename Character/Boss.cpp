@@ -13,13 +13,13 @@ Boss::Boss(int damage, Vector2<double> pos, int defTexture) :
 void Boss::Update()
 {
     if (mHealth  == 0)
-        mCurrentStage = 3;
-    else if (mHealth <= BOSSHEALTH / 3)
-        mCurrentStage = 2;
-    else if (mHealth <= 2 * BOSSHEALTH / 3)
-        mCurrentStage = 1;
-    else
         mCurrentStage = 0;
+    else if (mHealth <= BOSSHEALTH / 3)
+        mCurrentStage = 1;
+    else if (mHealth <= 2 * BOSSHEALTH / 3)
+        mCurrentStage = 2;
+    else
+        mCurrentStage = 3;
 
     if (mCurrentStage != 0 && getTicks() - mFrameTime > 10000)
         randomizeFrame();
@@ -34,15 +34,17 @@ void Boss::TakeDamage(int damage)
         Die();
 }
 
-void Boss::AddFrame(int texture, Mix_Chunk *taunt)
+void Boss::AddFrame(int texture, Mix_Chunk *taunt, int stage)
 {
     AnimationFrame frame = {texture, taunt};
-    mFrames[mCurrentStage].push_back(frame);
+    mFrames[stage].push_back(frame);
 }
 
 void Boss::randomizeFrame()
 {
     mCurrentFrame = mFrames[mCurrentStage][std::rand() % mFrames[mCurrentStage].size()];
+    setTexture(mCurrentFrame.texture);
+    playSound(mCurrentFrame.sound);
     mFrameTime = getTicks();
 }
 

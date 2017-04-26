@@ -67,6 +67,8 @@ void Game::Play(std::string mapName, Songs song)
 		//this will be removed in final build
 		CheckQuit();
 		CheckPause();
+		if (mIsBossLevel && mNumEnemies > 0)
+			dynamic_cast<Boss *>(mObjects.at(0))->Update();
 
 		if(CheckWin())
 		{

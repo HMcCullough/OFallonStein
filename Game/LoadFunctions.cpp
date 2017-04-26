@@ -2,9 +2,20 @@
 
 void Game::InitBoss(double posX, double posY)
 {
-	Object *boss = new Boss(10, Vector2<double>(posX, posY), Textures::nerd);
-	mObjects.insertAtFront(boss);
+	Object *obj = new Boss(10, Vector2<double>(posX, posY), Textures::nerd);
+	Boss *boss = dynamic_cast<Boss *>(obj);
+	mObjects.insertAtFront(obj);
 	mNumEnemies++;
+
+	// Adding animation frames for the first stage (Counts down from 4)
+	boss->AddFrame(Textures::geek, mSounds[Sounds::Geek], 3);
+	boss->AddFrame(Textures::happy, mSounds[Sounds::BossLaugh], 3);
+	boss->AddFrame(Textures::loser, mSounds[Sounds::Loser], 3);
+	boss->AddFrame(Textures::mad, mSounds[Sounds::Gugh], 3);
+	boss->AddFrame(Textures::nerd, mSounds[Sounds::Nerd], 3);
+	boss->AddFrame(Textures::surprised, mSounds[Sounds::BossHit1], 3);
+
+	playSound(mSounds[Sounds::BossLaugh]);
 }
 
 void Game::InitPlayer()

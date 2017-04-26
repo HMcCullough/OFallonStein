@@ -119,6 +119,7 @@ void Game::CheckShoot()
 			{
 				Object *obj = mObjects.at(i);
 				Enemy *e = dynamic_cast<Enemy*>(obj);
+				Boss *boss = dynamic_cast<Boss *>(obj);
 				if (e && e->isVisible() && e->getCameraX() == 0 && (obj->getPosition() - mPlayer.getPosition()).getSqrMagnitude() < 50)
 				{
 					e->TakeDamage(gun.getDamage());
