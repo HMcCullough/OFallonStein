@@ -36,7 +36,7 @@ void Game::Play(std::string mapName, Songs song)
 	double time = 0; //time of current frame
 	double oldTime = 0; //time of previous frame
 
-	mPlayer.setHealth(100);
+	mPlayer.setHealth(1000);
 
 	float deltaMouse = 0.0f;
 
@@ -56,8 +56,8 @@ void Game::Play(std::string mapName, Songs song)
 		oldTime = time;
 		time = getTicks();
 		mFrameTime = (time - oldTime) / 1000.0; //frameTime is the time this frame has taken, in seconds
-		print(1.0 / mFrameTime); //FPS counter
-		print(mObjects.size(), 0, 20);
+		//print(1.0 / mFrameTime); //FPS counter
+		//print(mObjects.size(), 0, 20);
 
 		readKeys();
 		UpdateRotation(deltaMouse);
@@ -67,6 +67,8 @@ void Game::Play(std::string mapName, Songs song)
 		//this will be removed in final build
 		CheckQuit();
 		CheckPause();
+		if (mIsBossLevel && mNumEnemies > 0)
+			dynamic_cast<Boss *>(mObjects.at(0))->Update();
 
 		if(CheckWin())
 		{

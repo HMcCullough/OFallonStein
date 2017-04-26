@@ -12,7 +12,7 @@ class Boss : public Enemy
 public:
     Boss(int damage, Vector2<double> pos, int texture);
 
-    void AddFrame(int texture, Mix_Chunk *taunt);
+    void AddFrame(int texture, Mix_Chunk *taunt, int stage);
     void Update();
     
     // Boss Specific Implementations
