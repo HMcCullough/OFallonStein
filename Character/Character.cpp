@@ -35,3 +35,8 @@ void Character::setDeathSound(Mix_Chunk *deathSound) { mDeathSound = deathSound;
 void Character::setShootSound(Mix_Chunk *shootSound) { mShootSound = shootSound; }
 
 bool Character::isDead() { return mIsDead; }
+
+void Character::Move(double x, double y)
+{
+	setPosition(x, y);
+}

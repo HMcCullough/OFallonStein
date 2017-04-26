@@ -90,9 +90,9 @@ void Game::UpdateRotation(float deltaMouse)
 	// Speed modifiers
 	double rotSpeed = mFrameTime * 2 * (deltaMouse != 0 ? 2 : 1); //the constant value is in radians/second
 
-	if (deltaMouse > 0 || keyDown(SDLK_RIGHT))
+	if (keyDown(SDLK_RIGHT))
 		rotSpeed *= -1;
-	else if (deltaMouse < 0 || keyDown(SDLK_LEFT))
+	else if (keyDown(SDLK_LEFT))
 		rotSpeed *= 1;
 	else if (deltaMouse == 0)
 		rotSpeed = 0;
@@ -102,6 +102,7 @@ void Game::UpdateRotation(float deltaMouse)
 
 void Game::CheckShoot()
 {
+	// Check the player's shoot
 	Gun &gun = mPlayer.getCurrentGun();
 
 	gun.update();
@@ -111,18 +112,40 @@ void Game::CheckShoot()
 
 		for (int i = 0; i < mObjects.size(); ++i)
 		{
-			Enemy *e = dynamic_cast<Enemy*>(mObjects.at(i));
-			if (e && e->isVisible() && e->getCameraX() == 0 && (e->getPosition() - mPlayer.getPosition()).getSqrMagnitude() < 50)
+			Object *obj = mObjects.at(i);
+			Enemy *e = static_cast<Enemy*>(obj);
+			if (e && e->isVisible() && e->getCameraX() == 0 && (obj->getPosition() - mPlayer.getPosition()).getSqrMagnitude() < 50)
 			{
  				e->TakeDamage(gun.getDamage());
 				if (e->isDead())
+				{
 					mObjects.deleteAt(i);
+					mNumEnemies--;
+				}
 			}
 		}
 	}
 
 	if (gun.isShooting())
 		gun.animate();
+
+	// Check Enemies' shoot
+	for (int i = 0; i < mObjects.size(); i++)
+	{
+		if (i == mNumEnemies)
+			break;
+		Enemy *e = static_cast<Enemy *>(mObjects.at(i));
+		if (e)
+		{
+			if (e->canSeePlayer() && e->CanShoot())
+			{
+				e->Shoot();
+				Object *proj = new Projectile(e->getPosition(), mPlayer.getPosition() - e->getPosition(), 0.1, e->getDamage(), Textures::AndyCeiling);
+				mObjects.insertAtEnd(proj);
+				mNumProjectiles++;
+			}
+		}
+	}
 }
 
 
@@ -223,6 +246,42 @@ void Game::CheckPause()
 			ExitButton.Draw();
 		
 			redraw();
+		}
+	}
+}
+
+bool Game::CheckWin()
+{
+	if(mObjects.size() == 0)
+		return true;
+
+	if (keyDown(SDLK_2))
+	{
+		sleep(1);
+		return true;
+	}
+
+	return false;
+		
+}
+
+void Game::CheckHit()
+{
+	if (mNumProjectiles > 0)
+	{
+		for (int i = 0; i < mObjects.size(); ++i)
+		{
+			Projectile *obj = static_cast<Projectile *>(mObjects.at(i));
+			if (obj)
+			{
+				obj->Move(obj->getDirection());
+				if (obj->getPosition().distanceTo(mPlayer.getPosition()) < 0.25)
+				{
+					mPlayer.TakeDamage(obj->getDamage());
+					mObjects.deleteAt(i);
+					mNumProjectiles--;
+				}
+			}
 		}
 	}
 }

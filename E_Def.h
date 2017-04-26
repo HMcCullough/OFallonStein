@@ -32,10 +32,10 @@ using namespace QuickCG;
 #define mapWidth 30
 #define mapHeight 30
 
-#define numTextures 50
+#define numTextures 51
 #define numGunTextures 4
 #define numSounds 3
-#define numSongs 1
+#define numSongs 10
 
 #define U32Size 4294967295 //all possible colors
 
@@ -71,7 +71,7 @@ enum Textures
 	caterpillar,caterpillarHurt,worm,workHurt,cock,cockHurt,grasshopper,grasshopperHurt,mosquito,
 	mosquitoHurt,spider,spiderHurt,wasp,waspHurt,
 
-	geek,happy,loser,mad,nerd,surprised,mad2,geek2,nerd2,sad2,loser3,mad3,sad3,verysad3,why,die,gameover, 
+	geek,happy,loser,mad,nerd,surprised,mad2,geek2,nerd2,sad2,loser3,mad3,sad3,verysad3,why,die,gameover,breakpoint,
 
 	GameLogo, UI
 };
@@ -87,7 +87,8 @@ enum Sounds
 
 enum Songs
 {
-	AndySong
+	AndySong, BitFeel, AndyOkay, CallMe, Credits, DukeAndy, MachoBit,
+		SteinFeld, SoundAndy, TakeAndy
 };
 
 enum Enemies
@@ -111,5 +112,7 @@ void _playSound(Mix_Chunk *sound);
 void playSong(Mix_Music *sound);
 
 void _playSong(Mix_Music *sound);
+
+void loadTexture(std::vector<Uint32>& out, unsigned long& w, unsigned long& h, const std::string& filename);
 
 void BAD();

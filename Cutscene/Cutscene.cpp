@@ -123,7 +123,7 @@ void CutsceneManager::LoadText()
 	mTexts[SCENE7] = "With the finesse of a tiger sneaking downstairs to get a midnight snack, he deleted the offending line.";
 	mTexts[SCENE8] = "ANDY: \"Now let THAT sink in.\"";
 
-	mTexts[SMOOTH1] = "";
+	mTexts[SMOOTH1] = ""; //without this I think it would print a ton of garbage when it got to that scene
 	
 	mTexts[GAMEOVER1] = "ANDY: \"Thank you very much students, feel free to appl...\"";
 	mTexts[GAMEOVER2] = "Andy slowly looked at the clock and realized it was 11p.m.";

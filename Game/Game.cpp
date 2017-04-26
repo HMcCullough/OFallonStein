@@ -39,7 +39,7 @@ void Game::Play(std::string mapName, Songs song)
 
 	mQuit = false;
 	while(!mQuit)
-	{
+	{	
 		int oldmx, oldmy;
 		SDL_GetMouseState(&oldmx, &oldmy);
 
@@ -52,6 +52,7 @@ void Game::Play(std::string mapName, Songs song)
 		time = getTicks();
 		mFrameTime = (time - oldTime) / 1000.0; //frameTime is the time this frame has taken, in seconds
 		print(1.0 / mFrameTime); //FPS counter
+		print(mObjects.size(), 10, 20);
 
 		readKeys();
 		UpdateRotation(deltaMouse);
@@ -60,7 +61,12 @@ void Game::Play(std::string mapName, Songs song)
 		//this will be removed in final build
 		CheckQuit();
 		CheckPause();
-
+		
+		if(CheckWin())
+		{
+			break;
+		}
+		
 		//who the heck made these ints defined in the while loop
 		int mx, my;
 		SDL_GetMouseState(&mx, &my);

@@ -17,17 +17,20 @@ void DisplayMenu()
 		std::cout << "Logo Loaded" << std::endl;
 	else
 		std::cout << "Logo Not Loaded" << std::endl;
-
+	
 	success = false;
-
-	Mix_Music* menuMusic = Mix_LoadMUS("Music/CallMe8bit.wav");
-	playSong(menuMusic);
 
 	//who the heck loves setting success so bad
 	success = false;
 
-	while(!success && !quit)
+	while(!quit)
 	{
+		if( Mix_PlayingMusic() == 0 )
+		{
+			Mix_Music* menuMusic = Mix_LoadMUS("Music/CallMe8bit.wav");
+			playSong(menuMusic);
+		}
+		SDL_ShowCursor(1);
 		SDL_Event event;
 		SDL_PollEvent(&event);
 
@@ -99,22 +102,29 @@ void StartGame()
 	Mix_HaltChannel(-1);
 
 	//Level 2
+	if(game.mQuit) return;
+
 	game.setPlayerPos(28, 3);
-	game.Play("OF2", Songs::AndySong);
+	game.Play("OF2", Songs::BitFeel);
 	Mix_HaltChannel(-1);
 
 	//Boss Level
+	if(game.mQuit) return;
+	
 	game.setPlayerPos(27, 14);
-	game.Play("OFBOSS", Songs::AndySong);
+	game.Play("OFBOSS", Songs::MachoBit);
 	Mix_HaltChannel(-1);
 
-	//if lose
-	//if(true)
-		//cm.PlayRange(GAMEOVER1, GAMEOVER5, false, "Music/SoundOfAndy.wav", 2000);
+	if(game.mQuit) return;
+
+	//Drop through means winning
+	cm.PlayRange(SCENE6, CREDITS, false, "Music/Credits.wav", 3000);
 
 	//if win
-	//if(true)
 		//cm.PlayRange(SCENE6, CREDITS, false, "Music/Credits.wav", 3750);
+
+	//if lose
+		//cm.PlayRange(GAMEOVER1, GAMEOVER5, false, "Music/SoundOfAndy.wav", 2000);
 }
 
 void ShowInfo()

@@ -162,79 +162,77 @@ void Game::DrawSprites()
 	{
 		try
 		{
-			Enemy *e = dynamic_cast<Enemy *>(mObjects.at(spriteOrder.at(i)));
+			Object *obj = mObjects.at(spriteOrder.at(i));
+			Enemy *e = dynamic_cast<Enemy *>(obj);
 
 			if (e)
-			{
 				e->setCameraX(INT_MAX);
-				curLocation = e->getPosition();
+			curLocation = obj->getPosition();
 
-				//translate sprite position to relative to camera
-				Vector2<double> spritePos = curLocation - pos;
+			//translate sprite position to relative to camera
+			Vector2<double> spritePos = curLocation - pos;
 
-				//transform sprite with the inverse camera matrix
-				// [ planeX   dirX ] -1                                       [ dirY      -dirX ]
-				// [               ]       =  1/(planeX*dirY-dirX*planeY) *   [                 ]
-				// [ planeY   dirY ]                                          [ -planeY  planeX ]
+			//transform sprite with the inverse camera matrix
+			// [ planeX   dirX ] -1                                       [ dirY      -dirX ]
+			// [               ]       =  1/(planeX*dirY-dirX*planeY) *   [                 ]
+			// [ planeY   dirY ]                                          [ -planeY  planeX ]
 
-				double invDet = 1.0 / (plane.x * dir.y - dir.x * plane.y); //required for correct matrix multiplication
+			double invDet = 1.0 / (plane.x * dir.y - dir.x * plane.y); //required for correct matrix multiplication
 
-				//this is actually the depth inside the screen, that what Z is in 3D
-				Vector2<double> transform(invDet * (dir.y * spritePos.x - dir.x * spritePos.y),
-											invDet * (-plane.y * spritePos.x + plane.x * spritePos.y));
+			//this is actually the depth inside the screen, that what Z is in 3D
+			Vector2<double> transform(invDet * (dir.y * spritePos.x - dir.x * spritePos.y),
+										invDet * (-plane.y * spritePos.x + plane.x * spritePos.y));
 
-				int spriteScreenX = int((getWidth() / 2) * (1 + transform.x / transform.y));
+			int spriteScreenX = int((getWidth() / 2) * (1 + transform.x / transform.y));
 
-				//calculate height of the sprite on screen
-				int spriteHeight = abs(int(getHeight() / (transform.y))); //using "transformY" instead of the real distance prevents fisheye
-				//calculate lowest and highest pixel to fill in current stripe
-				int drawStartY = -spriteHeight / 2 + getHeight() / 2;
-				if(drawStartY < 0) drawStartY = 0;
-				int drawEndY = spriteHeight / 2 + getHeight() / 2;
-				if(drawEndY >= getHeight()) drawEndY = getHeight() - 1;
+			//calculate height of the sprite on screen
+			int spriteHeight = abs(int(getHeight() / (transform.y))); //using "transformY" instead of the real distance prevents fisheye
+			//calculate lowest and highest pixel to fill in current stripe
+			int drawStartY = -spriteHeight / 2 + getHeight() / 2;
+			if(drawStartY < 0) drawStartY = 0;
+			int drawEndY = spriteHeight / 2 + getHeight() / 2;
+			if(drawEndY >= getHeight()) drawEndY = getHeight() - 1;
 
-				//calculate width of the sprite
-				int spriteWidth = abs( int (getHeight() / (transform.y)));
-				int drawStartX = -spriteWidth / 2 + spriteScreenX;
-				if(drawStartX < 0) drawStartX = 0;
-				int drawEndX = spriteWidth / 2 + spriteScreenX;
-				if(drawEndX >= getWidth()) drawEndX = getWidth() - 1;
+			//calculate width of the sprite
+			int spriteWidth = abs( int (getHeight() / (transform.y)));
+			int drawStartX = -spriteWidth / 2 + spriteScreenX;
+			if(drawStartX < 0) drawStartX = 0;
+			int drawEndX = spriteWidth / 2 + spriteScreenX;
+			if(drawEndX >= getWidth()) drawEndX = getWidth() - 1;
 
-				//loop through every vertical stripe of the sprite on screen
-				for(int stripe = drawStartX; stripe < drawEndX; stripe++)
+			//loop through every vertical stripe of the sprite on screen
+			for(int stripe = drawStartX; stripe < drawEndX; stripe++)
+			{
+				int texX = int(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * texWidth / spriteWidth) / 256;
+				//the conditions in the if are:
+				//1) it's in front of camera plane so you don't see things behind you
+				//2) it's on the screen (left)
+				//3) it's on the screen (right)
+				//4) mZBuffer, with perpendicular distance
+				Vector2<double> pos = mPlayer.getPosition();
+				Vector2<double> planeLeft = pos + mPlayer.getDirection() - mPlayer.getCameraPlane(),
+								planeRight = pos + mPlayer.getDirection() + mPlayer.getCameraPlane();
+				bool isOnScreen = ((sgn((planeLeft.x - pos.x) * (curLocation.y + 0.5 - pos.y) - (planeLeft.y - pos.y) * (curLocation.x + 0.5 - pos.x)) == -1 &&
+								sgn((planeRight.x - pos.x) * (curLocation.y - 0.5 - pos.y) - (planeRight.y - pos.y) * (curLocation.x - 0.5 - pos.x)) == 1));
+				if(transform.y > 0 && isOnScreen && transform.y < mZBuffer[stripe])
 				{
-					int texX = int(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * texWidth / spriteWidth) / 256;
-					//the conditions in the if are:
-					//1) it's in front of camera plane so you don't see things behind you
-					//2) it's on the screen (left)
-					//3) it's on the screen (right)
-					//4) mZBuffer, with perpendicular distance
-					Vector2<double> pos = mPlayer.getPosition();
-					Vector2<double> planeLeft = pos + mPlayer.getDirection() - mPlayer.getCameraPlane(),
-									planeRight = pos + mPlayer.getDirection() + mPlayer.getCameraPlane();
-					bool isOnScreen = ((sgn((planeLeft.x - pos.x) * (curLocation.y - pos.y) - (planeLeft.y - pos.y) * (curLocation.x - pos.x)) == -1 &&
-									sgn((planeRight.x - pos.x) * (curLocation.y - pos.y) - (planeRight.y - pos.y) * (curLocation.x - pos.x)) == 1));
-					if(transform.y > 0 && isOnScreen && transform.y < mZBuffer[stripe])
+					//0if (e && abs(getWidth() / 2 - stripe) < e->getCameraX())
+						//e->setCameraX(abs(getWidth() / 2 - stripe));
+					for(int y = drawStartY; y < drawEndY; y++) //for every pixel of the current stripe
 					{
-						if (abs(getWidth() / 2 - stripe) < e->getCameraX())
-							e->setCameraX(abs(getWidth() / 2 - stripe));
-						for(int y = drawStartY; y < drawEndY; y++) //for every pixel of the current stripe
-						{
-							// Update visibility
-							bool isVisible = e->isVisible();
+						// Update visibility
+						if (e)
 							e->setVisibility(true);
 
-							int d = (y) * 256 - h * 128 + spriteHeight * 128; //256 and 128 factors to avoid floats
-							int texY = ((d * texHeight) / spriteHeight) / 256;
-							Uint32 color = mTextures[e->getTexture()][texWidth * texY + texX]; //get current color from the texture
-							if((color & 0xFF000000) != 0) mBuffer[y][stripe] = color; //paint pixel if it's transparent'
-						}
+						int d = (y) * 256 - h * 128 + spriteHeight * 128; //256 and 128 factors to avoid floats
+						int texY = ((d * texHeight) / spriteHeight) / 256;
+						Uint32 color = mTextures[obj->getTexture()][texWidth * texY + texX]; //get current color from the texture
+						if((color & 0xFF000000) != 0) mBuffer[y][stripe] = color; //paint pixel if it's transparent'
 					}
-					else
-					{
-						bool isVisible = e->isVisible();
-						e->setVisibility(false);
-					}
+				}
+				else if (e)
+				{
+					e->setVisibility(false);
 				}
 			}
 		}
@@ -323,4 +321,54 @@ void Game::DrawCrosshair()
 		}
 	drawBuffer(mBuffer[0]);
 	for(int x = 0; x < getWidth(); x++) for(int y = 0; y < getHeight(); y++) mBuffer[y][x] = 0; //clear the buffer instead of cls()
+}
+
+void Game::PrintHUD()
+{
+	//PRINT LEFT	
+	int x = 20;
+	int y = 420;
+
+	int u,v;
+
+	ColorRGB color = ColorRGB(0,255,0); //text is green
+	ColorRGB color2 = ColorRGB(0,0,0); //background is black if it exists
+
+	//loads proper text in
+	//I would make a string the argument but since this function is very specialized
+	//(it starts on a predefined screen position everytime), it doesn't really make too much sense
+	std::string text = mTexts[scene];
+
+	//will print a background behind the text if this is et to true
+	bool bg = false;
+	int forceLength = 0;
+
+	//lineLength based on size of window but nothing else is. BAD DESIGN!
+	int lineLength = (int) (screenWidth - 40) / 16;
+
+	//changes the cubic size of the text. filled pixels independent of size
+	int textMult = 3;
+
+	//heavily modified functions from QuickCG
+	int charNum = 0;
+	for(size_t i = 0; i < character && i < text.size(); i++)
+	{
+		for (v = 0; v < 8; v++)
+		for (u = 0; u < 8; u++)
+		{
+			//these two for loops determine text fill
+			for (int k = 0; k < 2; ++k)
+			for (int j = 0; j < 2; ++j)
+			{
+		  		if(font[text[i]][u][v]) pset(x + u*textMult + k, y + v*textMult + j, color);
+		  		else if(bg) pset(x + u*textMult + k, y + v*textMult + j, color2);
+	  		}
+		}
+
+		x += 8 * textMult;
+		//this is pretty much straight out of FwD 2
+		if(x > w - 8 * textMult || (text[i] == ' ' && charNum > lineLength - charNum) ) {charNum = 0; x %= 8 * textMult; y += 8 * textMult;}
+		if(y > h - 8 * textMult) {y %= 8 * textMult;}
+		charNum++;
+	}
 }
