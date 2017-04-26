@@ -46,12 +46,6 @@ void Player::TakeDamage(int damage)
 	}
 }
 
-void Player::Move(double x, double y)
-{
-	mPosition.setX(x);
-	mPosition.setY(y);
-}
-
 void Player::Rotate(double rotSpeed)
 {
 	double oldDirX = mDirection.x;

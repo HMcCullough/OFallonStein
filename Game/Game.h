@@ -3,6 +3,7 @@
 #include "../E_Def.h"
 #include "../Character/Player.h"
 #include "../Character/Enemy.h"
+#include "../Objects/Projectile.h"
 #include "../HelperClasses/List.h"
 
 #include "../UI/UI.h"
@@ -54,6 +55,8 @@ private:
 	mapTile mMap[mapWidth][mapHeight];
 
 	List<Object*>  mObjects;
+	int mNumProjectiles;
+	int mNumEnemies;
 
 	//function used to sort the sprites
 	void combSort(std::vector<int> &order, std::vector<double> &dist, int amount);
@@ -66,15 +69,15 @@ private:
 	void LoadTextures();
 
 	void Render();
+	void CheckHit();
 	void CheckQuit();
 	void CheckPause();
 	bool CheckWin();
+	void CheckShoot();
 
 	void DrawSprites();
-
 	void DrawUI();
 
 	void UpdateMovement();
 	void UpdateRotation(float deltaMouse);
-	void CheckShoot();
 };

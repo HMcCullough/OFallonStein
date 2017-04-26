@@ -101,6 +101,7 @@ void Game::UpdateRotation(float deltaMouse)
 
 void Game::CheckShoot()
 {
+	// Check the player's shoot
 	Gun &gun = mPlayer.getCurrentGun();
 
 	gun.update();
@@ -110,18 +111,40 @@ void Game::CheckShoot()
 
 		for (int i = 0; i < mObjects.size(); ++i)
 		{
-			Enemy *e = dynamic_cast<Enemy*>(mObjects.at(i));
-			if (e && e->isVisible() && e->getCameraX() == 0 && (e->getPosition() - mPlayer.getPosition()).getSqrMagnitude() < 50)
+			Object *obj = mObjects.at(i);
+			Enemy *e = static_cast<Enemy*>(obj);
+			if (e && e->isVisible() && e->getCameraX() == 0 && (obj->getPosition() - mPlayer.getPosition()).getSqrMagnitude() < 50)
 			{
  				e->TakeDamage(gun.getDamage());
 				if (e->isDead())
+				{
 					mObjects.deleteAt(i);
+					mNumEnemies--;
+				}
 			}
 		}
 	}
 
 	if (gun.isShooting())
 		gun.animate();
+
+	// Check Enemies' shoot
+	for (int i = 0; i < mObjects.size(); i++)
+	{
+		if (i == mNumEnemies)
+			break;
+		Enemy *e = static_cast<Enemy *>(mObjects.at(i));
+		if (e)
+		{
+			if (e->canSeePlayer() && e->CanShoot())
+			{
+				e->Shoot();
+				Object *proj = new Projectile(e->getPosition(), mPlayer.getPosition() - e->getPosition(), 0.1, e->getDamage(), Textures::AndyCeiling);
+				mObjects.insertAtEnd(proj);
+				mNumProjectiles++;
+			}
+		}
+	}
 }
 
 
@@ -142,7 +165,7 @@ void Game::CheckPause()
 		int mx, my;
 		//std::cout << "pause" << std::endl;
 
-		Button ResumeButton(Vector2<double>(screenWidth/2 - 350, screenHeight/2 + 100),  nullptr, "Textures/UI/Resume.png");
+		Button ResumeButton(Vector2<double>(screenWidth/2 - 350, screenHeight/2 + 100),  nullptr, "Textures/UI/Resume->png");
 		Button InfoButton(Vector2<double>(screenWidth/2 - 75, screenHeight/2 + 100), nullptr, "Textures/UI/Info.png");
 		Button ExitButton(Vector2<double>(screenWidth/2 + 150, screenHeight/2 + 100), nullptr, "Textures/UI/Exit.png");
 
@@ -232,10 +255,31 @@ bool Game::CheckWin()
 
 	if (keyDown(SDLK_2))
 	{
-		sleep(1/2);
+		sleep(1);
 		return true;
 	}
 
 	return false;
 		
+}
+
+void Game::CheckHit()
+{
+	if (mNumProjectiles > 0)
+	{
+		for (int i = 0; i < mObjects.size(); ++i)
+		{
+			Projectile *obj = static_cast<Projectile *>(mObjects.at(i));
+			if (obj)
+			{
+				obj->Move(obj->getDirection());
+				if (obj->getPosition().distanceTo(mPlayer.getPosition()) < 0.25)
+				{
+					mPlayer.TakeDamage(obj->getDamage());
+					mObjects.deleteAt(i);
+					mNumProjectiles--;
+				}
+			}
+		}
+	}
 }

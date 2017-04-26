@@ -19,3 +19,11 @@ void Projectile::setDamage(int newDamage){mDamage = newDamage;}
 
 double Projectile::getSpeed() {return mSpeed;}
 void Projectile::setSpeed(double newSpeed){mSpeed = newSpeed;}
+
+void Projectile::Move(Vector2<double> dir) { Move(dir.x, dir.y); }
+void Projectile::Move(double x, double y) // Direction
+{
+	if (x != mDirection.x || y != mDirection.y)
+		setDirection(x, y);
+	setPosition(mSpeed * mDirection);
+}

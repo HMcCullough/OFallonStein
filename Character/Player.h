@@ -27,7 +27,6 @@ public:
 
 	// Member Functions
 	void TakeDamage(int damage) override;
-	void Move(double x, double y) override; // x and y represent the differences in the position vector components
 	void Rotate(double rotSpeed);
 	void Shoot() override;
 	void AddGun(Vector2<int> screenPos, int damage, int shotDelay, int defaultTexture);

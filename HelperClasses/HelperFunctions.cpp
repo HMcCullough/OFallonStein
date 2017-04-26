@@ -93,6 +93,12 @@ void _playSong(Mix_Music *sound)
 	sleep(1);
 }
 
+void loadTexture(std::vector<Uint32>& out, unsigned long& w, unsigned long& h, const std::string& filename)
+{
+	if (loadImage(out, w, h, filename))
+		std::cout << "Issue loading " + filename << std::endl;
+}
+
 void BAD() // WHEN DID HAPPEN BAD?!
 {
 	std::cout << "BAD" << std::endl;
