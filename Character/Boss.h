@@ -13,12 +13,13 @@ public:
     Boss(int damage, Vector2<double> pos, int texture);
 
     void AddFrame(int texture, Mix_Chunk *taunt, int stage);
-    void Update();
+    bool Update();
 
     bool isDying() const;
     
     // Boss Specific Implementations
     void TakeDamage(int damage);
+    bool CanShoot();
 
 private:
     std::vector<AnimationFrame> mFrames[BOSS_STAGES];

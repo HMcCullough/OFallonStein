@@ -20,7 +20,7 @@ public:
 
 	virtual void TakeDamage(int damage);
 	void Shoot();
-	bool CanShoot();
+	virtual bool CanShoot();
 
 	void setHurtTexture(int texture);
 	int getHurtTexture();

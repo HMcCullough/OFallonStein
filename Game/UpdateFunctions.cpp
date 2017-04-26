@@ -102,7 +102,6 @@ void Game::UpdateRotation(float deltaMouse)
 
 void Game::CheckShoot()
 {
-
 	// Check the player's shoot
 	Gun &gun = mPlayer.getCurrentGun();
 
