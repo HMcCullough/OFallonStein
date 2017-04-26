@@ -111,12 +111,16 @@ void Game::CheckShoot()
 
 		for (int i = 0; i < mObjects.size(); ++i)
 		{
-			Enemy *e = dynamic_cast<Enemy*>(mObjects.at(i));
-			if (e && e->isVisible() && e->getCameraX() == 0 && (e->getPosition() - mPlayer.getPosition()).getSqrMagnitude() < 50)
+			Object *obj = mObjects.at(i);
+			Enemy *e = static_cast<Enemy*>(obj);
+			if (e && e->isVisible() && e->getCameraX() == 0 && (obj->getPosition() - mPlayer.getPosition()).getSqrMagnitude() < 50)
 			{
  				e->TakeDamage(gun.getDamage());
 				if (e->isDead())
+				{
 					mObjects.deleteAt(i);
+					mNumEnemies--;
+				}
 			}
 		}
 	}
@@ -127,14 +131,16 @@ void Game::CheckShoot()
 	// Check Enemies' shoot
 	for (int i = 0; i < mObjects.size(); i++)
 	{
-		Enemy *e = dynamic_cast<Enemy *>(mObjects.at(i));
+		if (i == mNumEnemies)
+			break;
+		Enemy *e = static_cast<Enemy *>(mObjects.at(i));
 		if (e)
 		{
-			if (e->canSeePlayer())
+			if (e->canSeePlayer() && e->CanShoot())
 			{
 				e->Shoot();
-				Object *proj = new Projectile(e->getPosition(), mPlayer.getPosition() - e->getPosition(), MEDSPEED, e->getDamage(), Textures::breakpoint);
-				mObjects.insertAtFront(proj);
+				Object *proj = new Projectile(e->getPosition(), mPlayer.getPosition() - e->getPosition(), 0.1, e->getDamage(), Textures::AndyCeiling);
+				mObjects.insertAtEnd(proj);
 				mNumProjectiles++;
 			}
 		}
@@ -248,7 +254,7 @@ void Game::CheckHit()
 	{
 		for (int i = 0; i < mObjects.size(); ++i)
 		{
-			Projectile *obj = dynamic_cast<Projectile *>(mObjects.at(i));
+			Projectile *obj = static_cast<Projectile *>(mObjects.at(i));
 			if (obj)
 			{
 				obj->Move(obj->getDirection());

@@ -21,7 +21,7 @@ Vector2<double> Object::getPosition() const { return mPosition; }
 int Object::getTexture() const { return mTexture; }
 bool Object::rotates() const { return mRotates; }
 
-void Object::setDirection(const Vector2<double> &dir) { setPosition(dir.x, dir.y); }
+void Object::setDirection(const Vector2<double> &dir) { setDirection(dir.x, dir.y); }
 void Object::setDirection(const double &dirX, const double &dirY)
 {
 	mDirection.setX(dirX);

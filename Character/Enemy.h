@@ -23,10 +23,12 @@ public:
 
 	void TakeDamage(int damage) override;
 	void Shoot() override;
+	bool CanShoot();
 
 private:
 	int mDamage,
-		mCameraX;
+		mCameraX,
+		mShotTime, mOldShotTime;
 	bool mIsVisible,
 		 mCanSeePlayer;
 
