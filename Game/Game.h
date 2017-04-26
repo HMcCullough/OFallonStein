@@ -32,6 +32,8 @@ public:
 
 	void RunGame();
 	void Play(std::string mapName, Songs song);
+
+	bool mQuit;
 private:
 	Player mPlayer;
 	double mFrameTime;
@@ -47,7 +49,6 @@ private:
 	double mZBuffer[screenWidth];
 
 	// Keeps track on whether the user has pressed escape
-	bool mQuit;
 	bool mPause;
 
 	mapTile mMap[mapWidth][mapHeight];
@@ -67,6 +68,7 @@ private:
 	void Render();
 	void CheckQuit();
 	void CheckPause();
+	bool CheckWin();
 
 	void DrawSprites();
 

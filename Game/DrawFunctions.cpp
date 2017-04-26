@@ -212,8 +212,8 @@ void Game::DrawSprites()
 					Vector2<double> pos = mPlayer.getPosition();
 					Vector2<double> planeLeft = pos + mPlayer.getDirection() - mPlayer.getCameraPlane(),
 									planeRight = pos + mPlayer.getDirection() + mPlayer.getCameraPlane();
-					bool isOnScreen = ((sgn((planeLeft.x - pos.x) * (curLocation.y - pos.y) - (planeLeft.y - pos.y) * (curLocation.x - pos.x)) == -1 &&
-									sgn((planeRight.x - pos.x) * (curLocation.y - pos.y) - (planeRight.y - pos.y) * (curLocation.x - pos.x)) == 1));
+					bool isOnScreen = ((sgn((planeLeft.x - pos.x) * (curLocation.y + 0.5 - pos.y) - (planeLeft.y - pos.y) * (curLocation.x + 0.5 - pos.x)) == -1 &&
+									sgn((planeRight.x - pos.x) * (curLocation.y - 0.5 - pos.y) - (planeRight.y - pos.y) * (curLocation.x - 0.5 - pos.x)) == 1));
 					if(transform.y > 0 && isOnScreen && transform.y < mZBuffer[stripe])
 					{
 						if (abs(getWidth() / 2 - stripe) < e->getCameraX())

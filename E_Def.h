@@ -35,7 +35,7 @@ using namespace QuickCG;
 #define numTextures 50
 #define numGunTextures 4
 #define numSounds 3
-#define numSongs 1
+#define numSongs 10
 
 #define U32Size 4294967295 //all possible colors
 
@@ -87,7 +87,8 @@ enum Sounds
 
 enum Songs
 {
-	AndySong
+	AndySong, BitFeel, AndyOkay, CallMe, Credits, DukeAndy, MachoBit,
+		SteinFeld, SoundAndy, TakeAndy
 };
 
 enum Enemies

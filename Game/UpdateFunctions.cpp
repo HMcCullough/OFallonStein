@@ -89,9 +89,9 @@ void Game::UpdateRotation(float deltaMouse)
 	// Speed modifiers
 	double rotSpeed = mFrameTime * 2 * (deltaMouse != 0 ? 2 : 1); //the constant value is in radians/second
 
-	if (deltaMouse > 0 || keyDown(SDLK_RIGHT))
+	if (keyDown(SDLK_RIGHT))
 		rotSpeed *= -1;
-	else if (deltaMouse < 0 || keyDown(SDLK_LEFT))
+	else if (keyDown(SDLK_LEFT))
 		rotSpeed *= 1;
 	else if (deltaMouse == 0)
 		rotSpeed = 0;
@@ -223,4 +223,19 @@ void Game::CheckPause()
 			redraw();
 		}
 	}
+}
+
+bool Game::CheckWin()
+{
+	if(mObjects.size() == 0)
+		return true;
+
+	if (keyDown(SDLK_2))
+	{
+		sleep(1/2);
+		return true;
+	}
+
+	return false;
+		
 }

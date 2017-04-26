@@ -21,7 +21,7 @@ void Game::InitPlayer()
 	mPlayer.setDirection(-1, 0);
 
 	// Inwit default gun
-	mPlayer.AddGun((screenHeight * 3) / 4 - 300, (screenWidth/2) - 250/2, 2, 1000, GunTextures::Raid);
+	mPlayer.AddGun((screenHeight * 3) / 4 - 300, (screenWidth/2) - 250/2, 10, 1000, GunTextures::Raid);
 	mPlayer.getCurrentGun().addAnimationFrame(GunTextures::RaidAnim1);
 	mPlayer.getCurrentGun().addAnimationFrame(GunTextures::RaidAnim2);
 	mPlayer.getCurrentGun().addAnimationFrame(GunTextures::RaidAnim3);
@@ -135,6 +135,16 @@ void Game::LoadSounds()
  	mSongs.resize(numSongs);
  
  	mSongs[Songs::AndySong] = Mix_LoadMUS("Music/Andy.wav");
+	mSongs[Songs::AndyOkay] = Mix_LoadMUS("Music/AndyAreYouOkay.wav");
+	mSongs[Songs::BitFeel] = Mix_LoadMUS("Music/8BitFeel.wav");
+	mSongs[Songs::CallMe] = Mix_LoadMUS("Music/CallMe8bit.wav");
+	mSongs[Songs::Credits] = Mix_LoadMUS("Music/Credits.wav");
+	mSongs[Songs::DukeAndy] = Mix_LoadMUS("Music/DukeOfAndy.wav");
+	mSongs[Songs::MachoBit] = Mix_LoadMUS("Music/MachoBit.wav");
+	mSongs[Songs::SteinFeld] = Mix_LoadMUS("Music/OFallonsteinfeld");
+	mSongs[Songs::SoundAndy] = Mix_LoadMUS("Music/SoundOfAndy.wav");
+	mSongs[Songs::TakeAndy] = Mix_LoadMUS("Music/TakeOnAndy.wav");
+
  	std::cout << SDL_GetError();
  
  	for (int i = 0; i < numSongs; i++)
@@ -148,16 +158,17 @@ void Game::LoadSounds()
 
 void Game::LoadEnemies(std::string mapName)
 {
+	//std::cout << "OK " << mObjects.size() << std::endl;
 	Object *obj = nullptr;
 	for (int i = 0; i < mapWidth; i++)
 		for (int j = 0; j < mapHeight; j++)
 			if (mMap[i][j].enemy != 0)
 			{
 				obj = new Enemy(Enemies(mMap[i][j].enemy - 1), double(i) + .5, double(j) + .5);
-				mObjects.insertAtFront(obj);
+				if (obj)
+					mObjects.insertAtFront(obj);
 			}
 }
-
 void Game::LoadMap(std::string mapName)
 {
 	std::string filepath = "./Maps/" + mapName + ".txt";
