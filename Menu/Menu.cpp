@@ -104,7 +104,8 @@ void StartGame()
 	//Level 2
 	if(game.mQuit) return;
 
-	game.setPlayerPos(28, 3);
+	game.setPlayerPos(27, 2);
+	sleep(.5);
 	game.Play("OF2", Songs::BitFeel);
 	Mix_HaltChannel(-1);
 
@@ -112,6 +113,7 @@ void StartGame()
 	if(game.mQuit) return;
 	
 	game.setPlayerPos(27, 14);
+	sleep(.5);
 	game.Play("OFBOSS", Songs::MachoBit);
 	Mix_HaltChannel(-1);
 
