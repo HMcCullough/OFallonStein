@@ -91,7 +91,7 @@ void StartGame()
 	CutsceneManager cm;
 	
 	//plays the intro
-	cm.PlayRange(SCENE1, SCENE5, true, "Music/OFallonsteinfeld.wav");
+	//cm.PlayRange(SCENE1, SCENE5, true, "Music/OFallonsteinfeld.wav");
 	
 	Mix_HaltChannel(-1);
 	Game game;
