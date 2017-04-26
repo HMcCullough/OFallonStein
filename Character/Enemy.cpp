@@ -7,7 +7,6 @@ Enemy::Enemy(int health, int damage, double speed, Vector2<double> pos, int text
 	setDamage(damage);
 	setCameraX(0);
 	mShotTime = mOldShotTime = 0;
-	mCanSeePlayer = false;
 }
 
 Enemy::Enemy(int health, int damage, double speed, double posX, double posY, int texture) :
@@ -16,7 +15,6 @@ Enemy::Enemy(int health, int damage, double speed, double posX, double posY, int
 	setDamage(damage);
 	setCameraX(0);
 	mShotTime = mOldShotTime = 0;
-	mCanSeePlayer = false;
 }
 
 Enemy::Enemy(const Enemies & enemy, double posX, double posY, std::vector<Mix_Chunk *>& soundlist) :
@@ -88,7 +86,6 @@ Enemy::Enemy(const Enemies & enemy, double posX, double posY, std::vector<Mix_Ch
 		break;
 	}
 
-	mCanSeePlayer = false;
 	mShotTime = mOldShotTime = 0;
 }
 
@@ -97,9 +94,6 @@ void Enemy::setDamage(const int &damage) { mDamage = damage; }
 
 bool Enemy::isVisible() const { return mIsVisible; }
 void Enemy::setVisibility(const bool &visibility) { mIsVisible = visibility; }
-
-bool Enemy::canSeePlayer() const { return mCanSeePlayer; }
-void Enemy::setPlayerVisibility(const bool &canSeePlayer) { mCanSeePlayer = canSeePlayer; }
 
 int Enemy::getCameraX() const
 {
@@ -126,7 +120,7 @@ void Enemy::Shoot()
 
 bool Enemy::CanShoot()
 {
-	return mOldShotTime++ > mShotTime && mCanSeePlayer;
+	return mOldShotTime++ > mShotTime;
 }
 
 void Enemy::Die()
