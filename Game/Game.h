@@ -2,7 +2,7 @@
 
 #include "../E_Def.h"
 #include "../Character/Player.h"
-#include "../Character/Enemy.h"
+#include "../Character/Boss.h"
 #include "../Objects/Projectile.h"
 #include "../HelperClasses/List.h"
 #include "../Cutscene/Cutscene.h"
@@ -58,11 +58,12 @@ private:
 	List<Object*>  mObjects;
 	int mNumProjectiles;
 	int mNumEnemies;
+	bool mIsBossLevel;
 
 	//function used to sort the sprites
 	void combSort(std::vector<int> &order, std::vector<double> &dist, int amount);
 
-	void InitGame();
+	void InitBoss(double posX, double posY);
 	void InitPlayer();
 	void LoadMap(std::string mapName);
 	void LoadEnemies(std::string mapName);

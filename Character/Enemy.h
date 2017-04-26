@@ -18,8 +18,8 @@ public:
 	int getCameraX() const;
 	void setCameraX(const int &cameraX);
 
-	void TakeDamage(int damage) override;
-	void Shoot() override;
+	virtual void TakeDamage(int damage);
+	void Shoot();
 	bool CanShoot();
 
 	void setHurtTexture(int texture);
@@ -27,13 +27,13 @@ public:
 
 	//void Enemy::setBossTauntSound(); //For the boss sounds
 
-private:
+protected:
 	int mDamage,
 		mCameraX,
-		mShotTime, mOldShotTime;
+		mShotTime, mOldShotTime,
+		mShootDelay;
 	bool mIsVisible;
 
+	virtual void Die();
 	int mHurtTexture;
-
-	void Die() override;
 };

@@ -87,7 +87,7 @@ Mix_Chunk* Player::PlayQuip(std::vector<Mix_Chunk*> & mSounds)
 {
 	 std::random_device r;
 	std::default_random_engine generator(r());
-	std::uniform_int_distribution<int> distribution(1,20);
+	std::uniform_int_distribution<int> distribution(1,30);
 	int dice_roll = distribution(generator); 
 	Mix_Chunk* returnChunk;
 

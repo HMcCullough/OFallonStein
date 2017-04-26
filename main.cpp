@@ -2,6 +2,9 @@
 
 int main(int /*argc*/, char */*argv*/[])
 {
+	// For random numbers
+	std::srand(std::time(nullptr));
+
 	//Initializes Screen
 	screen(screenWidth, screenHeight, 0, GAMENAME);
 

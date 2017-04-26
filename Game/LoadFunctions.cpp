@@ -1,8 +1,10 @@
 #include "Game.h"
 
-void Game::InitGame()
+void Game::InitBoss(double posX, double posY)
 {
-	
+	Object *boss = new Boss(10, Vector2<double>(posX, posY), Textures::nerd);
+	mObjects.insertAtFront(boss);
+	mNumEnemies++;
 }
 
 void Game::InitPlayer()
@@ -191,7 +193,8 @@ void Game::LoadEnemies(std::string mapName)
 	Object *obj = nullptr;
 	for (int i = 0; i < mapWidth; i++)
 		for (int j = 0; j < mapHeight; j++)
-			if (mMap[i][j].enemy != 0)
+		{
+			if (mMap[i][j].enemy != 0 && mMap[i][j].enemy - 1 != Enemies::eBoss)
 			{
 				obj = new Enemy(Enemies(mMap[i][j].enemy - 1), double(i) + .5, double(j) + .5, mSounds);
 				if (obj)
@@ -200,6 +203,12 @@ void Game::LoadEnemies(std::string mapName)
 					mNumEnemies++;
 				}
 			}
+			else if (mMap[i][j].enemy - 1 == Enemies::eBoss)
+			{
+				mIsBossLevel = true;
+				InitBoss(double(i) + .5, double(j) + .5);
+			}
+		}
 
 	std::cout << "Enemies Loaded" << std::endl;
 }

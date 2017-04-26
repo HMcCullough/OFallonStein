@@ -113,11 +113,12 @@ void Game::CheckShoot()
 		{
 			playSound(mPlayer.PlayQuip(mSounds));
 			mPlayer.Shoot();
+			//std::cout << mPlayer.getPosition().x << " " << mPlayer.getPosition().y << std::endl;
 
 			for (int i = 0; i < mObjects.size(); ++i)
 			{
 				Object *obj = mObjects.at(i);
-				Enemy *e = static_cast<Enemy*>(obj);
+				Enemy *e = dynamic_cast<Enemy*>(obj);
 				if (e && e->isVisible() && e->getCameraX() == 0 && (obj->getPosition() - mPlayer.getPosition()).getSqrMagnitude() < 50)
 				{
 					e->TakeDamage(gun.getDamage());
@@ -146,7 +147,19 @@ void Game::CheckShoot()
 			if (e->CanShoot())
 			{
 				e->Shoot();
-				Object *proj = new Projectile(e->getPosition(), mPlayer.getPosition() - e->getPosition(), SLOWSPEED/2.0, e->getDamage(), Textures::breakpoint);
+
+				Object *proj = nullptr;
+				if (mIsBossLevel)
+					proj = new Projectile(e->getPosition(), mPlayer.getPosition() - e->getPosition(), 0.1, e->getDamage(), Textures::breakpoint);
+				else
+				{
+					proj = new Projectile(e->getPosition(), mPlayer.getPosition() - e->getPosition(), SLOWSPEED, e->getDamage(), Textures::breakpoint);
+
+					Vector2<double> stepDir; //what direction to step in x or y-direction (either +1 or -1)
+					int side, hit = 0;
+					dynamic_cast<Projectile*>(proj)->setHitLocation(Raycast(mMap, proj->getPosition(), proj->getDirection(), stepDir, hit, side));
+				}
+
 				mObjects.insertAtEnd(proj);
 				mNumProjectiles++;
 			}
@@ -280,9 +293,13 @@ void Game::CheckHit()
 			Projectile *obj = dynamic_cast<Projectile *>(mObjects.at(i));
 			if (obj)
 			{
-				obj->Move(obj->getDirection());
+				if (!mIsBossLevel)
+					obj->Move(obj->getDirection());
+				else
+					obj->Move(mPlayer.getPosition() - obj->getPosition());
 				Vector2<double> pos = obj->getPosition();
-				if (pos.x > mapWidth || pos.x < 0 || pos.y > mapHeight || pos.y < 0 || mMap[int(pos.x)][int(pos.y)].wall != 0)
+
+				if (pos.x > mapWidth || pos.x < 0 || pos.y > mapHeight || pos.y < 0 || mMap[int(pos.x)][int(pos.y)].wall != 0 || obj->HasHit())
 					mObjects.deleteAt(i);
 				if (obj->getPosition().distanceTo(mPlayer.getPosition()) < 0.6)
 				{
