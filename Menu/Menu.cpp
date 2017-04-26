@@ -166,7 +166,10 @@ void ShowInfo()
 		if (event.type == SDL_MOUSEBUTTONUP)
 		{
 			if (ResumeButton.OnClick(mx, my))
+			{
+				sleep(1);
 				pause = false;
+			}
 		}
 
 		if (keyDown(SDLK_ESCAPE))

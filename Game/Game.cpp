@@ -57,7 +57,7 @@ void Game::Play(std::string mapName, Songs song)
 		time = getTicks();
 		mFrameTime = (time - oldTime) / 1000.0; //frameTime is the time this frame has taken, in seconds
 		print(1.0 / mFrameTime); //FPS counter
-		print(mObjects.size(), 10, 20);
+		print(mObjects.size(), 0, 20);
 
 		readKeys();
 		UpdateRotation(deltaMouse);
@@ -96,6 +96,8 @@ void Game::Play(std::string mapName, Songs song)
 	}
 
 	mObjects.clear();
+	mNumEnemies = 0;
+	mNumProjectiles = 0;
 }
 
 void Game::setPlayerPos(double posX, double posY)

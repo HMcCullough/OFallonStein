@@ -43,7 +43,7 @@ using namespace QuickCG;
 #define SMALLHEALTH 1
 #define MEDHEALTH 5
 #define BIGHEALTH 10
-#define BOSSHEALTH 100
+#define BOSSHEALTH 50
 
 #define SMALLDMG 1
 #define MEDDMG 3
