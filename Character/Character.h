@@ -24,6 +24,9 @@ public:
 	void setDeathSound(Mix_Chunk *deathSound);
 	void setShootSound(Mix_Chunk *shootSound);
 
+	int getMaxHealth();
+	void setMaxHealth(const int &maxHealth);
+
 	bool isDead();
 
 protected:
@@ -35,6 +38,7 @@ protected:
 			  *mShootSound = nullptr;
 
 	int mHealth;
+	int mMaxHealth;
 
 	double mSpeed;
 	bool mIsDead;

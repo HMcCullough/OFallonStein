@@ -102,27 +102,34 @@ void Game::UpdateRotation(float deltaMouse)
 
 void Game::CheckShoot()
 {
+
 	// Check the player's shoot
 	Gun &gun = mPlayer.getCurrentGun();
 
 	gun.update();
 	if ((keyDown(SDLK_RCTRL) || keyDown(SDLK_LCTRL)) && gun.canShoot())
 	{
-		mPlayer.Shoot();
-
-		for (int i = 0; i < mObjects.size(); ++i)
+		if(mPlayer.getAmmo() > 0)
 		{
-			Object *obj = mObjects.at(i);
-			Enemy *e = dynamic_cast<Enemy*>(obj);
-			if (e && e->isVisible() && e->getCameraX() == 0 && (obj->getPosition() - mPlayer.getPosition()).getSqrMagnitude() < 50)
+			mPlayer.Shoot();
+
+			for (int i = 0; i < mObjects.size(); ++i)
 			{
- 				e->TakeDamage(gun.getDamage());
-				if (e->isDead())
+				Object *obj = mObjects.at(i);
+				Enemy *e = static_cast<Enemy*>(obj);
+				if (e && e->isVisible() && e->getCameraX() == 0 && (obj->getPosition() - mPlayer.getPosition()).getSqrMagnitude() < 50)
 				{
-					mObjects.deleteAt(i);
-					mNumEnemies--;
+					e->TakeDamage(gun.getDamage());
+					if (e->isDead())
+					{
+						mPlayer.setAmmo(mPlayer.getAmmo() + e->getMaxHealth()/2);
+						if(mPlayer.getAmmo() >= 100) mPlayer.setAmmo(100);
+						mObjects.deleteAt(i);
+						mNumEnemies--;
+					}
 				}
 			}
+			mPlayer.setAmmo(mPlayer.getAmmo() - 1);
 		}
 	}
 
