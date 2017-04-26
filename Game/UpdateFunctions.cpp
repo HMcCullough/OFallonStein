@@ -157,6 +157,7 @@ void Game::CheckShoot()
 					Vector2<double> stepDir; //what direction to step in x or y-direction (either +1 or -1)
 					int side, hit = 0;
 					dynamic_cast<Projectile*>(proj)->setHitLocation(Raycast(mMap, proj->getPosition(), proj->getDirection(), stepDir, hit, side));
+					dynamic_cast<Projectile*>(proj)->setStepDir(stepDir);
 				}
 
 				mObjects.insertAtEnd(proj);
@@ -298,7 +299,7 @@ void Game::CheckHit()
 					obj->Move(mPlayer.getPosition() - obj->getPosition());
 				Vector2<double> pos = obj->getPosition();
 
-				if (pos.x > mapWidth || pos.x < 0 || pos.y > mapHeight || pos.y < 0 || mMap[int(pos.x)][int(pos.y)].wall != 0 || obj->HasHit())
+				if (pos.x > mapWidth || pos.x < 0 || pos.y > mapHeight || pos.y < 0 || mMap[int(pos.x)][int(pos.y)].wall != 0 || (obj->HasHit() && !mIsBossLevel))
 					mObjects.deleteAt(i);
 				if (obj->getPosition().distanceTo(mPlayer.getPosition()) < 0.6)
 				{

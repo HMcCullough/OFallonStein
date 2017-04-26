@@ -23,17 +23,30 @@ double Projectile::getSpeed() {return mSpeed;}
 void Projectile::setSpeed(double newSpeed){mSpeed = newSpeed;}
 
 void Projectile::setHitLocation(const Vector2<int> &hit) { mHitLocation = hit; }
+void Projectile::setStepDir(const Vector2<double> &stepDir) { mStepDir = stepDir; }
 
 bool Projectile::HasHit()
 {
-	if 		(mPreviousPosition.x < mHitLocation.x && mPosition.x > mHitLocation.x)
-		return true;
-	else if (mPreviousPosition.x > mHitLocation.x && mPosition.x < mHitLocation.x)
-		return true;
-	else if (mPreviousPosition.y < mHitLocation.y && mPosition.y > mHitLocation.y)
-		return true;
-	else if (mPreviousPosition.y > mHitLocation.y && mPosition.y < mHitLocation.y)
-		return true;
+	if		(mStepDir.x > 0 && mStepDir.y > 0)
+	{
+		return ((mPreviousPosition.x < mHitLocation.x && mPreviousPosition.y < mHitLocation.y) &&
+				(mPosition.x > mHitLocation.x && mPosition.y > mHitLocation.y));
+	}
+	else if (mStepDir.x < 0 && mStepDir.y > 0)
+	{
+		return ((mPreviousPosition.x > mHitLocation.x && mPreviousPosition.y < mHitLocation.y) &&
+				(mPosition.x < mHitLocation.x && mPosition.y > mHitLocation.y));
+	}
+	else if (mStepDir.x > 0 && mStepDir.y < 0)
+	{
+		return ((mPreviousPosition.x < mHitLocation.x && mPreviousPosition.y > mHitLocation.y) &&
+				(mPosition.x > mHitLocation.x && mPosition.y < mHitLocation.y));
+	}
+	else if (mStepDir.x < 0 && mStepDir.y < 0)
+	{
+		return ((mPreviousPosition.x > mHitLocation.x && mPreviousPosition.y > mHitLocation.y) &&
+				(mPosition.x < mHitLocation.x && mPosition.y < mHitLocation.y));
+	}
 }
 
 void Projectile::Move(Vector2<double> dir) { Move(dir.x, dir.y); }

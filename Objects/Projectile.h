@@ -15,6 +15,7 @@ public:
 	void setSpeed(double newSpeed);
 
 	void setHitLocation(const Vector2<int> &hit);
+	void setStepDir(const Vector2<double> &stepDir);
 
 	bool HasHit();
 
@@ -24,6 +25,7 @@ public:
 private:
 	int mDamage;	
 	double mSpeed;
-	Vector2<double> mPreviousPosition;
+	Vector2<double> mPreviousPosition,
+					mStepDir;
 	Vector2<int>    mHitLocation;
 };
