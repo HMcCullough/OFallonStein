@@ -14,6 +14,8 @@ public:
 
     void AddFrame(int texture, Mix_Chunk *taunt, int stage);
     void Update();
+
+    bool isDying() const;
     
     // Boss Specific Implementations
     void TakeDamage(int damage);

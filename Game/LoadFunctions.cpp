@@ -8,12 +8,30 @@ void Game::InitBoss(double posX, double posY)
 	mNumEnemies++;
 
 	// Adding animation frames for the first stage (Counts down from 4)
+	// HEALTHY
 	boss->AddFrame(Textures::geek, mSounds[Sounds::Geek], 3);
 	boss->AddFrame(Textures::happy, mSounds[Sounds::BossLaugh], 3);
 	boss->AddFrame(Textures::loser, mSounds[Sounds::Loser], 3);
 	boss->AddFrame(Textures::mad, mSounds[Sounds::Gugh], 3);
 	boss->AddFrame(Textures::nerd, mSounds[Sounds::Nerd], 3);
 	boss->AddFrame(Textures::surprised, mSounds[Sounds::BossHit1], 3);
+
+	// DAMAGED
+	boss->AddFrame(Textures::geek2, mSounds[Sounds::Geek], 2);
+	boss->AddFrame(Textures::nerd2, mSounds[Sounds::Nerd], 2);
+	boss->AddFrame(Textures::sad2, mSounds[Sounds::Gugh], 2);
+	boss->AddFrame(Textures::mad2, mSounds[Sounds::BossHit2], 2);
+
+	// VERY DAMAGED
+	boss->AddFrame(Textures::loser3, mSounds[Sounds::Loser], 1);
+	boss->AddFrame(Textures::mad3, mSounds[Sounds::BossHit1], 1);
+	boss->AddFrame(Textures::sad3, mSounds[Sounds::Gugh], 1);
+	boss->AddFrame(Textures::verysad3, mSounds[Sounds::Gugh], 1);
+
+	// DYING
+	boss->AddFrame(Textures::why, mSounds[Sounds::WHY], 1);
+	boss->AddFrame(Textures::die, nullptr, 1);
+	boss->AddFrame(Textures::gameover, nullptr, 1);
 
 	playSound(mSounds[Sounds::BossLaugh]);
 }
