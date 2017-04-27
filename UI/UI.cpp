@@ -7,7 +7,7 @@
 Button::Button(Vector2<double> upperLeft, void (* action)(), std::string filename)//, std::string hFilename) Don't need anymore done on the fly
 {
 	mUpperLeft.x = upperLeft.x; mUpperLeft.y = upperLeft.y;
-	Do = action;
+	Do = action; //Set function ptr
 	bool success;
 	
 	mHover = false;

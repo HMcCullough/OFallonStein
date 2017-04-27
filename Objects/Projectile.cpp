@@ -25,7 +25,7 @@ void Projectile::setSpeed(double newSpeed){mSpeed = newSpeed;}
 void Projectile::setHitLocation(const Vector2<int> &hit) { mHitLocation = hit; }
 void Projectile::setStepDir(const Vector2<double> &stepDir) { mStepDir = stepDir; }
 
-bool Projectile::HasHit()
+bool Projectile::HasHit() //Used to avoid clipping through walls/surrfaces
 {
 	if		(mStepDir.x > 0 && mStepDir.y > 0)
 	{

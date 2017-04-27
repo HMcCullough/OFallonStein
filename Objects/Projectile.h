@@ -2,6 +2,7 @@
 
 #include "Object.h"
 
+//Projectiles to be instantiated and fired at a given target
 class Projectile : public Object
 {
 public:

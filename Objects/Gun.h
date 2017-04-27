@@ -1,6 +1,7 @@
 #pragma once
 #include "Object.h"
 
+//Handles shooting from the player
 class Gun
 {
 public:

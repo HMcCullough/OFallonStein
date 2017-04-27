@@ -21,6 +21,7 @@ void DisplayMenu()
 	success = false;
 
 	//who the heck loves setting success so bad
+	//Logan does :)
 	success = false;
 
 	while(!quit)
