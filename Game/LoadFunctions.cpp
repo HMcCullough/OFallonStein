@@ -151,6 +151,7 @@ void Game::LoadSounds()
 
 	mSounds.resize(numSounds);
 
+	// Similar to LoadTextures we load the sounds into the mSounds array
 	mSounds[Sounds::Absent] = Mix_LoadWAV("sound/Absent.wav");
 	mSounds[Sounds::BossHit1] = Mix_LoadWAV("sound/BossHit1.wav");
 	mSounds[Sounds::BossHit2] = Mix_LoadWAV("sound/BossHit2.wav");
@@ -183,6 +184,7 @@ void Game::LoadSounds()
 	mSounds[Sounds::Worm] = Mix_LoadWAV("sound/Worm.wav");
 	mSounds[Sounds::Worm2] = Mix_LoadWAV("sound/Worm2.wav");
 
+	// Here we check if any of the sounds loaded unsuccessfully
 	for (int i = 0; i < numSounds; i++)
 		success &= (mSounds[i] != nullptr);
 
@@ -194,6 +196,7 @@ void Game::LoadSounds()
  	//MUSIC
  	mSongs.resize(numSongs);
  
+	// We repeat with music and mSongs
  	mSongs[Songs::AndySong] = Mix_LoadMUS("Music/Andy.wav");
 	mSongs[Songs::AndyOkay] = Mix_LoadMUS("Music/AndyAreYouOkay.wav");
 	mSongs[Songs::BitFeel] = Mix_LoadMUS("Music/8BitFeel.wav");
@@ -207,6 +210,7 @@ void Game::LoadSounds()
 
  	std::cout << SDL_GetError();
  
+	// Again we check if any songs failed to load
  	for (int i = 0; i < numSongs; i++)
  		success &= (mSongs[i] != nullptr);
  
@@ -218,26 +222,30 @@ void Game::LoadSounds()
 
 void Game::LoadEnemies(std::string mapName)
 {
-	//std::cout << "OK " << mObjects.size() << std::endl;
 	Object *obj = nullptr;
 	for (int i = 0; i < mapWidth; i++)
+	{
 		for (int j = 0; j < mapHeight; j++)
 		{
-			if (mMap[i][j].enemy != 0 && mMap[i][j].enemy - 1 != Enemies::eBoss)
+			if (mMap[i][j].enemy - 1 == Enemies::eBoss)
 			{
+				// If the current map tile contains a boss then initialize a boss and set the mIsBossLevel member to true
+				mIsBossLevel = true;
+				InitBoss(double(i) + .5, double(j) + .5);
+			}
+			else if (mMap[i][j].enemy != 0) // Otherwise, if the current map tile contains an enemy
+			{
+				// Create an enemy and pass mSounds so that it's damage sounds can be setup
 				obj = new Enemy(Enemies(mMap[i][j].enemy - 1), double(i) + .5, double(j) + .5, mSounds);
-				if (obj)
+				if (obj != nullptr) // Check if the memory allocated correctly
 				{
+					// Insert the new enemy to the front and increment mNumEnemies
 					mObjects.insertAtFront(obj);
 					mNumEnemies++;
 				}
 			}
-			else if (mMap[i][j].enemy - 1 == Enemies::eBoss)
-			{
-				mIsBossLevel = true;
-				InitBoss(double(i) + .5, double(j) + .5);
-			}
 		}
+	}
 
 	std::cout << "Enemies Loaded" << std::endl;
 }
@@ -246,11 +254,11 @@ void Game::LoadMap(std::string mapName)
 	std::string filepath = "./Maps/" + mapName + ".txt";
 	std::ifstream infile(filepath);
 
-	for(int k = 0; k < 4; k++)
+	for(int k = 0; k < 4; k++) // There are 4 sections of each map
 	{
-		for(int i = 0; i < 30; i++)
+		for(int i = 0; i < 30; i++) // Each consisting of 30 rows
 		{
-			for(int j = 0; j < 30; j++)
+			for(int j = 0; j < 30; j++) // And 30 columns
 			{
 				std::string line;
 				std::getline(infile, line, ',');
@@ -262,24 +270,24 @@ void Game::LoadMap(std::string mapName)
 
 				switch(k)
 				{
-					case 0:
+					case 0: // The first layer holds floor tiling data
 						mMap[i][j].floor = std::stoi(line);
 						break;
-					case 1:
+					case 1: // The second layer holds wall data
 						mMap[i][j].wall = std::stoi(line);
 						break;
-					case 2:
+					case 2: // The third layer holds object data (enemies, pickups, etc.)
 						if(std::stoi(line) != 18)
 						{
 							mMap[i][j].enemy = std::stoi(line);
 						}
-						else
+						else // This is where we ignore pickups
 						{
 							mMap[i][j].enemy = 0;
 						}
 						
 						break;
-					case 3:
+					case 3: // And the forth holds ceiling tiling data
 						mMap[i][j].ceiling = std::stoi(line);
 						break;
 				}

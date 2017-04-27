@@ -1,5 +1,6 @@
 #include "Game.h"
 
+// Largely adapted from Lode Vandevenne's article on raycasting engines - http://lodev.org/cgtutor/raycasting.html
 void Game::Render()
 {
 	Vector2<double> playerPos = mPlayer.getPosition(), cameraPlane = mPlayer.getCameraPlane(), playerDir = mPlayer.getDirection();
@@ -122,6 +123,8 @@ void Game::Render()
 	Game::DrawUI();
 }
 
+// Largely adapted from Lode Vandevenne's article on sprite casting - http://lodev.org/cgtutor/raycasting3.html
+// Modified to read from a dynamically sized object list and to store visibility information for shooting
 void Game::DrawSprites()
 {
 	Vector2<double> pos = mPlayer.getPosition(),
@@ -149,11 +152,12 @@ void Game::DrawSprites()
 		}
 		catch (std::out_of_range &oore)
 		{
-			std::cout << oore.what() << std::endl << "EXCEPTION IN SPRITE CASTING" << std::endl;
+			std::cout << oore.what() << std::endl << "\tEXCEPTION IN SPRITE CASTING" << std::endl;
 			return;
 		}
 	}
 
+	// Does the sorting based on distance
 	combSort(spriteOrder, spriteDistance, mObjects.size());
 
     //after sorting the sprites, do the projection and draw them
@@ -161,14 +165,16 @@ void Game::DrawSprites()
 	{
 		try
 		{
+			// Grab the object in the specified order and cast to enemy
 			Object *obj = mObjects.at(spriteOrder.at(i));
 			Enemy *e = dynamic_cast<Enemy *>(obj);
 
-			if (e)
+			// If the enemy exists then set the distance from window center to INT_MAX for later calculations
+			if (e != nullptr)
 				e->setCameraX(INT_MAX);
-			curLocation = obj->getPosition();
 
-			//translate sprite position to relative to camera
+			// Grab the position of the object and translate sprite position to relative to camera
+			curLocation = obj->getPosition();
 			Vector2<double> spritePos = curLocation - pos;
 
 			//transform sprite with the inverse camera matrix
@@ -203,24 +209,34 @@ void Game::DrawSprites()
 			for(int stripe = drawStartX; stripe < drawEndX; stripe++)
 			{
 				int texX = int(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * texWidth / spriteWidth) / 256;
+
+				Vector2<double> pos = mPlayer.getPosition(), perpDir(mPlayer.getDirection().y, -mPlayer.getDirection().x);
+				Vector2<double> planeLeft = pos + mPlayer.getDirection() - mPlayer.getCameraPlane(),
+								planeRight = pos + mPlayer.getDirection() + mPlayer.getCameraPlane();
+
+				// Modified from http://stackoverflow.com/questions/1560492/how-to-tell-whether-a-point-is-to-the-right-or-left-side-of-a-line, Credit to user Regexident
+				// Check the sign of determinates between the left and right plane vectors and the position of the player with the position of the enemy being the query point
+				// Note that the perpDir modifies the player position so that enemies are visible by 0.5 more "square", basically allows for peripheral viewing of enemies
+				bool isOnScreen = ((sgn((planeLeft.x - pos.x) * (curLocation.y + (0.5 * perpDir.y) - pos.y) - (planeLeft.y - pos.y) * (curLocation.x + (0.5 * perpDir.x) - pos.x)) == -1 &&
+									sgn((planeRight.x - pos.x) * (curLocation.y - (0.5 * perpDir.y) - pos.y) - (planeRight.y - pos.y) * (curLocation.x - (0.5 * perpDir.x) - pos.x)) == 1));
+
 				//the conditions in the if are:
 				//1) it's in front of camera plane so you don't see things behind you
 				//2) it's on the screen (left)
 				//3) it's on the screen (right)
 				//4) mZBuffer, with perpendicular distance
-				Vector2<double> pos = mPlayer.getPosition(), perpDir(mPlayer.getDirection().y, -mPlayer.getDirection().x);
-				Vector2<double> planeLeft = pos + mPlayer.getDirection() - mPlayer.getCameraPlane(),
-								planeRight = pos + mPlayer.getDirection() + mPlayer.getCameraPlane();
-				bool isOnScreen = ((sgn((planeLeft.x - pos.x) * (curLocation.y + (0.5 * perpDir.y) - pos.y) - (planeLeft.y - pos.y) * (curLocation.x + (0.5 * perpDir.x) - pos.x)) == -1 &&
-								sgn((planeRight.x - pos.x) * (curLocation.y - (0.5 * perpDir.y) - pos.y) - (planeRight.y - pos.y) * (curLocation.x - (0.5 * perpDir.x) - pos.x)) == 1));
+				// perpDir is the perpendicular vector to the players facing direction, it is to the right of the direction vector
 				if(transform.y > 0 && isOnScreen && transform.y < mZBuffer[stripe])
 				{
-					if (e && abs(getWidth() / 2 - stripe) < e->getCameraX())
+					// If the current object is an enemy and the distance of the current pixel from the center
+					// is less than its stored lowest distance, then replace it
+					if (e != nullptr && abs(getWidth() / 2 - stripe) < e->getCameraX())
 						e->setCameraX(abs(getWidth() / 2 - stripe));
+
 					for(int y = drawStartY; y < drawEndY; y++) //for every pixel of the current stripe
 					{
-						// Update visibility
-						if (e)
+						// Update visibility if the current object is an enemy
+						if (e != nullptr)
 							e->setVisibility(true);
 
 						int d = (y) * 256 - h * 128 + spriteHeight * 128; //256 and 128 factors to avoid floats
@@ -229,19 +245,22 @@ void Game::DrawSprites()
 						if((color & 0xFF000000) != 0) mBuffer[y][stripe] = color; //paint pixel if it's transparent'
 					}
 				}
-				else if (e)
+				else if (e != nullptr)
 				{
+					// If the current object is an enemy then we know it failed the visibility check
 					e->setVisibility(false);
 				}
 			}
 		}
 		catch (std::out_of_range &oore)
 		{
-			std::cout << oore.what() << std::endl << "EXCEPTION IN SPRITE PROJECTION" << std::endl;
+			std::cout << oore.what() << std::endl << "\tEXCEPTION IN SPRITE PROJECTION" << std::endl;
 		}
 	}
 }
 
+// Taken from Lode Vandevenne's article on sprite casting - http://lodev.org/cgtutor/raycasting3.html
+// Sorts the objects in order of distance - farthest first so that the farthest do not overwrite the closest on the screen
 void Game::combSort(std::vector<int> &order, std::vector<double> &dist, int amount)
 {
 	int gap = amount, temp = 0;
@@ -276,14 +295,19 @@ void Game::combSort(std::vector<int> &order, std::vector<double> &dist, int amou
 	}
 }
 
+// Takes the UI bar and places it at the bottom of the screen
 void Game::DrawUI()
 {
+	// Gets the current gun to reference it's texture
 	Gun &gun = mPlayer.getCurrentGun();
+
+	// Used for scaling (only scales to the same ratio)
 	int uiYOffset = (screenHeight * 3) / 4;
 	int gunYOffset = gun.getScreenPos().x, gunXOffset = gun.getScreenPos().y;
 	double skipX = screenWidth / 800;
 	double skipY = (screenHeight - uiYOffset) / 150;
 
+	// Prints the gun's texture to the buffer
 	for(int x = gunXOffset; x < gunXOffset + gunTexWidth; x++)
 	{
 		for(int y = gunYOffset; y < gunYOffset + gunTexHeight; y++)
@@ -293,6 +317,8 @@ void Game::DrawUI()
 				mBuffer[y][x] = color;
 		}
 	}
+
+	// Prints the UI bar to the buffer
 	for(int x = 0; x < 800; x++)
 	{
 		for(int y = 0; y < 150; y++)
@@ -304,11 +330,11 @@ void Game::DrawUI()
 					mBuffer[int(j) + uiYOffset][int(i)] = mUI[800 * (y) + x];
 				}
 			}
-			//mBuffer[y][x] = 0;
 		}
 	}
 }
 
+// Draws the crosshair to the buffer
 void Game::DrawCrosshair()
 {
 	//DRAW CROSSHAIR
@@ -316,8 +342,10 @@ void Game::DrawCrosshair()
 		for (int j = -5; j <= 5; ++j)
 		{
 			if (i < 2 && j < 2)
-			mBuffer[screenHeight/2 + i][screenWidth/2 + j] = RGBtoINT(ColorRGB(255,0,0));
+				mBuffer[screenHeight/2 + i][screenWidth/2 + j] = RGBtoINT(ColorRGB(255,0,0));
 		}
+
+	// Refreshes the screen
 	drawBuffer(mBuffer[0]);
 	for(int x = 0; x < getWidth(); x++) for(int y = 0; y < getHeight(); y++) mBuffer[y][x] = 0; //clear the buffer instead of cls()
 }
@@ -396,5 +424,4 @@ void Game::PrintHUD()
 		if(x > w - 8 * textMult) {x %= 8 * textMult; y += 8 * textMult;}
 		if(y > h - 8 * textMult) {y %= 8 * textMult;}
 	}
-
 }
