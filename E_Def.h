@@ -1,4 +1,6 @@
 //Shoutout to WL_DEF.H
+
+//Master header file
 #pragma once
 
 #include <string>
@@ -14,13 +16,15 @@
 #include <type_traits>
 #include <cstdlib>
 
-#include "HelperClasses/Vector2.h"
-#include "quickcg.h"
+#include "HelperClasses/Vector2.h" //For 2D physics
+#include "quickcg.h" //Front end for SDL
 
 using namespace QuickCG;
 
+//Change this to change window title
 #define GAMENAME "O'FALLONSTEIN 3D"
 
+//Game resolution VERY FRAGILE
 #define screenWidth 800
 #define screenHeight 600
 
@@ -33,6 +37,7 @@ using namespace QuickCG;
 #define mapWidth 30
 #define mapHeight 30
 
+//Change these values when adding or removing assets
 #define numTextures 51
 #define numGunTextures 4
 #define numSounds 30
@@ -40,7 +45,7 @@ using namespace QuickCG;
 
 #define U32Size 4294967295 //all possible colors
 
-#define ENEMYDELAY 85
+#define ENEMYDELAY 85 //Time between enemy shots
 
 //Boss Info
 #define BOSS_STAGES 4
@@ -61,13 +66,15 @@ using namespace QuickCG;
 #define SLOWSPEED 1
 #define BOSSSPEED 2
 
-typedef struct mapTile
+typedef struct mapTile //All values contained in a given map tile space
 {
 	int floor;
 	int wall;
 	int enemy;
 	int ceiling;
 }mapTile;
+
+//The following enums are used for enumerating and loading assets
 
 enum Textures
 {
@@ -105,6 +112,7 @@ enum Enemies
 	eCockroach, eCaterpillar, eGrasshopper, eMosquito, eSpider, eWasp, eWorm, eBoss
 };
 
+//Non OOP function prototypes
 Vector2<int> Raycast(mapTile (& map)[mapWidth][mapHeight], Vector2<double> rayPos, Vector2<double> rayDir,	Vector2<double> &stepDir,
 	int &hit, int &side);
 double SqrDistFromPointToRay(Vector2<double> rayPoint1, Vector2<int> rayPoint2, Vector2<double> point);
@@ -124,4 +132,4 @@ void _playSong(Mix_Music *sound);
 
 void loadTexture(std::vector<Uint32>& out, unsigned long& w, unsigned long& h, const std::string& filename);
 
-void BAD();
+void BAD(); //World class debugging
