@@ -76,10 +76,7 @@ void Game::Play(std::string mapName, Songs song)
 			}
 		}
 
-		if(CheckWin())
-		{
-			break;
-		}
+		if(CheckWin()) { break; }
 
 		if(mPlayer.isDead())
 		{
@@ -103,6 +100,7 @@ void Game::Play(std::string mapName, Songs song)
 		//std::cout << mEnemies[0].isVisible() << " " << mEnemies[1].isVisible() << std::endl;
 	}
 
+	// Clear the list and reset the counters when a level is over
 	mObjects.clear();
 	mNumEnemies = 0;
 	mNumProjectiles = 0;
