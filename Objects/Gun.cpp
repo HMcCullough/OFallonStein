@@ -58,7 +58,7 @@ void Gun::animate()
 
 	mAnimTicks++;
 }
-void Gun::shoot()
+void Gun::shoot() //Updates frame ticks
 {
     if (mIsShooting)
         mCurrentFrameIndex = 0;

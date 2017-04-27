@@ -1,6 +1,7 @@
 #pragma once
 #include "../E_Def.h"
 
+//An Object is the master type for physical world objects
 class Object
 {
 public:
@@ -25,6 +26,6 @@ public:
 
 protected:
 	Vector2<double>  mPosition, mDirection;
-	int  mTexture;
+	int  mTexture; //For reference to the enum
 	bool mRotates;
 };
