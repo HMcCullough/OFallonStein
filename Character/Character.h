@@ -2,6 +2,7 @@
 #include "../Objects/Object.h"
 #include <SDL/SDL.h>
 
+//Takes from object, describes "living" objects
 class Character : public Object
 {
 public:
@@ -25,9 +26,10 @@ public:
 	void setShootSound(Mix_Chunk *shootSound);
 
 	int getMaxHealth();
-	void setMaxHealth(const int &maxHealth);
+	void setMaxHealth(const int &maxHealth); 
+	//Used to get ammo reward, could be used for more
 
-	bool isDead();
+	bool isDead(); //Hugely useful for sound, animation and other logic
 
 protected:
 	virtual void Die() = 0;

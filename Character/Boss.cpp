@@ -1,5 +1,6 @@
 #include "Boss.h"
 
+//Deals with complex animation of the boss
 Boss::Boss(int damage, Vector2<double> pos, int defTexture) : 
     Enemy(BOSSHEALTH, damage, 0, pos, defTexture)
 {

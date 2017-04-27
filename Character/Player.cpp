@@ -10,7 +10,7 @@ Player::Player() :
 Player::Player(int health, int armor, int battery, double speed, double posX, double posY, double dirX, double dirY, double cameraX, double cameraY) :
 	Character(health, speed, posX, posY, dirX, dirY, -1)
 {
-	setCameraPlane(cameraX, cameraY);
+	setCameraPlane(cameraX, cameraY); //Essentially FOV
 }
 
 Player::Player(int health, int armor, int battery, double speed, Vector2<double> pos, Vector2<double> dir, Vector2<double> camera) :
@@ -40,7 +40,7 @@ void Player::setArmor(const int &armor) { mArmor = armor; }
 void Player::setBattery(const int &battery) { mBattery = battery; }
 void Player::setAmmo(const int &ammo) { mAmmo = ammo; }
 
-void Player::TakeDamage(int damage)
+void Player::TakeDamage(int damage) //Subtract health(could be used negatively for healing)
 {
 	mHealth -= damage;
 	if (mHealth <= 0)
@@ -83,11 +83,12 @@ void Player::AddGun(Vector2<int> screenPos, int damage, int shotDelay, int defau
 	mGuns.push_back(g);
 }
 
+//This plays random "action hero" quips.
 Mix_Chunk* Player::PlayQuip(std::vector<Mix_Chunk*> & mSounds)
 {
 	 std::random_device r;
 	std::default_random_engine generator(r());
-	std::uniform_int_distribution<int> distribution(1,30);
+	std::uniform_int_distribution<int> distribution(1,30); //Range could be changed to make them more/less frequent
 	int dice_roll = distribution(generator); 
 	Mix_Chunk* returnChunk;
 
@@ -103,7 +104,7 @@ Mix_Chunk* Player::PlayQuip(std::vector<Mix_Chunk*> & mSounds)
 			returnChunk = mSounds[Sounds::SinkIn];
 			break;
 		case 4:
-			returnChunk = mSounds[Sounds::StackOverflow];
+			returnChunk = mSounds[Sounds::StackOverflow]; 
 			break;
 		case 5:
 			returnChunk = mSounds[Sounds::TestWrapper];
@@ -115,7 +116,7 @@ Mix_Chunk* Player::PlayQuip(std::vector<Mix_Chunk*> & mSounds)
 			returnChunk = mSounds[Sounds::TypeDeath];
 			break;
 		default:
-			returnChunk = nullptr;
+			returnChunk = nullptr; //No quip(Say nothing)
 			break;
 	}
 

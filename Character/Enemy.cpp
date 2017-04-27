@@ -22,6 +22,7 @@ Enemy::Enemy(int health, int damage, double speed, double posX, double posY, int
 Enemy::Enemy(const Enemies & enemy, double posX, double posY, std::vector<Mix_Chunk *>& soundlist) :
 	Character(0, 0, posX, posY, 0, 0, 0)
 {
+	//Takes in info from Load Map and sets stats accordingly
 	setPosition(posX, posY);
 	switch(enemy)
 	{
