@@ -54,6 +54,8 @@ private:
 	// Keeps track on whether the user has pressed escape
 	bool mPause;
 
+	bool mMini;
+
 	mapTile mMap[mapWidth][mapHeight];
 
 	List<Object*>  mObjects;
@@ -83,6 +85,7 @@ private:
 
 	void DrawSprites();
 	void DrawUI();
+	void DrawMap();
 
 	void UpdateMovement();
 	void UpdateRotation(float deltaMouse);

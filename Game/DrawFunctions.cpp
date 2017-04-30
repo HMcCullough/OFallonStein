@@ -425,3 +425,23 @@ void Game::PrintHUD()
 		if(y > h - 8 * textMult) {y %= 8 * textMult;}
 	}
 }
+
+void Game::DrawMap()
+{
+	for(int y = 0; y < mapHeight; y++)
+	{
+		for(int x = 0; x < mapWidth; x++)
+		{
+			if(mMap[x][y].wall != 0)
+			{
+				print("#",y*5,x*5);
+			}
+			else
+			{
+				print(" ",y*5,x*5);
+			}
+		}
+	}
+
+	print("@", (int)mPlayer.getPosition().y * 5, (int)mPlayer.getPosition().x * 5);
+}
