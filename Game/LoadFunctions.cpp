@@ -126,6 +126,12 @@ void Game::LoadTextures()
 	success |= loadImage(mTextures[Textures::die], tw, th, "Textures/Enemies/5dying2.png");
 	success |= loadImage(mTextures[Textures::gameover], tw, th, "Textures/Enemies/5evenMoredead.png");
 	success |= loadImage(mTextures[Textures::breakpoint], tw, th, "Textures/Sprites/Breakpoint.png");
+
+	// Sprites
+	success |= loadImage(mTextures[Textures::BlackMarker], tw, th, "Textures/Pickups/markerBlack.png");
+	success |= loadImage(mTextures[Textures::BlueMarker], tw, th, "Textures/Pickups/markerBlue.png");
+	success |= loadImage(mTextures[Textures::RedMarker], tw, th, "Textures/Pickups/markerRed.png");
+	success |= loadImage(mTextures[Textures::RaidBottle], tw, th, "Textures/Pickups/raid_bottle.png");
 	
 	// Menu
 	success |= loadImage(mTextures[Textures::GameLogo], tw, th, "Textures/gamelogo.png");
@@ -227,11 +233,17 @@ void Game::LoadEnemies(std::string mapName)
 	{
 		for (int j = 0; j < mapHeight; j++)
 		{
+
 			if (mMap[i][j].enemy - 1 == Enemies::eBoss)
 			{
 				// If the current map tile contains a boss then initialize a boss and set the mIsBossLevel member to true
 				mIsBossLevel = true;
 				InitBoss(double(i) + .5, double(j) + .5);
+			}
+			else if (mMap[i][j].enemy == Textures::BlackMarker)
+			{
+				obj = new Pickup(double(i) + .5, double(j) + .5, Textures::BlackMarker + rand() % 3, 5, 0);
+				mObjects.insertAtEnd(obj);
 			}
 			else if (mMap[i][j].enemy != 0) // Otherwise, if the current map tile contains an enemy
 			{
@@ -283,7 +295,7 @@ void Game::LoadMap(std::string mapName)
 						}
 						else // This is where we ignore pickups
 						{
-							mMap[i][j].enemy = 0;
+							mMap[i][j].enemy = Textures::BlackMarker;
 						}
 						
 						break;

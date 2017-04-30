@@ -4,6 +4,7 @@
 #include "../Character/Player.h"
 #include "../Character/Boss.h"
 #include "../Objects/Projectile.h"
+#include "../Objects/Pickup.h"
 #include "../HelperClasses/List.h"
 #include "../Cutscene/Cutscene.h"
 

@@ -86,7 +86,9 @@ enum Textures
 
 	geek,happy,loser,mad,nerd,surprised,mad2,geek2,nerd2,sad2,loser3,mad3,sad3,verysad3,why,die,gameover,breakpoint,
 
-	GameLogo, UI
+	GameLogo, UI,
+	
+	BlackMarker, BlueMarker, RedMarker, RaidBottle
 };
 
 enum GunTextures
