@@ -48,9 +48,18 @@ void Game::Play(std::string mapName, Songs song)
 		int oldmx, oldmy;
 		SDL_GetMouseState(&oldmx, &oldmy);
 
+		readKeys();
+		if (keyPressed(SDLK_TAB))
+			if(!mMini)
+				mMini = true;
+			else
+				mMini = false;
+
 		Render();
 		DrawCrosshair();
 		PrintHUD();
+		if(mMini)	
+			DrawMap();
 
 		//timing for input and FPS counter
 		oldTime = time;
