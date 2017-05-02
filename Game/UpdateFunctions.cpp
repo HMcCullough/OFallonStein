@@ -349,3 +349,16 @@ void Game::CheckHit()
 		}
 	}
 }
+
+void Game::CheckPickup()
+{
+	for (int i = mNumEnemies; i < mObjects.size(); ++i)
+	{
+		Pickup *pickup = dynamic_cast<Pickup *>(mObjects.at(i));
+		if (pickup != nullptr && (pickup->getPosition() - mPlayer.getPosition()).getSqrMagnitude() < 0.25)
+		{
+			mPlayer.setHealth(mPlayer.getHealth() + pickup->getHealAmount());
+			mObjects.deleteAt(i);
+		}
+	}
+}

@@ -82,6 +82,7 @@ private:
 	void CheckPause();
 	bool CheckWin();
 	void CheckShoot();
+	void CheckPickup();
 
 	void DrawSprites();
 	void DrawUI();

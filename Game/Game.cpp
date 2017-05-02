@@ -73,6 +73,7 @@ void Game::Play(std::string mapName, Songs song)
 		UpdateMovement();
 		CheckShoot();
 		CheckHit();
+		CheckPickup();
 		//this will be removed in final build
 		CheckQuit();
 		CheckPause();

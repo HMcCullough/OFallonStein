@@ -38,7 +38,7 @@ using namespace QuickCG;
 #define mapHeight 30
 
 //Change these values when adding or removing assets
-#define numTextures 51
+#define numTextures 54
 #define numGunTextures 4
 #define numSounds 30
 #define numSongs 10
