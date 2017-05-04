@@ -120,7 +120,7 @@ void Game::CheckShoot()
 	if ((keyDown(SDLK_RCTRL) || keyDown(SDLK_LCTRL)) && gun.canShoot() && mPlayer.getAmmo() > 0)
 	{
 		// Call PlayQuip which will randomly pick an Andy sound to play, then begin gun shooting animation
-		playSound(mPlayer.PlayQuip(mSounds));
+		//playSound(mPlayer.PlayQuip(mSounds));
 		mPlayer.Shoot();
 
 		// Iterate through the objects list
