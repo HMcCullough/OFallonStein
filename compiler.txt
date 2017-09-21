@@ -1,1 +1,5 @@
 g++ *.cpp -o Epitome Game/*.cpp Character/*.cpp Cutscene/*.cpp HelperClasses/*.cpp Menu/*.cpp UI/*.cpp Objects/*.cpp -lSDL -lSDL_mixer -std=c++11
+
+// To run on a new system run the following commands
+//	sudo apt-get install libsdl1.2-dev
+//	sudo apt-get install libsdl-mixer1.2-dev
